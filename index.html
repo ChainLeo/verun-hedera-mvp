@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erster — The Trust ID for Agentic Finance · Hedera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f8f9fe;            /* lavender section bg — reference exact */
+  --bg3: #f3fdf9;             /* light green ambient */
+  --card: #ffffff;
+  --card2: #e6fbf5;
+  --teal: #16a34a;             /* brand green — used in deck/video */
+  --teal-bright: #22c55e;      /* hero gradient top */
+  --teal-soft: #dcfce7;        /* brand green tinted bg */
+  --teal-dim: rgba(22,163,74,0.08);
+  --teal-border: rgba(22,163,74,0.22);
+  --purple: #7B61FF;
+  --purple-soft: #efe9ff;      /* lavender card tint */
+  --purple-dim: rgba(123,97,255,0.08);
+  --purple-border: rgba(123,97,255,0.22);
+  --green: #16a34a;
+  --green-dim: rgba(22,163,74,0.08);
+  --red: #dc2626;
+  --red-dim: rgba(220,38,38,0.08);
+  --amber: #d97706;
+  --amber-soft: #fef3e0;       /* gold card tint */
+  --amber-dim: rgba(217,119,6,0.08);
+  --blue: #2563eb;
+  --blue-dim: rgba(37,99,235,0.08);
+  --text: #0a2540;             /* reference body dark navy */
+  --text2: #62798f;            /* reference muted */
+  --text3: #8898aa;            /* reference light */
+  --border: #e5ebf7;           /* reference border blueish hairline */
+  --border-strong: #d6dfee;
+  --border2: rgba(0,148,112,0.18);
+  --shadow-sm: 0 4px 14px 0 rgba(0,0,0,0.10);
+  --shadow-md: 0 4px 14px 0 rgba(10,37,64,0.18);
+  --shadow-lg: 0 12px 32px 0 rgba(10,37,64,0.20);
+  --shadow: var(--shadow-md);
+  --radius: 24px;              /* reference card radius */
+  --radius-sm: 10px;            /* reference button radius */
+  --radius-lg: 24px;
+  --mono: 'JetBrains Mono', Menlo, monospace;
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg2);color:var(--text);line-height:1.55;font-size:16px;letter-spacing:-0.005em;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+a{color:var(--teal);text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 32px}
+.section{padding:100px 0}
+.section-head{margin-bottom:48px}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(248,249,254,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;height:100%}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--text);letter-spacing:-0.01em}
+.nav-logo .tag{font-family:var(--mono);font-size:10px;font-weight:700;background:var(--teal-bright);color:#fff;padding:3px 8px;border-radius:5px;letter-spacing:0.1em}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:500;color:var(--text2);transition:color 0.2s}
+.nav-links a:hover{color:var(--teal)}
+.algo-badge{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:600;color:var(--teal);background:#dcfce7;border:0;padding:7px 14px;border-radius:20px;font-family:var(--mono);letter-spacing:0.04em}
+.algo-dot{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(1.5)}}
+
+/* HERO */
+/* Hero — soft lavender-grey base (var(--bg2)); brand green reserved for ERSTER finale section */
+.hero{padding:80px 0 0;position:relative;overflow:visible;background:var(--bg2)}
+/* Phone overflows into next white section for visual depth */
+.hero-phone-wrap{margin-bottom:-160px}
+.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:start;gap:0;padding-bottom:0}
+.hero-copy{text-align:left;padding-bottom:0;align-self:center;grid-area:copy}
+.hero h1{font-size:clamp(40px,4.5vw,60px);font-weight:800;line-height:1.04;color:var(--text);margin-bottom:24px;letter-spacing:-0.03em}
+.hero h1 .hl{color:var(--text)}
+.hero h1 .muted{color:#8898aa;font-weight:600}
+.hero-sub{font-size:20px;color:var(--text2);max-width:540px;margin:8px 0 32px;line-height:1.55;font-weight:400;letter-spacing:-0.004em}
+.hero-sub strong{color:inherit;font-weight:700}
+.hero-btns{display:flex;justify-content:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:0;margin-top:24px}
+.hero-flags{display:flex;justify-content:flex-start;gap:14px;flex-wrap:wrap;align-items:center;margin:0 0 8px}
+.hero-flag{display:block;width:96px;height:auto;filter:drop-shadow(0 3px 10px rgba(0,51,153,0.20))}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:15px;font-weight:600;cursor:pointer;border:none;border-radius:10px;padding:14px 28px;transition:all 0.2s;letter-spacing:-0.005em}
+.btn-teal{background:var(--teal);color:#fff;box-shadow:0 4px 14px 0 rgba(22,163,74,0.25)}
+.btn-teal:hover{background:#15803d;box-shadow:0 6px 24px rgba(22,163,74,0.35);transform:translateY(-1px)}
+.btn-outline{background:#fff;color:var(--text);border:1px solid var(--border-strong)}
+.btn-outline:hover{background:#f8f9fe;border-color:var(--text2)}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:20px;border:1px solid var(--border)}
+.pill-teal{background:var(--teal-dim);color:var(--teal);border-color:var(--teal-border)}
+.pill-purple{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
+.pill-green{background:var(--green-dim);color:var(--green);border-color:rgba(22,163,74,0.25)}
+.pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
+
+/* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
+.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-160px;z-index:5;grid-area:phone}
+.hero-phone{
+  width:340px;height:680px;
+  background:#0a2540;
+  border-radius:54px;padding:8px;
+  /* Reference exact shadow: subtle ring + dark shadow + green ambient glow */
+  /* Apple-style layered shadow on white bg — neutral dark, no green tint */
+  box-shadow:
+    0 0 0 1.5px rgba(74,81,96,0.35),
+    0 2px 6px rgba(15,23,42,0.05),
+    0 12px 24px rgba(15,23,42,0.07),
+    0 28px 56px rgba(15,23,42,0.10),
+    0 56px 100px rgba(15,23,42,0.10);
+  position:relative;
+}
+.hero-phone::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.hero-phone::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
+.hero-phone-island{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:14px;z-index:5}
+.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:46px;overflow:hidden;isolation:isolate}
+/* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
+.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 22px;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);overflow:hidden}
+.hp-nav{display:flex;align-items:center;justify-content:space-between;margin-top:4px}
+.hp-back{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
+.hp-counter{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500}
+.hp-next{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--teal);color:#fff;padding:7px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:2px}
+.hp-steps{display:flex;align-items:center;gap:4px;padding:0 4px}
+.hp-step-dot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:600;flex-shrink:0}
+.hp-step-dot.active{background:var(--teal);color:#fff}
+.hp-step-dot.inactive{background:#fff;border:1px solid #e2e8f0;color:#94a3b8}
+.hp-step-line{flex:1;height:1px;background:#e2e8f0}
+.hp-step-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:0.06em;margin-top:4px}
+.hp-title{font-size:15px;font-weight:700;color:#0f172a;letter-spacing:-0.01em;line-height:1.3;margin-top:-6px}
+.hp-card{background:#f1f5f9;border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:3px}
+.hp-card-label{font-family:var(--mono);font-size:9px;font-weight:600;color:#94a3b8;letter-spacing:0.08em}
+.hp-card-value{font-family:var(--mono);font-size:11.5px;color:#0f172a;font-weight:500}
+.hp-checks{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.hp-check{display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);font-size:10.5px;color:#475569;line-height:1.35}
+.hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
+
+/* Ensure the next section after the hero has breathing room for the phone overflow */
+.market-section{background:#fff;padding-top:120px;padding-bottom:60px}
+.market-label{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8898aa;padding:5px 12px;border-radius:20px;border:1px solid #e5ebf7;background:#f8f9fe;margin-bottom:32px}
+.market-divider{height:1px;background:var(--border);margin-bottom:48px;width:90%}
+.market-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.market-stat{display:flex;flex-direction:column}
+.ms-num{font-size:clamp(34px,3.5vw,44px);font-weight:700;color:var(--text);line-height:1.05;letter-spacing:-0.025em;margin-bottom:12px}
+.ms-plus{color:var(--teal);font-weight:700;margin-left:1px}
+.ms-desc{font-size:14px;color:var(--text2);line-height:1.4;letter-spacing:-0.005em}
+.market-sources{font-family:var(--mono);font-size:11px;color:#8898aa;margin-top:24px;line-height:1.55;letter-spacing:0.02em}
+.modes-section{padding-top:100px}
+
+/* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
+@media(max-width:760px){
+  .hero-inner{grid-template-columns:1fr;gap:0;grid-template-areas:"copy" "phone"}
+  .hero-copy{padding:0 0 36px;text-align:left}
+  .hero h1{font-size:62px;line-height:1.02;text-align:left;letter-spacing:-0.035em}
+  .hero-sub{font-size:19px;text-align:left;margin:0 0 36px;line-height:1.5}
+  .hero-btns{justify-content:flex-start;margin-bottom:0}
+  .hero-phone-wrap{padding:0 0 50px;margin-bottom:0;align-items:center;z-index:1}
+  .hero-phone{width:min(340px,calc(100vw - 60px));height:auto;aspect-ratio:340/680;padding:8px}
+  .hero-phone::before{top:140px;height:50px}
+  .hero-phone::after{top:100px;height:30px;box-shadow:0 46px 0 #4a5160,0 90px 0 #4a5160}
+  .hero-phone-island{width:90px;height:24px;top:14px}
+}
+
+/* 3 MODES — reference exact */
+.modes-section{background:var(--bg2);padding:100px 0}
+.modes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mode-card{padding:32px;position:relative;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:none;transition:transform 0.25s ease}
+.mode-card:hover{transform:translateY(-2px)}
+.modes-grid > .mode-card:nth-child(1){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#dcfce7 100%)}
+.modes-grid > .mode-card:nth-child(2){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#efe9ff 100%)}
+.modes-grid > .mode-card:nth-child(3){background:linear-gradient(135deg,#ffffff 0%,#ffffff 60%,#fef3e0 100%)}
+.mode-num{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--text3);margin-bottom:20px;letter-spacing:0.12em}
+.mode-icon{margin-bottom:20px;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#dcfce7;border:0;flex-shrink:0}
+.mode-icon svg{display:block}
+.mode-card:nth-child(2) .mode-icon{background:#efe9ff}
+.mode-card:nth-child(3) .mode-icon{background:#fef3e0}
+.mode-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:10px;letter-spacing:-0.015em;line-height:1.2}
+.mode-desc{font-size:14.5px;color:var(--text2);line-height:1.55;margin-bottom:0;letter-spacing:-0.005em}
+.mode-tag{font-size:10px;font-weight:700;padding:5px 12px;border-radius:8px;display:inline-block;letter-spacing:0.06em;text-transform:uppercase}
+.mode-tag.teal{background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+.mode-tag.amber{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(255,176,32,0.25)}
+.mode-tag.purple{background:var(--purple-dim);color:var(--purple);border:1px solid var(--purple-border)}
+.mode-arrow{display:none}
+
+/* SECTION HEADER — reference exact */
+.section-label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);margin-bottom:16px}
+.section-h2{font-size:clamp(36px,4.5vw,54px);font-weight:800;color:var(--text);line-height:1.05;margin-bottom:48px;letter-spacing:-0.03em}
+.section-h2 .muted{color:#8898aa;font-weight:600}
+.section-sub{font-size:16px;color:var(--text2);line-height:1.55;max-width:640px;margin-bottom:48px}
+/* When section-sub follows h2, reduce h2 margin to avoid double-gap */
+.section-h2 + .section-sub{margin-top:-32px}
+
+/* DEMO */
+.demo-section{background:var(--bg2)}
+.demo-layout{display:grid;grid-template-columns:1fr;gap:24px;align-items:start;margin-top:40px;max-width:680px;margin-left:auto;margin-right:auto}
+
+/* MODE TABS */
+.mode-tabs{display:flex;justify-content:center;gap:0;margin:40px auto 0;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:5px;width:fit-content;box-shadow:var(--shadow-sm)}
+.mode-tab{font-family:var(--sans);font-size:13px;font-weight:600;padding:9px 22px;border-radius:8px;border:none;background:transparent;color:var(--text2);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:8px}
+.mode-tab.active{background:var(--teal);color:#fff;box-shadow:0 2px 12px rgba(22,163,74,0.25)}
+.mode-tab.auto-tab.active{background:var(--purple);color:#fff;box-shadow:0 2px 12px rgba(123,97,255,0.3)}
+
+/* STEP PANEL — unified card system with subtle green wash */
+.step-panel{background:linear-gradient(135deg,rgba(22,163,74,0.04) 0%,rgba(22,163,74,0.01) 30%,#ffffff 60%);border:1px solid var(--border);border-radius:var(--radius);padding:36px;box-shadow:var(--shadow-md);min-height:420px;display:flex;flex-direction:column}
+.step-dots{display:flex;align-items:center;margin-bottom:26px}
+.step-dot-wrap{display:flex;align-items:center;flex:1}
+.step-dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);background:var(--bg);color:var(--text3);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;flex-shrink:0}
+.step-dot.active{background:var(--teal);border-color:var(--teal);color:#fff;box-shadow:0 0 0 4px rgba(22,163,74,0.15)}
+.step-dot.done{background:var(--teal);border-color:var(--teal);color:#fff}
+.step-dot.purple-dot.active{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 0 0 4px rgba(123,97,255,0.15)}
+.step-dot.purple-dot.done{background:var(--purple);border-color:var(--purple);color:#fff}
+.step-line{flex:1;height:2px;background:var(--border);transition:background 0.3s;margin:0 4px}
+.step-line.done{background:var(--teal)}
+.step-line.done-purple{background:var(--purple)}
+.step-header{margin-bottom:18px}
+.step-num{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:4px}
+.step-num.purple{color:var(--purple)}
+.step-title{font-size:17px;font-weight:700;color:var(--text)}
+.stage-body{flex:1}
+.anim-in{animation:slideUp 0.35s cubic-bezier(0.34,1.56,0.64,1) both}
+@keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+.info-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px}
+.ic-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.ic-row:last-child{margin-bottom:0}
+.ic-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3)}
+.ic-val{font-family:var(--mono);font-size:11px;color:var(--text);text-align:right}
+.ic-val.teal{color:var(--teal)}
+.ic-val.green{color:var(--green)}
+.ic-val.purple{color:var(--purple)}
+.ic-val.amber{color:var(--amber)}
+
+.score-bar-wrap{margin:12px 0}
+.score-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:11px}
+.score-bar-bg{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:8px}
+.score-bar-fill{height:100%;border-radius:6px;transition:width 1s ease}
+.score-bar-fill.teal{background:linear-gradient(90deg,var(--teal),var(--green))}
+.score-bar-fill.purple{background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+.verdict-box{border-radius:10px;padding:16px;margin-bottom:10px;text-align:center}
+.verdict-box.approved{background:rgba(0,201,134,0.06);border:1px solid rgba(0,201,134,0.25)}
+.verdict-box.pending{background:var(--amber-dim);border:1px solid rgba(255,176,32,0.25)}
+.verdict-box.auto{background:var(--purple-dim);border:1px solid var(--purple-border)}
+.verdict-icon{font-size:26px;margin-bottom:6px}
+.verdict-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.verdict-title.green{color:var(--green)}
+.verdict-title.amber{color:var(--amber)}
+.verdict-title.purple{color:var(--purple)}
+.verdict-sub{font-size:11px;opacity:0.7}
+.verdict-sub.green{color:var(--green)}
+.verdict-sub.amber{color:var(--amber)}
+.verdict-sub.purple{color:var(--purple)}
+
+.check-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.check-list li{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text2);opacity:0;transition:opacity 0.3s}
+.check-list li.show{opacity:1}
+.check-list li::before{content:'';width:18px;height:18px;border-radius:50%;flex-shrink:0;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800}
+.check-list li.ok::before{background:var(--teal);content:'✓';color:#07111F;display:flex;align-items:center;justify-content:center}
+.check-list li.ok-purple::before{background:var(--purple);content:'✓';color:#fff;display:flex;align-items:center;justify-content:center}
+.check-list li.pending::before{border:2px solid var(--amber);background:transparent;content:'';animation:spin 0.9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.code-block{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-family:var(--mono);font-size:11px;color:var(--text2);overflow-x:auto;white-space:pre;line-height:1.65;margin-bottom:10px}
+.code-block .k{color:var(--teal)}
+.code-block .v{color:var(--green)}
+.code-block .s{color:var(--amber)}
+.code-block .n{color:var(--purple)}
+.code-block .r{color:var(--red)}
+
+.tx-box{background:var(--bg);border:1px solid var(--teal-border);border-radius:8px;padding:12px;margin-top:8px}
+.tx-label{font-size:10px;font-weight:600;text-transform:uppercase;color:var(--text3);margin-bottom:4px;letter-spacing:0.07em}
+.tx-hash{font-family:var(--mono);font-size:10px;color:var(--teal);word-break:break-all;margin-bottom:4px}
+.tx-link{font-size:11px;color:var(--teal);opacity:0.6}
+
+.progress-wrap{background:var(--bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;height:6px;margin:10px 0}
+.progress-fill{height:100%;border-radius:6px;width:0%;transition:width 3.5s linear}
+.progress-fill.teal{background:linear-gradient(90deg,var(--teal),var(--green))}
+.progress-fill.purple{background:linear-gradient(90deg,var(--purple),var(--teal))}
+
+.human-action{background:var(--amber-dim);border:1px solid rgba(255,176,32,0.3);border-radius:10px;padding:16px;margin-bottom:10px}
+.ha-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--amber);margin-bottom:8px}
+.ha-msg{font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6}
+.ha-btns{display:flex;gap:8px}
+.ha-btn{font-family:var(--sans);font-size:12px;font-weight:700;padding:7px 16px;border-radius:7px;border:none;cursor:pointer;transition:all 0.2s}
+.ha-btn.approve{background:var(--green);color:#fff}
+.ha-btn.approve:hover{background:#00f0a0}
+.ha-btn.deny{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,77,106,0.3)}
+.ha-btn.deny:hover{background:rgba(255,77,106,0.2)}
+
+.step-nav{display:flex;justify-content:space-between;align-items:center}
+.nav-btn{font-family:var(--sans);font-size:12px;font-weight:600;padding:7px 18px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;transition:all 0.2s}
+.nav-btn:hover:not(:disabled){border-color:var(--teal);color:var(--teal)}
+.nav-btn:disabled{opacity:0.3;cursor:not-allowed}
+.nav-btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+.nav-btn.primary:hover:not(:disabled){background:#00f0c4}
+.nav-btn.primary-purple{background:var(--purple);border-color:var(--purple);color:#fff}
+.nav-btn.primary-purple:hover:not(:disabled){background:#9a85ff}
+.nav-btn.restart{background:var(--green);border-color:var(--green);color:#fff!important;font-weight:700}
+.step-counter{font-size:11px;color:var(--text3);font-weight:500}
+
+/* TERMINAL */
+.terminal-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);position:sticky;top:76px}
+.terminal-header{background:var(--bg);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px}
+.terminal-dots{display:flex;gap:5px}
+.td{width:10px;height:10px;border-radius:50%}
+.td1{background:#FF5F57}.td2{background:#FEBC2E}.td3{background:#28C840}
+.terminal-title{font-size:11px;font-weight:600;color:var(--text3);font-family:var(--mono);flex:1;text-align:center}
+.terminal-body{padding:14px;min-height:400px;max-height:500px;overflow-y:auto;font-family:var(--mono);font-size:11px;line-height:1.75}
+.log-line{display:flex;opacity:0;transition:opacity 0.2s,transform 0.2s;transform:translateY(3px);margin-bottom:1px}
+.log-line.show{opacity:1;transform:none}
+.log-time{color:var(--text3);flex-shrink:0;margin-right:6px;font-size:10px}
+.log-type{flex-shrink:0;margin-right:8px;font-weight:700;min-width:48px;font-size:10px}
+.log-agent .log-type{color:var(--teal)}
+.log-verun .log-type{color:var(--purple)}
+.log-human .log-type{color:var(--amber)}
+.log-auto .log-type{color:var(--blue)}
+.log-ok .log-type{color:var(--green)}
+.log-tx .log-type{color:var(--teal)}
+.log-warn .log-type{color:var(--amber)}
+.log-msg{color:var(--text2);word-break:break-all;font-size:11px}
+.log-msg.teal{color:var(--teal)}
+.log-msg.green{color:var(--green)}
+.log-msg.purple{color:var(--purple)}
+.log-msg.amber{color:var(--amber)}
+.log-msg.dim{color:var(--text3)}
+
+/* PLATFORM REGISTRY — reference Trust Infrastructure exact: 30% white → color */
+.platform-section{background:#fff;padding:100px 0}
+.platform-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:0}
+.platform-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:32px;transition:transform 0.25s ease;box-shadow:none}
+.platform-card:hover{transform:translateY(-2px)}
+.platform-card.featured{border-color:var(--border)}
+.platform-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,#ffffff 55%,#f0fdf4 100%)}
+.platform-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,#ffffff 55%,#f5f3ff 100%)}
+.platform-grid > .platform-card:nth-child(3){background:linear-gradient(135deg,#ffffff 55%,#fffbeb 100%)}
+.reg-anchor-grid > .platform-card:nth-child(1){background:linear-gradient(135deg,#ffffff 55%,#f5f3ff 100%)}
+.reg-anchor-grid > .platform-card:nth-child(2){background:linear-gradient(135deg,#ffffff 55%,#f0fdf4 100%)}
+.plat-name{font-size:20px;font-weight:700;letter-spacing:-0.01em;color:var(--text)}
+.plat-desc{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:16px}
+.plat-tag{font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;background:var(--bg2);color:var(--text2);border:1px solid var(--border)}
+.plat-tags{display:flex;flex-wrap:wrap;gap:6px}
+/* Redesigned founding validator badge — sits at bottom of card */
+.plat-badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);background:var(--teal-soft);padding:6px 12px;border-radius:999px;margin-top:auto;align-self:flex-start;text-transform:uppercase}
+.plat-badge .dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0}
+.plat-apply{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--amber);background:var(--amber-soft);padding:6px 12px;border-radius:999px;margin-top:auto;align-self:flex-start;text-transform:uppercase;text-decoration:none;transition:transform .15s}
+.plat-apply:hover{transform:translateX(2px)}
+.platform-card{display:flex;flex-direction:column}
+.plat-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.plat-name{font-size:15px;font-weight:700;color:var(--text)}
+.plat-score{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--teal)}
+.plat-type{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;margin-bottom:10px;display:inline-block;background:var(--teal-dim);color:var(--teal);border:1px solid var(--teal-border)}
+.plat-type.investment{background:var(--purple-dim);color:var(--purple);border-color:var(--purple-border)}
+.plat-type.stablecoin{background:var(--green-dim);color:var(--green);border-color:rgba(0,201,134,0.25)}
+.plat-type.soon{background:var(--border);color:var(--text3);border-color:var(--border)}
+.plat-desc{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:12px}
+.plat-tags{display:flex;flex-wrap:wrap;gap:6px}
+.plat-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--bg2);color:var(--text3);border:1px solid var(--border)}
+
+/* Compliance section (legacy class names, unused but kept for backward CSS compatibility) */
+
+/* ARCHITECTURE */
+.arch-section{background:var(--bg2)}
+.arch-diagram{margin-top:56px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md)}
+.arch-flow{display:flex;align-items:stretch;overflow-x:auto}
+.arch-node{flex:1;min-width:130px;padding:22px 14px;display:flex;flex-direction:column;align-items:center;text-align:center;border-right:1px solid var(--border)}
+.arch-node:last-child{border-right:none}
+.arch-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px;border:1px solid var(--border)}
+.arch-icon.teal{background:var(--teal-dim);border-color:var(--teal-border)}
+.arch-icon.purple{background:var(--purple-dim);border-color:var(--purple-border)}
+.arch-icon.amber{background:var(--amber-dim);border-color:rgba(255,176,32,0.25)}
+.arch-icon.green{background:var(--green-dim);border-color:rgba(0,201,134,0.25)}
+.arch-node h4{font-size:12px;font-weight:700;color:var(--text);margin-bottom:4px}
+.arch-node p{font-size:11px;color:var(--text3);line-height:1.5}
+.arch-node .arch-tag{font-family:var(--mono);font-size:9px;color:var(--text3);margin-top:8px;background:var(--bg2);padding:2px 7px;border-radius:4px;border:1px solid var(--border)}
+.arch-arr{display:flex;align-items:center;padding:0 4px;color:var(--teal);font-size:16px;opacity:0.35;flex-shrink:0}
+
+/* FOOTER — reference exact: dark navy #0a1929 */
+footer{background:#0a1929;border-top:0;padding:48px 0;color:rgba(255,255,255,0.7);font-size:13px;line-height:1.55}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-brand{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:800;color:#fff}
+.footer-brand .tag{font-size:9px;font-weight:800;background:var(--teal);color:#fff;padding:2px 7px;border-radius:4px;letter-spacing:0.08em}
+.footer-links{display:flex;gap:22px}
+.footer-links a{font-size:13px;color:#94a3b8;transition:color 0.2s}
+.footer-links a:hover{color:#fff}
+.footer-note{font-size:11px;color:#64748b;font-family:var(--mono)}
+footer .footer-inner > div:first-child > div:last-child{color:#64748b !important}
+
+@media(max-width:900px){
+  .demo-layout,.modes-grid,.platform-grid{grid-template-columns:1fr}
+  .terminal-panel{position:static}
+  .arch-flow{flex-wrap:wrap}
+  .arch-node{min-width:120px;border-bottom:1px solid var(--border)}
+  .hero{padding:70px 0 56px}
+  .section{padding:64px 0}
+  .market-section{padding:80px 0 40px !important}
+  /* Reference mobile: stats stack 1-column with horizontal dividers between */
+  .market-grid{grid-template-columns:1fr;gap:0}
+  .market-stat{padding:28px 0;border-bottom:1px solid var(--border)}
+  .market-stat:last-child{border-bottom:0}
+  .market-stat:first-child{padding-top:0}
+  .ms-num{font-size:42px;margin-bottom:14px}
+  .ms-desc{font-size:15px}
+  .market-divider{width:100%}
+  .modes-grid{grid-template-columns:1fr;gap:14px}
+  .mode-card{padding:24px 22px}
+}
+@media(max-width:760px){
+  .container{padding:0 20px}
+  /* Phone screen — keep desktop-like sizes since mobile phone is now near-full width */
+  .nav{height:56px}
+  /* Demo section header — left align on mobile, center on desktop */
+  .demo-head{text-align:left !important}
+  .nav-logo{font-size:15px}
+  .nav-logo .tag{font-size:8px;padding:2px 6px}
+  .algo-badge{font-size:10px;padding:3px 9px}
+  .hero{padding:48px 0 0}
+  .hero-inner{padding-bottom:0}
+  .hero-copy{padding-bottom:36px}
+  .hero h1{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
+  .hero-sub{font-size:18px;line-height:1.5;margin-bottom:36px}
+  .hero-btns{justify-content:flex-start}
+  .btn{font-size:13px;padding:11px 22px}
+  .phone-wrap{padding:24px 0 0;margin-right:0;justify-content:center}
+  .phone{width:200px}
+  .section{padding:48px 0}
+  .modes-section{padding-top:40px !important}
+  .market-section{padding-top:10px !important}
+  .section-title{font-size:26px}
+  .section-sub{font-size:14px}
+  .demo-stage{padding:18px 14px}
+  .step-title{font-size:15px;line-height:1.3}
+  .step-num{font-size:9px}
+  /* Stack info-card rows vertically on mobile to avoid overflow with mono fonts */
+  .info-card{padding:12px}
+  .ic-row{flex-direction:column;align-items:flex-start;gap:3px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+  .ic-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .ic-val{text-align:left;font-size:12px;word-break:break-all}
+  .ic-label{font-size:9px}
+  .check-list li{font-size:12px;line-height:1.4}
+  .code-block{font-size:10px;padding:10px 12px;white-space:pre-wrap;word-break:break-all}
+  .verdict-box{padding:16px}
+  .verdict-title{font-size:15px}
+  .verdict-sub{font-size:12px}
+  .ha-msg{font-size:13px;line-height:1.6}
+  .ha-btns{flex-direction:column;gap:8px}
+  .ha-btn{width:100%}
+  .step-progress{flex-wrap:wrap;gap:8px}
+  .step-controls{flex-wrap:wrap;gap:8px}
+  .step-controls button{flex:1;min-width:0;font-size:12px;padding:9px 14px}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hero h1{font-size:54px}
+  .mode-tabs{flex-direction:column;width:100%}
+  .mode-tabs button{width:100%}
+  .arch-node{flex:1 1 50%;min-width:0}
+  .terminal-panel{font-size:11px}
+  .footer{font-size:12px}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:18px}
+  .footer-links{flex-wrap:wrap;gap:14px 18px}
+  .reg-anchor-grid{grid-template-columns:1fr !important}
+  .platform-grid{grid-template-columns:1fr}
+  .x402-grid{grid-template-columns:1fr !important;gap:20px !important}
+  .hero-phone-wrap{margin-bottom:-40px !important}
+}
+/* Tablet — 2-column x402 grid + fact cards stack */
+@media(min-width:641px) and (max-width:1024px){
+  .x402-grid{grid-template-columns:1fr !important;gap:24px !important}
+  .hero-phone-wrap{margin-bottom:-80px !important}
+}
+/* Tablet 2-col grid for validator + regulatory cards */
+@media(min-width:601px) and (max-width:900px){
+  .platform-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ============== ERSTER OPENER SECTION (above hero) ============== */
+.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:100px 0;overflow:hidden}
+.erster-section .section-h2{color:#fff}
+.erster-section .section-h2 .muted{color:rgba(255,255,255,0.55);font-weight:600}
+.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
+.erster-copy{padding-right:8px}
+.erster-section .section-label{margin-bottom:18px}
+.erster-section .section-h2{margin-bottom:24px;font-size:clamp(40px,4.5vw,60px);line-height:1.04;letter-spacing:-0.03em}
+.erster-section .section-h2 .ln{display:block;white-space:nowrap}
+.erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
+
+/* Browser-framed dashboard mockup */
+.erster-browser{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.erster-bar{background:#f1f5f9;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:14px}
+.erster-dots{display:flex;gap:6px}
+.erster-dots span{width:10px;height:10px;border-radius:50%}
+.erster-dots span:nth-child(1){background:#ff5f57}
+.erster-dots span:nth-child(2){background:#febc2e}
+.erster-dots span:nth-child(3){background:#28c840}
+.erster-url{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--text3);max-width:260px;margin:0 auto;text-align:center}
+
+/* Dashboard layout — compact for laptop viewport */
+.er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
+.er-sidebar{background:#fff;border-right:1px solid var(--border);padding:14px 11px;display:flex;flex-direction:column;gap:3px}
+.er-logo{font-weight:800;font-size:12px;letter-spacing:0.1em;color:var(--text);margin-bottom:12px;padding:0 7px}
+.er-nav-label{font-family:var(--mono);font-size:7.5px;font-weight:700;letter-spacing:0.14em;color:var(--text3);text-transform:uppercase;margin:12px 7px 4px}
+.er-nav-item{display:flex;align-items:center;gap:6px;padding:5px 7px;border-radius:5px;font-size:9.5px;color:var(--text2);font-weight:500;cursor:default}
+.er-nav-item.active{background:#dcfce7;color:var(--teal);font-weight:600}
+.er-nav-item .er-bullet{width:5px;height:5px;border-radius:50%;background:#cbd5e1;flex-shrink:0}
+.er-nav-item.active .er-bullet,.er-nav-item .er-bullet.green{background:var(--teal)}
+.er-nav-item.purple .er-bullet{background:#7B61FF}
+.er-nav-item.amber .er-bullet{background:#d97706}
+
+/* Main area */
+.er-main{padding:14px 16px;overflow:hidden}
+.er-search{width:100%;padding:5px 9px 5px 24px;border:1px solid var(--border);border-radius:5px;font-size:9px;color:var(--text3);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='9' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='20' y1='20' x2='16.5' y2='16.5'/%3E%3C/svg%3E") no-repeat 8px center;margin-bottom:12px}
+.er-title{font-size:15px;font-weight:800;color:var(--text);letter-spacing:-0.015em;margin-bottom:12px}
+
+.er-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px}
+.er-asset-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.er-asset-row .er-asset{margin-bottom:0}
+.er-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px}
+.er-card-h{font-size:10px;font-weight:700;color:var(--text);margin-bottom:10px}
+.er-asset{padding:8px;background:#fafbff;border-radius:5px;margin-bottom:7px}
+.er-asset:last-child{margin-bottom:0}
+.er-asset-icon{width:15px;height:15px;border-radius:3px;background:#dcfce7;display:inline-block;margin-bottom:5px}
+.er-asset-icon.purple{background:#efe9ff}
+.er-tag-mini{font-family:var(--mono);font-size:6px;font-weight:700;letter-spacing:0.1em;padding:2px 5px;border-radius:3px;display:inline-block;margin-bottom:4px;text-transform:uppercase}
+.er-tag-mini.purple{background:#efe9ff;color:#7B61FF}
+.er-asset-name{font-size:9px;color:var(--text2);margin-bottom:4px}
+.er-asset-amount{font-size:12px;font-weight:800;color:var(--text);margin-bottom:5px;letter-spacing:-0.01em}
+.er-asset-amount .ai{color:#7B61FF}
+.er-bar{height:2.5px;border-radius:2px;background:#e2e8f0;overflow:hidden}
+.er-bar-fill{height:100%;border-radius:2px}
+.er-bar-fill.green{background:var(--teal);width:25%}
+.er-bar-fill.purple{background:#7B61FF;width:40%}
+
+.er-chart-card{position:relative}
+.er-tag-mini.verun{background:#efe9ff;color:#7B61FF;position:absolute;top:10px;left:10px}
+.er-chart-title{font-size:9px;font-weight:700;color:var(--text);margin-top:14px;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.er-chart-pct{font-size:7.5px;color:var(--teal);font-weight:700}
+.er-chart{height:70px;position:relative;margin-top:6px}
+.er-chart svg{width:100%;height:100%}
+.er-legend{display:flex;gap:8px;font-size:6.5px;color:var(--text3);margin-top:4px;justify-content:center}
+.er-legend span{display:flex;align-items:center;gap:2px}
+.er-legend span::before{content:'';width:5px;height:5px;border-radius:50%;background:#cbd5e1}
+.er-legend span.line::before{background:#7B61FF}
+
+/* Investors table */
+.er-table-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:10px}
+.er-table-card h3{font-size:9px;font-weight:700;color:var(--text);margin-bottom:1px}
+.er-table-card p{font-size:7.5px;color:var(--text3);margin-bottom:8px}
+.er-table{width:100%;font-size:7.5px;border-collapse:collapse}
+.er-table th{text-align:left;font-weight:700;color:var(--text3);font-size:6.5px;letter-spacing:0.08em;text-transform:uppercase;padding:4px 0;border-bottom:1px solid var(--border)}
+.er-table td{padding:4.5px 0;border-bottom:1px solid #f1f5f9;color:var(--text2)}
+.er-table tr:last-child td{border-bottom:0}
+.er-table td:first-child{font-weight:600;color:var(--text)}
+.er-pill-status{font-size:8px;font-weight:700;padding:2px 7px;border-radius:8px;display:inline-block}
+.er-pill-status.yes{background:#dcfce7;color:var(--teal)}
+.er-pill-status.no{background:#fee2e2;color:#dc2626}
+.er-pill-status.approved{background:#dcfce7;color:var(--teal)}
+.er-pill-status.waiting{background:#f1f5f9;color:var(--text3)}
+.er-pill-status.rejected{background:#fee2e2;color:#dc2626}
+
+/* TEAM SECTION */
+.team-section .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.team-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,23,42,0.06)}
+@media(max-width:1024px){
+  .team-section{padding:70px 0 !important}
+  .team-section .team-grid{grid-template-columns:repeat(2,1fr) !important;max-width:680px;gap:16px}
+}
+@media(max-width:560px){
+  .team-section{padding:56px 0 !important}
+  .team-section .team-grid{grid-template-columns:1fr !important;max-width:420px;gap:14px}
+  .team-card{padding:22px 20px !important}
+}
+
+/* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
+@media(max-width:1024px){
+  .erster-section{padding:80px 0 60px}
+  .erster-inner{grid-template-columns:1fr;gap:36px}
+  .erster-copy{padding-right:0;max-width:680px}
+  .erster-browser{max-width:none;margin:0 auto;width:100%}
+  /* slight internal tighten */
+  .er-dash{grid-template-columns:160px 1fr;min-height:400px}
+  .er-main{padding:14px 16px}
+}
+
+@media(max-width:780px){
+  .erster-section{padding:60px 0 40px}
+  .erster-section .section-h2{font-size:62px;line-height:1.02;letter-spacing:-0.035em}
+  .erster-section .section-h2 .ln{white-space:normal}
+  .er-dash{grid-template-columns:140px 1fr;min-height:360px}
+  .er-sidebar{padding:13px 9px}
+  .er-logo{font-size:11px;margin-bottom:11px;padding:0 6px}
+  .er-nav-item{font-size:9.5px;padding:4px 6px;gap:5px}
+  .er-nav-item .er-bullet{width:5px;height:5px}
+  .er-nav-label{font-size:7px;margin:11px 6px 3px}
+  .er-main{padding:13px 15px}
+  .er-search{font-size:9px;padding:5px 8px 5px 22px;margin-bottom:11px}
+  .er-title{font-size:14px;margin-bottom:11px}
+  .er-card{padding:11px}
+  .er-asset-amount{font-size:11px}
+  .er-asset-name{font-size:8.5px}
+  .er-chart{height:60px}
+  .er-table-card{padding:9px}
+  .er-table th{font-size:7px}
+  .er-table td{font-size:8px}
+  .er-pill-status{font-size:7.5px;padding:2px 7px}
+  .er-table th:nth-child(3),.er-table td:nth-child(3),
+  .er-table th:nth-child(4),.er-table td:nth-child(4),
+  .er-table th:nth-child(6),.er-table td:nth-child(6){display:none}
+}
+
+@media(max-width:640px){
+  .er-dash{grid-template-columns:120px 1fr;min-height:320px}
+  .er-sidebar{padding:11px 8px}
+  .er-logo{font-size:10px}
+  .er-nav-item{font-size:8.5px;padding:3px 6px;gap:4px}
+  .er-nav-item .er-bullet{width:4.5px;height:4.5px}
+  .er-nav-label{font-size:6.5px;margin:10px 6px 3px}
+  .er-main{padding:11px 13px}
+  .er-search{font-size:8px;padding:4px 7px 4px 20px}
+  .er-title{font-size:12px}
+  .er-grid{grid-template-columns:1fr;gap:7px}
+  .er-card{padding:10px}
+  .er-asset-amount{font-size:10.5px}
+  .er-asset-name{font-size:8px}
+  .er-chart{height:52px}
+  .er-table-card{padding:8px}
+  .er-table th{font-size:6.5px}
+  .er-table td{font-size:7.5px}
+  .er-pill-status{font-size:7px;padding:2px 6px}
+}
+
+@media(max-width:480px){
+  .erster-section{padding:50px 0 32px}
+  .erster-section .section-h2{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
+  .er-dash{grid-template-columns:1fr;min-height:0}
+  .er-sidebar{display:none}
+  .er-main{padding:14px 14px 16px}
+  .er-title{font-size:14px;margin-bottom:10px}
+  .er-asset-row{grid-template-columns:1fr;gap:7px}
+  .er-asset-row .er-asset{margin-bottom:0}
+  .er-asset-amount{font-size:12px}
+  .er-asset-name{font-size:9px}
+  .er-chart{height:60px}
+  .er-table th{font-size:7px}
+  .er-table td{font-size:8.5px}
+  .er-pill-status{font-size:8px;padding:2px 7px}
+}
+
+@media(max-width:380px){
+  .erster-section .section-h2{font-size:54px}
+  .er-main{padding:12px 12px 14px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <div class="nav-logo" style="letter-spacing:0.12em">ERSTER</div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+      <a href="#x402">x402</a>
+      <a href="/docs.html" target="_blank">Tech Docs</a>
+    </div>
+    <div class="nav-right" style="display:flex;align-items:center;gap:10px">
+      <div class="algo-badge" style="background:#ede9fe;color:#5b21b6">
+        <span class="algo-dot" style="background:#7c3aed"></span>
+        x402 Powered
+      </div>
+      <div class="algo-badge">
+        <span class="algo-dot"></span>
+        Hedera Testnet
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Trusted agents.<br><span class="muted">Scored referrals.</span></h1>
+        <p class="hero-sub">Make your AI agent <strong>regulatory-ready</strong>.<br>MiFID II + EU AI Act compliant.<br>Verun is the agentic trust layer by Erster — on Hedera.</p>
+        <div class="hero-flags">
+          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="MiFID II compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">MiFID II</text></svg>
+          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="EU AI Act compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">AI Act</text></svg>
+        </div>
+        <div class="hero-btns">
+          <button class="btn btn-teal" onclick="scrollToDemo()">Run Demo →</button>
+          <a href="https://drive.google.com/file/d/1RdTKX5FVt6BgVHeFWg_wQEin5PefgFpJ/view?usp=sharing" target="_blank" class="btn btn-outline">Demo Video →</a>
+        </div>
+      </div>
+      <!-- Phone mockup (iPhone 15 Pro style, shows live demo content) -->
+      <div class="hero-phone-wrap">
+        <div class="hero-phone">
+          <div class="hero-phone-island"></div>
+          <div class="hero-phone-screen">
+            <div class="hp-content">
+              <div class="hp-nav">
+                <span class="hp-back">← Back</span>
+                <span class="hp-counter">Step 1 of 3</span>
+                <span class="hp-next">Next →</span>
+              </div>
+              <div class="hp-steps">
+                <span class="hp-step-dot active">1</span>
+                <span class="hp-step-line"></span>
+                <span class="hp-step-dot inactive">2</span>
+                <span class="hp-step-line"></span>
+                <span class="hp-step-dot inactive">3</span>
+              </div>
+              <div class="hp-step-label">STEP 1 · PLATFORM SCAN</div>
+              <div class="hp-title">Agent scans platform registry</div>
+              <div class="hp-card">
+                <div class="hp-card-label">AGENT</div>
+                <div class="hp-card-value">agt_openclaw_01</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">INTENT</div>
+                <div class="hp-card-value">SpaceX Pre-IPO Shares</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">BUDGET</div>
+                <div class="hp-card-value">€500,000+ EUR</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">REGION</div>
+                <div class="hp-card-value">EU · MiFID II Jurisdiction</div>
+              </div>
+              <div class="hp-checks">
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Scanning investment platforms…</span></div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Filtering: MiFID II + AI Act audit trail</span></div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Match found: tokenforge (Score 920)</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDRESSABLE MARKET · EU -->
+<section class="section market-section" id="market">
+  <div class="container">
+    <div class="market-divider"></div>
+    <div class="market-grid">
+      <div class="market-stat">
+        <div class="ms-num">5,000<span class="ms-plus">+</span></div>
+        <div class="ms-desc">regulated financial<br>institutions in EU<br>(potential validators)</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">€ 33.7T</div>
+        <div class="ms-desc">EU assets under<br>management<br>(TAM)</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">27</div>
+        <div class="ms-desc">EU member states<br>covered by single<br>MiFID II + AI Act framework</div>
+      </div>
+      <div class="market-stat">
+        <div class="ms-num">450M<span class="ms-plus">+</span></div>
+        <div class="ms-desc">projected agents<br>by 2030 — one per<br>EU resident</div>
+      </div>
+    </div>
+    <div class="market-sources">Sources: EBA register · Eurostat · McKinsey Agentic Finance forecast · ECB AUM data 2024. Numbers represent addressable market — not Verun's current customer base.</div>
+  </div>
+</section>
+
+<!-- DEMO -->
+<section class="section demo-section" id="demo">
+  <div class="container">
+    <div class="demo-head" style="text-align:center">
+      <h2 class="section-h2" style="margin-bottom:8px">Test how your agent <span class="muted">is scoring.</span></h2>
+    </div>
+
+    <div class="mode-tabs">
+      <button class="mode-tab" id="tab-discover" onclick="setMode('discover')">🔍 Discovery</button>
+      <button class="mode-tab active" id="tab-supervised" onclick="setMode('supervised')">👤 Supervised</button>
+      <button class="mode-tab auto-tab" id="tab-auto" onclick="setMode('auto')">⚡ Autonomous</button>
+    </div>
+
+    <div class="demo-layout">
+      <div class="step-panel" id="step-panel">
+        <div class="step-nav" style="margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--border);border-top:none;margin-top:0;padding-top:0">
+          <button class="nav-btn" id="btn-prev" onclick="prevStep()" disabled>← Back</button>
+          <span class="step-counter" id="step-counter"></span>
+          <button class="nav-btn primary" id="btn-next" onclick="nextStep()">Next →</button>
+        </div>
+        <div class="step-dots" id="step-dots"></div>
+        <div id="stage-body" class="stage-body"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE DIAGRAM -->
+<section class="section" id="architecture" style="background:var(--bg);padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <h2 class="section-h2" style="text-align:center;margin-bottom:14px;margin-top:12px">
+      One request. <span class="muted">Full agent settlement.</span>
+    </h2>
+    <p class="section-sub" style="text-align:center;max-width:680px;margin:0 auto 48px;font-size:17px;color:var(--text2)">
+      An agent fires one HTTP call. Six layers respond — x402 challenge, on-chain payment,
+      institutional consensus, audit anchor, public verification, and yield routing —
+      all before the agent moves on.
+    </p>
+
+    <!-- HORIZONTAL HIGH-LEVEL FLOW (docs-style) -->
+    <div style="max-width:1100px;margin:0 auto">
+      <style>
+        .flow-box{border:1px solid var(--border);border-radius:10px;padding:0;background:#fff;font-family:var(--mono);box-shadow:var(--shadow-sm);overflow:hidden}
+        .flow-row{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;padding:30px 24px;overflow-x:auto;min-height:128px}
+        .flow-step{text-align:center;flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+        .flow-tag{border-radius:8px;padding:11px 14px;font-weight:700;font-size:13px;line-height:1.25;width:100%;letter-spacing:-0.005em}
+        .flow-tag .sub{display:block;font-size:10px;opacity:0.7;font-weight:500;margin-top:3px;font-family:var(--mono);letter-spacing:0.02em}
+        .flow-label{font-size:10px;color:var(--text3);margin-top:8px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600}
+        .flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 4px;color:var(--text3);font-size:22px;flex-shrink:0;font-family:var(--sans)}
+        /* Only 3 colors — same family as nav badges and section accents */
+        .flow-tag.green{background:var(--teal-soft);border:1px solid var(--teal-border);color:#065f46}
+        .flow-tag.purple{background:var(--purple-soft);border:1px solid var(--purple-border);color:var(--purple)}
+        .flow-tag.amber{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
+        .flow-tag.blue{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
+        .flow-tag.yellow{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
+        @media (max-width:760px){
+          .flow-row{flex-wrap:wrap;justify-content:center}
+          .flow-step{min-width:42%}
+          .flow-arrow{display:none}
+        }
+      </style>
+
+      <div class="flow-box">
+        <div class="flow-row">
+          <div class="flow-step">
+            <div class="flow-tag green">Agent<span class="sub">Claude · MCP</span></div>
+            <div class="flow-label">Caller</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-tag purple">x402<span class="sub">HTTP 402 · paymentRequirements</span></div>
+            <div class="flow-label">Challenge</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-tag purple">Hedera Official Facilitator<span class="sub">verify · settle</span></div>
+            <div class="flow-label">Facilitator</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-tag amber">Verun<span class="sub">2-of-3 consensus</span></div>
+            <div class="flow-label">Trust Gate</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-tag blue">Hedera<span class="sub">HCS topic anchor</span></div>
+            <div class="flow-label">Audit Trail</div>
+          </div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step">
+            <div class="flow-tag yellow">HashScan<span class="sub">Public verification</span></div>
+            <div class="flow-label">Verification</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- below: 3 quick fact cards -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px" class="x402-grid">
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Validators</div>
+          <div style="font-weight:700;font-size:14px;color:var(--text);line-height:1.4">ERSTER · tokenforge · Test</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px">2-of-3 institutional consensus, weight-1 each.</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Settlement</div>
+          <div style="font-weight:700;font-size:14px;color:var(--text);line-height:1.4">USDC · HBAR</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px">Two schemes accepted side-by-side via x402 facilitator.</div>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px 18px">
+          <div style="font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px">Verification</div>
+          <div style="font-weight:700;font-size:14px;color:var(--text);line-height:1.4">HashScan · Public · Zero-auth</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:4px">Every verdict txid + settlement txid public on hashscan.io.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- x402 COMMERCE SECTION -->
+<section class="section" id="x402" style="background:linear-gradient(180deg,#faf5ff 0%,#f3f4ff 100%);padding:80px 0;border-top:1px solid var(--border)">
+  <div class="container">
+    <h2 class="section-h2" style="text-align:center;margin-bottom:14px;margin-top:12px">
+      Pay-per-evaluation. <span class="muted">Agent-native commerce.</span>
+    </h2>
+    <p class="section-sub" style="text-align:center;max-width:680px;margin:0 auto 40px;font-size:17px;color:var(--text2)">
+      An agent pays <strong>0.01 USDC</strong> via x402 → gets a Verun trust verdict
+      + on-chain anchor in one round trip. No subscriptions, no API keys, no billing accounts.
+    </p>
+
+    <div style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:32px;max-width:1080px;margin:0 auto;align-items:start" class="x402-grid">
+      <!-- LEFT: interactive terminal -->
+      <div>
+        <div style="background:#0a2540;color:#cbd5e1;border-radius:14px;padding:0;overflow:hidden;box-shadow:var(--shadow-lg);font-family:var(--mono)">
+          <div style="background:#1e293b;padding:10px 14px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #334155">
+            <span style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#febc2e"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#28c840"></span>
+            <span style="font-size:11px;color:#94a3b8;margin-left:8px">agent · x402 live terminal</span>
+            <span id="x402-status" style="margin-left:auto;font-size:10px;color:#7c3aed;font-weight:700;letter-spacing:0.08em">READY</span>
+          </div>
+          <pre id="x402-terminal" style="margin:0;padding:18px 20px;font-size:12px;line-height:1.7;color:#e2e8f0;white-space:pre-wrap;word-break:break-word;min-height:340px;max-height:480px;overflow-y:auto"><span style="color:#94a3b8"># Click "Step 1" below to fire a real HTTP request.
+# Then "Step 2" to run the paid Verun evaluation.
+# All transactions are live on Hedera testnet.</span></pre>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+          <button id="btn-x402-step1" onclick="runX402Step1()" class="btn btn-teal" style="padding:11px 20px;font-size:14px;background:#7c3aed;box-shadow:0 4px 14px rgba(124,58,237,0.3)">
+            Step 1 · Trigger HTTP 402 →
+          </button>
+          <button id="btn-x402-step2" onclick="runX402Step2()" class="btn btn-outline" style="padding:11px 20px;font-size:14px" disabled>
+            Step 2 · Run Paid Evaluation →
+          </button>
+          <button onclick="resetX402()" style="background:transparent;border:0;color:var(--text2);font-size:12px;text-decoration:underline;cursor:pointer">reset</button>
+        </div>
+      </div>
+      <!-- RIGHT: payment options + facts -->
+      <div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;box-shadow:var(--shadow-sm)">
+          <div style="font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:0.08em;margin-bottom:14px">ACCEPTED PAYMENT SCHEMES</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px solid var(--border)">
+              <div>
+                <div style="font-weight:700;font-size:14px">USDC <span style="font-size:11px;font-weight:500;color:var(--text2);margin-left:6px">via Hedera Official Facilitator</span></div>
+                <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:var(--mono)">hedera · USDC token</div>
+              </div>
+              <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)">0.01</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#f8fafc;border-radius:8px;border:1px solid var(--border)">
+              <div>
+                <div style="font-weight:700;font-size:14px">HBAR <span style="font-size:11px;font-weight:500;color:var(--text2);margin-left:6px">via native transfer</span></div>
+                <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:var(--mono)">hedera testnet · native</div>
+              </div>
+              <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--teal)">0.01</div>
+            </div>
+          </div>
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border);font-size:11px;color:var(--text3);line-height:1.5">
+            <strong style="color:var(--text2)">Spec-compliant:</strong> follows <code style="font-family:var(--mono);font-size:10px;background:#f1f5f9;padding:1px 5px;border-radius:3px">x402Version: 1</code>, <code style="font-family:var(--mono);font-size:10px;background:#f1f5f9;padding:1px 5px;border-radius:3px">scheme: exact</code>, CAIP-2 network IDs, atomic transaction groups.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section team-section" id="team" style="background:var(--bg);padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <h2 class="section-h2" style="text-align:center;margin-bottom:48px">Team</h2>
+    <div class="team-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1100px;margin:0 auto">
+      <a href="https://www.linkedin.com/in/rafaelschultz/" target="_blank" class="team-card" style="display:flex;flex-direction:column;align-items:flex-start;padding:28px 24px;background:#fff;border:1px solid var(--border);border-radius:16px;text-decoration:none;color:inherit;transition:all .2s">
+        <div style="font-weight:800;font-size:17px;color:var(--text);margin-bottom:14px">Rafael Schultz</div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/nils-engeln/" target="_blank" class="team-card" style="display:flex;flex-direction:column;align-items:flex-start;padding:28px 24px;background:#fff;border:1px solid var(--border);border-radius:16px;text-decoration:none;color:inherit;transition:all .2s">
+        <div style="font-weight:800;font-size:17px;color:var(--text);margin-bottom:14px">Nils Engeln</div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/adarsh-raj-ds/" target="_blank" class="team-card" style="display:flex;flex-direction:column;align-items:flex-start;padding:28px 24px;background:#fff;border:1px solid var(--border);border-radius:16px;text-decoration:none;color:inherit;transition:all .2s">
+        <div style="font-weight:800;font-size:17px;color:var(--text);margin-bottom:14px">Adarsh Raj</div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/fahadfaroooq/" target="_blank" class="team-card" style="display:flex;flex-direction:column;align-items:flex-start;padding:28px 24px;background:#fff;border:1px solid var(--border);border-radius:16px;text-decoration:none;color:inherit;transition:all .2s">
+        <div style="font-weight:800;font-size:17px;color:var(--text);margin-bottom:14px">Fahad Farooq</div>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#16a34a"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ERSTER PLATFORM CONTEXT (after validators, before footer) -->
+<section class="erster-section" id="erster">
+  <div class="container">
+    <div class="erster-inner">
+      <div class="erster-copy">
+        <h2 class="section-h2"><span class="ln">Assets.</span><span class="ln">Agentic Investors.</span><span class="ln muted">One Workflow.</span></h2>
+      </div>
+      <div class="erster-browser">
+        <div class="erster-bar">
+          <div class="erster-dots"><span></span><span></span><span></span></div>
+          <div class="erster-url">hedera.erster.fund</div>
+        </div>
+        <div class="er-dash">
+          <div class="er-sidebar">
+            <div class="er-logo">ERSTER</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Smart Contracts</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Assets</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Investors</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Transactions</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Permission</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Analytics</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>Affiliate</div>
+            <div class="er-nav-label">VERUN LAYER</div>
+            <div class="er-nav-item active"><span class="er-bullet"></span>VERUN AI Referrals</div>
+            <div class="er-nav-item"><span class="er-bullet"></span>VERUN Agent Score</div>
+            <div class="er-nav-item amber"><span class="er-bullet"></span>VERUN Validator</div>
+          </div>
+          <div class="er-main">
+            <input class="er-search" placeholder="Search">
+            <div class="er-title">Platform overview</div>
+            <div class="er-grid">
+              <div class="er-card">
+                <div class="er-card-h">Current Sales Status of Assets</div>
+                <div class="er-asset-row">
+                  <div class="er-asset">
+                    <div class="er-asset-icon"></div>
+                    <div class="er-asset-name">SpaceX Pre-IPO</div>
+                    <div class="er-asset-amount">€4M of €4M raised</div>
+                    <div class="er-bar"><div class="er-bar-fill green"></div></div>
+                  </div>
+                  <div class="er-asset">
+                    <div class="er-asset-icon purple"></div>
+                    <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
+                    <div class="er-asset-name">SpaceX Pre-IPO · AI share</div>
+                    <div class="er-asset-amount">€1.2M of €4M <span class="ai">AI referred</span></div>
+                    <div class="er-bar"><div class="er-bar-fill purple"></div></div>
+                  </div>
+                </div>
+              </div>
+              <div class="er-card er-chart-card">
+                <span class="er-tag-mini verun">VERUN AI</span>
+                <div class="er-chart-title">Weekly Agentic Referrals <span class="er-chart-pct">+15.2%</span></div>
+                <div class="er-chart">
+                  <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+                    <rect x="5" y="30" width="14" height="50" rx="2" fill="#e2e8f0"/>
+                    <rect x="25" y="14" width="14" height="66" rx="2" fill="#e2e8f0"/>
+                    <rect x="45" y="38" width="14" height="42" rx="2" fill="#e2e8f0"/>
+                    <rect x="65" y="32" width="14" height="48" rx="2" fill="#e2e8f0"/>
+                    <rect x="85" y="42" width="14" height="38" rx="2" fill="#e2e8f0"/>
+                    <rect x="105" y="6" width="14" height="74" rx="2" fill="#e2e8f0"/>
+                    <rect x="125" y="22" width="14" height="58" rx="2" fill="#e2e8f0"/>
+                    <rect x="145" y="18" width="14" height="62" rx="2" fill="#e2e8f0"/>
+                    <rect x="165" y="26" width="14" height="54" rx="2" fill="#e2e8f0"/>
+                    <polyline points="12,42 32,38 52,46 72,40 92,44 112,28 132,34 152,22 172,30" fill="none" stroke="#7B61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="42" r="2" fill="#7B61FF"/>
+                    <circle cx="32" cy="38" r="2" fill="#7B61FF"/>
+                    <circle cx="52" cy="46" r="2" fill="#7B61FF"/>
+                    <circle cx="72" cy="40" r="2" fill="#7B61FF"/>
+                    <circle cx="92" cy="44" r="2" fill="#7B61FF"/>
+                    <circle cx="112" cy="28" r="2" fill="#7B61FF"/>
+                    <circle cx="132" cy="34" r="2" fill="#7B61FF"/>
+                    <circle cx="152" cy="22" r="2" fill="#7B61FF"/>
+                    <circle cx="172" cy="30" r="2" fill="#7B61FF"/>
+                  </svg>
+                </div>
+                <div class="er-legend"><span>Referrals per Day</span><span class="line">Avg · AI-driven</span></div>
+              </div>
+            </div>
+            <div class="er-table-card">
+              <h3>Investors List</h3>
+              <p>Your detailed overview about your investors.</p>
+              <table class="er-table">
+                <thead>
+                  <tr><th>Name</th><th>Email</th><th>Wallet</th><th>Reg.</th><th>KYC</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>Tommy Sicilia</td><td>tommy@gmail.com</td><td>0X3FC…478</td><td>02/04/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Waldemar Mannering</td><td>mann@stack3.io</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
+                  <tr><td>Louetta Esses</td><td>admin@sisyphus.com</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
+                  <tr><td>Tessa Meyer</td><td>tessmeyer@gmail.com</td><td>0X1FC…532</td><td>04/08/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand" style="letter-spacing:0.12em">ERSTER</div>
+        <div style="font-size:11px;color:var(--text3);margin-top:4px;font-family:var(--mono)">© 2026 BCP Partners GmbH · All rights reserved</div>
+      </div>
+      <div class="footer-links">
+        <a href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
+        <a href="#x402">x402</a>
+        <a href="https://github.com/ChainLeo/verun-hedera-mvp" target="_blank">GitHub</a>
+        <a href="/docs.html" target="_blank">Tech Docs</a>
+        <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
+      </div>
+      <div class="footer-note">Hedera Testnet · x402 · v0.1.0</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ─── x402 INTERACTIVE DEMO (live calls to /api/x402/* + /api/evaluate) ──
+function _x402WriteLine(text, color = '#e2e8f0') {
+  const term = document.getElementById('x402-terminal');
+  if (!term) return;
+  const line = document.createElement('div');
+  line.style.color = color;
+  line.textContent = text;
+  term.appendChild(line);
+  term.scrollTop = term.scrollHeight;
+}
+function _x402WriteRaw(html) {
+  const term = document.getElementById('x402-terminal');
+  if (!term) return;
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  term.appendChild(div);
+  term.scrollTop = term.scrollHeight;
+}
+function _x402SetStatus(text, color = '#7c3aed') {
+  const s = document.getElementById('x402-status');
+  if (s) { s.textContent = text; s.style.color = color; }
+}
+function resetX402() {
+  const term = document.getElementById('x402-terminal');
+  if (term) term.innerHTML = '<span style="color:#94a3b8"># Click "Step 1" below to fire a real HTTP request.\n# Then "Step 2" to run the paid Verun evaluation.\n# All transactions are live on Hedera testnet.</span>';
+  _x402SetStatus('READY', '#7c3aed');
+  document.getElementById('btn-x402-step1').disabled = false;
+  document.getElementById('btn-x402-step2').disabled = true;
+}
+async function runX402Step1() {
+  document.getElementById('btn-x402-step1').disabled = true;
+  const term = document.getElementById('x402-terminal');
+  if (term) term.innerHTML = '';
+  _x402SetStatus('REQUESTING…', '#fbbf24');
+  _x402WriteLine('$ curl -i https://hedera.erster.fund/api/x402/evaluate', '#a78bfa');
+  _x402WriteLine('');
+  try {
+    const res = await fetch('/api/x402/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' } });
+    const body = await res.json();
+    _x402WriteLine(`HTTP/${res.status === 402 ? '1.1 402 Payment Required' : res.status}`, res.status === 402 ? '#fbbf24' : '#34d399');
+    const facHdr = res.headers.get('x-402-powered');
+    if (facHdr) _x402WriteLine('X-402-Powered: ' + facHdr, '#94a3b8');
+    _x402WriteLine('');
+    _x402WriteLine('// paymentRequirements (3 schemes accepted)', '#94a3b8');
+    body.accepts.forEach((a, i) => {
+      const asset = a.extra?.name || a.asset;
+      const amt = (Number(a.maxAmountRequired) / 1e6).toFixed(2);
+      _x402WriteRaw(`<span style="color:#fbbf24">  scheme ${i + 1}:</span> <span style="color:#34d399">${a.scheme}</span> · <span style="color:#a78bfa">${a.network.split(':')[0]}</span> · <span style="color:#e2e8f0;font-weight:700">${amt} ${asset}</span> <span style="color:#94a3b8">→ ${a.extra?.facilitator || a.extra?.provider || '—'}</span>`);
+    });
+    _x402WriteLine('');
+    _x402WriteLine('# Next: agent signs PaymentTxn + retries with X-PAYMENT header', '#94a3b8');
+    _x402SetStatus('402 RECEIVED', '#fbbf24');
+    document.getElementById('btn-x402-step2').disabled = false;
+  } catch (e) {
+    _x402WriteLine('ERROR: ' + e.message, '#f87171');
+    _x402SetStatus('ERROR', '#f87171');
+    document.getElementById('btn-x402-step1').disabled = false;
+  }
+}
+async function runX402Step2() {
+  document.getElementById('btn-x402-step2').disabled = true;
+  _x402WriteLine('');
+  _x402WriteLine('$ curl -X POST /api/evaluate  # paid call → run consensus + anchor', '#a78bfa');
+  _x402WriteLine('# (in production: -H "X-PAYMENT: $SIGNED_TXN_BASE64")', '#94a3b8');
+  _x402WriteLine('');
+  _x402SetStatus('EVALUATING…', '#fbbf24');
+  try {
+    const payload = { agentId: 'agt_demo', score: 820, operation: 'transfer', validatorIds: ['val-erster-01', 'val-tokenforge-02', 'val-test-03'] };
+    const res = await fetch('/api/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res.json();
+    const verdict = data.verdict || {};
+    const anchor = data.anchor || {};
+    _x402WriteLine('HTTP/1.1 200 OK', '#34d399');
+    _x402WriteLine('');
+    _x402WriteRaw(`<span style="color:#94a3b8">// verdict</span>`);
+    _x402WriteRaw(`  consensus  : <span style="color:#34d399;font-weight:700">${verdict.consensus || 'n/a'}</span>`);
+    _x402WriteRaw(`  permitted  : <span style="color:#34d399;font-weight:700">${String(verdict.permitted)}</span>`);
+    _x402WriteRaw(`  validators : <span style="color:#a78bfa">${(verdict.validators_used || []).map(v => v.name).join(' · ')}</span>`);
+    _x402WriteRaw(`  kickback   : <span style="color:#fbbf24">${verdict.kickback_rate}%</span>`);
+    _x402WriteLine('');
+    _x402WriteRaw(`<span style="color:#94a3b8">// anchor (Hedera Testnet)</span>`);
+    if (anchor.txid) {
+      _x402WriteRaw(`  txid      : <span style="color:#34d399">${anchor.txid}</span>`);
+      _x402WriteRaw(`  round     : <span style="color:#a78bfa">${anchor.round || ''}</span>`);
+      _x402WriteRaw(`  explorer  : <a href="${anchor.explorer}" target="_blank" style="color:#60a5fa;text-decoration:underline">${anchor.explorer}</a>`);
+      _x402SetStatus('200 · ANCHORED', '#34d399');
+    } else {
+      _x402WriteRaw(`  status    : <span style="color:#fbbf24">${anchor.status || 'unavailable'}</span>`);
+      if (anchor.error) _x402WriteRaw(`  error     : <span style="color:#f87171">${anchor.error}</span>`);
+      _x402SetStatus('200 · NO ANCHOR', '#fbbf24');
+    }
+  } catch (e) {
+    _x402WriteLine('ERROR: ' + e.message, '#f87171');
+    _x402SetStatus('ERROR', '#f87171');
+  }
+}
+
+// ─── STATE ──────────────────────────────────────────────
+let currentMode = 'supervised';
+let currentStep = 1;
+let logTimer = null;
+let lastLiveEvaluation = null;
+
+const LIVE_DEMO_PAYLOAD = {
+  agentId: 'agt_demo',
+  score: 820,
+  operation: 'transfer',
+  validatorIds: ['val-erster-01','val-tokenforge-02','val-test-03']
+};
+
+const MODES = {
+  discover: {
+    steps: 3,
+    title: 'verun · discovery log',
+    color: 'teal',
+    labels: ['Platform Scan', 'Verun Validation', 'Agent Referral']
+  },
+  supervised: {
+    steps: 3,
+    title: 'verun · supervised log',
+    color: 'teal',
+    labels: ['Referral Received', 'Human Review', 'Decision Anchored']
+  },
+  auto: {
+    steps: 3,
+    title: 'verun · autonomous log',
+    color: 'purple',
+    labels: ['Policy Loaded', 'Auto Execute', 'On-Chain Proof']
+  }
+};
+
+// ─── ANCHOR TX BOX ──────────────────────────────────────
+// Renders a clickable on-chain anchor box. If no live evaluation has come back
+// yet, shows a loading state instead of a fake hash + misleading "unavailable".
+function anchorBoxHTML(label) {
+  const tx = lastLiveEvaluation?.anchor?.txid;
+  const explorer = lastLiveEvaluation?.anchor?.explorer
+    || (tx ? `https://hashscan.io/testnet/tx/${tx}` : null);
+  if (tx && explorer) {
+    return `<div class="tx-box">
+      <div class="tx-label">${label}</div>
+      <div class="tx-hash"><a href="${explorer}" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;border-bottom:1px dashed currentColor">${tx}</a></div>
+      <div class="tx-link"><a href="${explorer}" target="_blank" rel="noopener">↗ View on Lora Explorer Testnet</a></div>
+    </div>`;
+  }
+  return `<div class="tx-box" style="opacity:0.85">
+    <div class="tx-label">${label}</div>
+    <div class="tx-hash" style="display:flex;align-items:center;gap:8px">
+      <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--teal-border);border-top-color:var(--teal);border-radius:50%;animation:spin 0.8s linear infinite"></span>
+      <span>Anchoring on Hedera testnet…</span>
+    </div>
+    <div class="tx-link">Live <code>/api/evaluate</code> call in flight</div>
+  </div>`;
+}
+
+// ─── LOG ────────────────────────────────────────────────
+function now() { return new Date().toTimeString().substr(0,8); }
+function addLog(type, typeLabel, msg, cls='') {
+  // Terminal panel was removed from layout — log to console instead so the JS doesn't throw.
+  const body = document.getElementById('terminal-body');
+  if (!body) { try { console.debug(`[${typeLabel}]`, msg); } catch (_) {} return; }
+  const line = document.createElement('div');
+  line.className = `log-line log-${type}`;
+  line.innerHTML = `<span class="log-time">${now()}</span><span class="log-type">${typeLabel}</span><span class="log-msg ${cls}">${msg}</span>`;
+  body.appendChild(line);
+  setTimeout(()=>line.classList.add('show'), 20);
+  body.scrollTop = body.scrollHeight;
+}
+function queueLogs(logs) {
+  clearInterval(logTimer);
+  let i = 0;
+  logTimer = setInterval(() => {
+    if(i >= logs.length) { clearInterval(logTimer); return; }
+    addLog(...logs[i++]);
+  }, 320);
+}
+
+// ─── DOTS ───────────────────────────────────────────────
+function renderDots() {
+  const m = MODES[currentMode];
+  const container = document.getElementById('step-dots');
+  container.innerHTML = '';
+  for(let i=1;i<=m.steps;i++){
+    const wrap = document.createElement('div');
+    wrap.className = 'step-dot-wrap';
+    if(i===m.steps) wrap.style.flex='0';
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (m.color==='purple'?' purple-dot':'');
+    if(i < currentStep) dot.classList.add('done');
+    if(i === currentStep) dot.classList.add('active');
+    dot.textContent = i;
+    dot.onclick = (()=>{const n=i;return()=>{if(n<currentStep){currentStep=n;renderStep();}}})();
+    wrap.appendChild(dot);
+    if(i < m.steps){
+      const line = document.createElement('div');
+      line.className = 'step-line' + (i < currentStep ? (m.color==='purple'?' done-purple':' done') : '');
+      wrap.appendChild(line);
+    }
+    container.appendChild(wrap);
+  }
+  document.getElementById('step-counter').textContent = `Step ${currentStep} of ${m.steps}`;
+  document.getElementById('btn-prev').disabled = currentStep === 1;
+  const nextBtn = document.getElementById('btn-next');
+  if(currentStep === m.steps){
+    nextBtn.textContent = '↻ Restart';
+    nextBtn.className = 'nav-btn restart';
+    nextBtn.onclick = () => { currentStep=1; renderStep(); };
+  } else {
+    nextBtn.textContent = 'Next →';
+    nextBtn.className = m.color==='purple' ? 'nav-btn primary-purple' : 'nav-btn primary';
+    nextBtn.onclick = nextStep;
+  }
+}
+
+function prevStep(){ if(currentStep>1){currentStep--;renderStep();} }
+function nextStep(){ const m=MODES[currentMode]; if(currentStep<m.steps){currentStep++;renderStep();} }
+
+// ─── MODE SWITCH ────────────────────────────────────────
+let liveDemoPromise = null;
+function setMode(mode) {
+  currentMode = mode;
+  currentStep = 1;
+  ['discover','supervised','auto'].forEach(k=>{
+    const t = document.getElementById('tab-'+k);
+    if (t) t.classList.remove('active');
+  });
+  const activeTab = document.getElementById('tab-'+mode);
+  if (activeTab) activeTab.classList.add('active');
+  const tt = document.getElementById('terminal-title'); if (tt) tt.textContent = MODES[mode].title;
+  const tb = document.getElementById('terminal-body'); if (tb) tb.innerHTML = '';
+  renderStep();
+  addLog('agent','AGENT',`Mode: ${mode.toUpperCase()}`, mode==='auto'?'purple':'teal');
+  // Kick off (or reuse) a live /api/evaluate call so step 3 can render the real testnet TXID.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
+}
+
+function copyAgentPrompt() {
+  const text = document.getElementById('agent-prompt-text').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copy-btn');
+    btn.textContent = '✓ Copied!';
+    btn.style.background = 'var(--teal)';
+    btn.style.color = '#fff';
+    setTimeout(() => {
+      btn.textContent = 'Copy Command';
+      btn.style.background = 'var(--teal-dim)';
+      btn.style.color = 'var(--teal)';
+    }, 2000);
+  });
+}
+
+function scrollToDemo() {
+  const panel = document.getElementById('step-panel');
+  if (!panel) return;
+  const navH = document.querySelector('.nav')?.offsetHeight || 62;
+  const top = panel.getBoundingClientRect().top + window.scrollY - navH - 12;
+  window.scrollTo({ top, behavior: 'smooth' });
+}
+
+async function runLiveDemo() {
+  addLog('agent','AGENT','Running live evaluate call...','teal');
+  addLog('verun','VERUN',`payload: ${JSON.stringify(LIVE_DEMO_PAYLOAD)}`,'dim');
+
+  try {
+    const res = await fetch('/api/evaluate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(LIVE_DEMO_PAYLOAD)
+    });
+    const data = await res.json();
+    const verdict = data?.verdict || {};
+    const anchor = data?.anchor || {};
+    const tx = anchor?.txid || null;
+    lastLiveEvaluation = { verdict, anchor };
+
+    addLog('ok','OK',`consensus: ${verdict.consensus || 'n/a'} · permitted: ${String(verdict.permitted)}`,'green');
+    if (tx) {
+      addLog('tx','TX',`anchor txid: ${tx}`,'teal');
+      addLog('tx','TX',anchor.explorer || `https://hashscan.io/testnet/tx/${tx}`,'dim');
+    } else {
+      addLog('warn','WARN',`anchor: ${anchor.status || 'unavailable'} ${anchor.error ? `(${anchor.error})` : ''}`,'amber');
+    }
+
+    // Re-render whatever step the user is currently on so the TX hash + explorer link populate live.
+    renderStep();
+  } catch (e) {
+    addLog('warn','WARN',`live call failed: ${e.message}`,'amber');
+  }
+}
+
+// ─── STEP RENDERERS ─────────────────────────────────────
+function renderStep() {
+  renderDots();
+  const body = document.getElementById('stage-body');
+  body.innerHTML = '';
+  if(currentMode === 'discover') renderDiscover(body);
+  else if(currentMode === 'supervised') renderSupervised(body);
+  else renderAuto(body);
+}
+
+function renderDiscover(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 1 · Platform Scan</div>
+        <div class="step-title">Agent scans platform registry</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val teal">agt_openclaw_01</span></div>
+        <div class="ic-row"><span class="ic-label">Intent</span><span class="ic-val">SpaceX Pre-IPO Shares</span></div>
+        <div class="ic-row"><span class="ic-label">Budget</span><span class="ic-val">€500,000+ EUR</span></div>
+        <div class="ic-row"><span class="ic-label">Region</span><span class="ic-val">EU · MiFID II Jurisdiction</span></div>
+      </div>
+      <ul class="check-list" id="cl1">
+        <li id="c1-1">Scanning investment platforms...</li>
+        <li id="c1-2">Filtering: MiFID II + AI Act audit trail</li>
+        <li id="c1-3">Match found: tokenforge (Score 920)</li>
+      </ul>
+    </div>`;
+    [100,500,900].forEach((t,i)=>{
+      setTimeout(()=>{
+        const el=document.getElementById(`c1-${i+1}`);
+        if(el){el.classList.add('show');setTimeout(()=>el.classList.add('ok'),200);}
+      },t);
+    });
+    queueLogs([
+      ['agent','AGENT','agt_openclaw_01 initialised','teal'],
+      ['agent','AGENT','intent: SpaceX Pre-IPO Shares · €500,000+','dim'],
+      ['verun','VERUN','scanning platform registry...','purple'],
+      ['verun','VERUN','filter: MiFID II + AI Act trail · EU jurisdiction','dim'],
+      ['ok','MATCH','tokenforge → score: 920 · VERIFIED','green'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 2 · Verun Validation</div>
+        <div class="step-title">tokenforge platform validated</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
+        <div class="ic-row"><span class="ic-label">Trust Score</span><span class="ic-val" style="color:var(--teal);font-size:17px;font-weight:700">920 / 1000</span></div>
+        <div class="ic-row"><span class="ic-label">Type</span><span class="ic-val">SpaceX Pre-IPO Shares</span></div>
+        <div class="ic-row"><span class="ic-label">Compliance</span><span class="ic-val green">eWpG · BaFin · MiFID II</span></div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar-label"><span style="font-size:11px;color:var(--text3)">Platform Trust</span><span style="font-size:11px;color:var(--teal)">920</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill teal" id="bar1" style="width:0%"></div></div>
+      </div>
+      <div class="code-block"><span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
+<span class="k">"score"</span>:     <span class="v">920</span>,
+<span class="k">"tier"</span>:      <span class="v">"VERIFIED"</span>,
+<span class="k">"validator_consensus"</span>: <span class="v">3</span>/<span class="v">3</span>,
+<span class="k">"compliance"</span>: <span class="s">"MiFID II Art.17 · AI Act Art.14"</span></div>
+    </div>`;
+    setTimeout(()=>{ const b=document.getElementById('bar1'); if(b) b.style.width='92%'; },200);
+    queueLogs([
+      ['verun','VERUN','validating tokenforge...','purple'],
+      ['verun','VERUN','Val-EU-01 → VERIFIED (eWpG confirmed)','dim'],
+      ['verun','VERUN','Val-Neutral-02 → VERIFIED (AML clear)','dim'],
+      ['verun','VERUN','Val-tokenforge → VERIFIED (self-attested)','dim'],
+      ['ok','OK','consensus 3/3 · score: 920 · MiFID II + AI Act trail','green'],
+    ]);
+  }
+  if(step===3) {
+    const consensus = lastLiveEvaluation?.verdict?.consensus || 'LOW';
+    const permitted = (lastLiveEvaluation?.verdict?.permitted ?? true);
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 3 · Agent Referral</div>
+        <div class="step-title">Agent refers tokenforge to human</div>
+      </div>
+      <div class="verdict-box approved">
+        <div class="verdict-icon">📨</div>
+        <div class="verdict-title green">Referral sent to human</div>
+        <div class="verdict-sub green">consensus ${consensus} · permitted ${String(permitted)}</div>
+      </div>
+      <div class="code-block"><span class="k">"to"</span>:       <span class="s">"human_rafael"</span>,
+<span class="k">"from"</span>:     <span class="s">"agt_openclaw_01"</span>,
+<span class="k">"platform"</span>: <span class="s">"tokenforge"</span>,
+<span class="k">"action"</span>:   <span class="s">"invest €500,000+ in SpaceX Pre-IPO Shares"</span>,
+<span class="k">"score"</span>:    <span class="v">${lastLiveEvaluation?.verdict?.score ?? 920}</span>,
+<span class="k">"consensus"</span>:<span class="v">"${consensus}"</span>,
+<span class="k">"status"</span>:   <span class="s">"awaiting_approval"</span></div>
+      ${anchorBoxHTML('Hedera Anchor · Referral TX')}
+      <div class="progress-wrap"><div class="progress-fill teal" id="prog3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog3');if(p)p.style.width='100%';},100);
+    const liveTxid = lastLiveEvaluation?.anchor?.txid;
+    queueLogs([
+      ['agent','AGENT','preparing referral for human_rafael...','teal'],
+      ['agent','AGENT',`live verdict: ${consensus} · permitted ${String(permitted)}`,'dim'],
+      ['tx','TX','anchoring referral on Hedera...','teal'],
+      ['tx','TX', liveTxid ? `txID: ${liveTxid}` : 'fetching live txid...', 'dim'],
+      ['ok','OK','referral anchored · awaiting human approval','green'],
+    ]);
+  }
+}
+
+function renderSupervised(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 1 · Referral Received</div>
+        <div class="step-title">Human receives agent recommendation</div>
+      </div>
+      <div class="human-action">
+        <div class="ha-label">👤 Human Dashboard · Notification</div>
+        <div class="ha-msg">Your agent <strong>agt_openclaw_01</strong> recommends investing <strong>€500,000+</strong> in <strong>SpaceX Pre-IPO Shares</strong> via <strong>tokenforge</strong>.<br><br>Platform Trust Score: <strong style="color:var(--teal)">920/1000</strong> · MiFID II + AI Act audit trail · eWpG verified.</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge · tokenforge.io</span></div>
+        <div class="ic-row"><span class="ic-label">Action</span><span class="ic-val">Invest in SpaceX Pre-IPO</span></div>
+        <div class="ic-row"><span class="ic-label">Risk Tier</span><span class="ic-val green">LOW (Score 920)</span></div>
+        <div class="ic-row"><span class="ic-label">Verun Verdict</span><span class="ic-val green">VERIFIED · 3/3 Validators</span></div>
+      </div>
+    </div>`;
+    queueLogs([
+      ['human','HUMAN','referral received from agt_openclaw_01','amber'],
+      ['human','HUMAN','platform: tokenforge · action: invest €5k','dim'],
+      ['verun','VERUN','verun verdict attached: VERIFIED (920)','purple'],
+      ['human','HUMAN','awaiting human decision...','amber'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 2 · Human Review</div>
+        <div class="step-title">Human approves or denies</div>
+      </div>
+      <div class="human-action">
+        <div class="ha-label">👤 Your Decision</div>
+        <div class="ha-msg">Approve this one-time transaction — or grant <strong>Autonomous Mode</strong> to let the agent execute future tokenforge investments automatically within your policy.</div>
+        <div class="ha-btns">
+          <button class="ha-btn approve" onclick="humanApprove(false)">✓ Approve Once</button>
+          <button class="ha-btn approve" style="background:var(--purple);color:#fff" onclick="humanApprove(true)">⚡ Grant Auto Mode</button>
+          <button class="ha-btn deny" onclick="humanDeny()">✗ Deny</button>
+        </div>
+      </div>
+      <div id="decision-result"></div>
+    </div>`;
+    queueLogs([
+      ['human','HUMAN','reviewing recommendation...','amber'],
+      ['verun','VERUN','options: approve once · grant auto mode · deny','purple'],
+    ]);
+  }
+  if(step===3) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num">Step 3 · Decision Anchored</div>
+        <div class="step-title">Approval recorded on Hedera</div>
+      </div>
+      <div class="verdict-box approved">
+        <div class="verdict-icon">✅</div>
+        <div class="verdict-title green">Transaction Executed · Approved</div>
+        <div class="verdict-sub green">SpaceX Pre-IPO · €500,000+ EUR → tokenforge · anchored on-chain</div>
+      </div>
+      ${anchorBoxHTML('Hedera Anchor · Approval TX')}
+      <div class="progress-wrap"><div class="progress-fill teal" id="prog-s3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog-s3');if(p)p.style.width='100%';},100);
+    queueLogs([
+      ['human','HUMAN','approved: invest €500,000+ in SpaceX Pre-IPO on tokenforge','amber'],
+      ['tx','TX','anchoring approval on Hedera...','teal'],
+      ['ok','OK','approval anchored · ~3.6s','green'],
+      ['ok','OK','transaction executed · MiFID II + AI Act audit trail written','green'],
+    ]);
+  }
+}
+
+function humanApprove(autoMode) {
+  const r = document.getElementById('decision-result');
+  if(!r) return;
+  if(autoMode) {
+    r.innerHTML = `<div class="verdict-box auto"><div class="verdict-icon">⚡</div><div class="verdict-title purple">Autonomous Mode Granted</div><div class="verdict-sub purple">Agent can now execute tokenforge investments automatically within policy</div></div>`;
+    addLog('human','HUMAN','granted: AUTONOMOUS MODE for tokenforge','amber');
+    addLog('verun','VERUN','policy stored on Hedera · agent unlocked','purple');
+  } else {
+    r.innerHTML = `<div class="verdict-box approved"><div class="verdict-icon">✅</div><div class="verdict-title green">One-time Approval Granted</div><div class="verdict-sub green">Executing: €500,000+ EUR → SpaceX Pre-IPO via tokenforge</div></div>`;
+    addLog('human','HUMAN','approved: one-time transaction','amber');
+  }
+}
+function humanDeny() {
+  const r = document.getElementById('decision-result');
+  if(!r) return;
+  r.innerHTML = `<div style="background:var(--red-dim);border:1px solid rgba(255,77,106,0.25);border-radius:10px;padding:14px;text-align:center"><div style="font-size:22px;margin-bottom:6px">🚫</div><div style="font-size:13px;font-weight:700;color:var(--red)">Transaction Denied</div></div>`;
+  addLog('human','HUMAN','denied: transaction blocked by human','amber');
+  addLog('verun','VERUN','denial anchored on Hedera','purple');
+}
+
+function renderAuto(body) {
+  const step = currentStep;
+  if(step===1) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 1 · Policy Loaded</div>
+        <div class="step-title">Autonomous mode active</div>
+      </div>
+      <div class="verdict-box auto">
+        <div class="verdict-icon">⚡</div>
+        <div class="verdict-title purple">Autonomous Mode Active</div>
+        <div class="verdict-sub purple">Human pre-approved · policy enforced by Verun</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-row"><span class="ic-label">Agent</span><span class="ic-val purple">agt_openclaw_01</span></div>
+        <div class="ic-row"><span class="ic-label">Platform</span><span class="ic-val teal">tokenforge</span></div>
+        <div class="ic-row"><span class="ic-label">Max per TX</span><span class="ic-val">€ 10,000 USDC</span></div>
+        <div class="ic-row"><span class="ic-label">Revokable</span><span class="ic-val green">Yes · anytime</span></div>
+      </div>
+    </div>`;
+    queueLogs([
+      ['auto','AUTO','autonomous mode loaded','purple'],
+      ['auto','AUTO','policy: tokenforge · max €10,000/tx · USDC','dim'],
+      ['verun','VERUN','policy anchor confirmed on Hedera','purple'],
+      ['auto','AUTO','agent agt_openclaw_01 ready to execute','teal'],
+    ]);
+  }
+  if(step===2) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 2 · Auto Execute</div>
+        <div class="step-title">Agent executes without human input</div>
+      </div>
+      <ul class="check-list" id="cl-auto">
+        <li id="ca-1">Policy check: tokenforge · €3,200 USDC ✓</li>
+        <li id="ca-2">Verun score re-validated: 920 (cached 4h)</li>
+        <li id="ca-3">x402 micro-fee paid · access granted</li>
+        <li id="ca-4">Transaction initiated on tokenforge Chain API</li>
+        <li id="ca-5">Settlement: USDC → tokenforge wallet</li>
+      </ul>
+    </div>`;
+    [0,350,700,1050,1400].forEach((t,i)=>{
+      setTimeout(()=>{
+        const el=document.getElementById(`ca-${i+1}`);
+        if(el){el.classList.add('show');setTimeout(()=>el.classList.add('ok-purple'),200);}
+      },t);
+    });
+    queueLogs([
+      ['auto','AUTO','executing: invest €3,200 in SpaceX Pre-IPO on tokenforge','purple'],
+      ['verun','VERUN','policy check: within bounds','dim'],
+      ['verun','VERUN','score cache: 920 · valid 4h · skip re-eval','dim'],
+      ['auto','AUTO','x402 fee paid · tokenforge API called','teal'],
+      ['ok','OK','transaction initiated · no human required','green'],
+    ]);
+  }
+  if(step===3) {
+    body.innerHTML = `<div class="anim-in">
+      <div class="step-header">
+        <div class="step-num" style="color:var(--purple)">Step 3 · On-Chain Proof</div>
+        <div class="step-title">Execution anchored · human can review</div>
+      </div>
+      <div class="verdict-box auto">
+        <div class="verdict-icon">⛓️</div>
+        <div class="verdict-title purple">Autonomous TX Complete</div>
+        <div class="verdict-sub purple">Anchored on Hedera · human notified</div>
+      </div>
+      ${anchorBoxHTML('Hedera Anchor · Auto Execution TX')}
+      <div class="info-card" style="margin-top:10px">
+        <div class="ic-row"><span class="ic-label">Human notified</span><span class="ic-val green">Yes · push notification</span></div>
+        <div class="ic-row"><span class="ic-label">Revoke anytime</span><span class="ic-val amber">Yes · single action</span></div>
+        <div class="ic-row"><span class="ic-label">Next auto TX</span><span class="ic-val purple">Scheduled · policy-bound</span></div>
+      </div>
+      <div class="progress-wrap"><div class="progress-fill purple" id="prog-a3"></div></div>
+    </div>`;
+    setTimeout(()=>{const p=document.getElementById('prog-a3');if(p)p.style.width='100%';},100);
+    const liveTxA = lastLiveEvaluation?.anchor?.txid;
+    queueLogs([
+      ['tx','TX','anchoring execution on Hedera...','teal'],
+      ['tx','TX', liveTxA ? `txID: ${liveTxA}` : 'fetching live txid...','dim'],
+      ['ok','OK','anchored · ~5s · audit trail complete','green'],
+      ['auto','AUTO','human notified · next execution scheduled','purple'],
+    ]);
+  }
+}
+
+// ─── INIT ────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  renderStep();
+  addLog('verun','VERUN','Verun Network online · Hedera Testnet','teal');
+  addLog('verun','VERUN','Select a mode to begin demo','dim');
+  // Fire the live evaluate call in the background so step 3 has a real testnet TXID by the time the user clicks.
+  if (!liveDemoPromise) liveDemoPromise = runLiveDemo().catch(()=>{}).finally(()=>{ liveDemoPromise = null; });
+});
+</script>
+</body>
+</html>
+

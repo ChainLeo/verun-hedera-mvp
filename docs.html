@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verun Protocol — Hedera Technical Docs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css" id="hljs-theme">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg-sidebar:#f8f9fa;--border:#e5e7eb;--border-light:#f0f1f3;
+  --text:#1f2937;--text-secondary:#4b5563;--text-muted:#9ca3af;
+  --accent:#00b386;--accent-bg:#f0fdf9;--accent-border:#6ee7d0;
+  --violet:#7c3aed;--violet-bg:#f5f3ff;
+  --code-bg:#f8f9fa;--sidebar-w:260px;--topbar-h:56px;
+  --font:'Inter',system-ui,sans-serif;--mono:'Fira Code',monospace;
+}
+body.dark{
+  --bg:#07111F;--bg-sidebar:#0d1b2a;--border:#1e3448;--border-light:#172840;
+  --text:#e2e8f0;--text-secondary:#94a3b8;--text-muted:#475569;
+  --accent:#00D4AA;--accent-bg:rgba(0,212,170,0.08);--accent-border:rgba(0,212,170,0.3);
+  --violet-bg:rgba(123,97,255,0.08);--code-bg:#060f1a;
+}
+html{scroll-behavior:smooth;font-size:15px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7;transition:background .2s,color .2s}
+
+/* TOPBAR */
+#topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);background:var(--bg-sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;z-index:200}
+.tb-brand{width:var(--sidebar-w);flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 20px;border-right:1px solid var(--border);height:100%}
+.tb-icon{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,#00D4AA,#7B61FF);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.tb-site-name{font-size:13px;font-weight:600;color:var(--text)}
+.tb-center{flex:1;display:flex;align-items:center;padding:0 32px}
+.tb-search{display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:6px 12px;width:240px;color:var(--text-muted);font-size:12px}
+.tb-search kbd{margin-left:auto;font-family:var(--mono);font-size:10px;background:var(--border-light);border:1px solid var(--border);border-radius:3px;padding:1px 5px;color:var(--text-muted)}
+.tb-right{display:flex;align-items:center;gap:8px;padding:0 20px;margin-left:auto}
+.tb-link{font-size:12px;color:var(--text-secondary);text-decoration:none;padding:5px 10px;border-radius:5px;transition:background .15s;white-space:nowrap}
+.tb-link:hover{background:var(--border-light)}
+.tb-theme-btn{background:transparent;border:1px solid var(--border);color:var(--text-secondary);padding:5px 10px;border-radius:5px;cursor:pointer;font-size:12px;font-family:var(--font);transition:all .15s}
+.tb-theme-btn:hover{background:var(--border-light)}
+.hamburger{display:none;background:transparent;border:none;color:var(--text-secondary);font-size:18px;cursor:pointer;padding:6px 16px}
+
+/* SIDEBAR */
+#sidebar{position:fixed;top:var(--topbar-h);left:0;bottom:0;width:var(--sidebar-w);background:var(--bg-sidebar);border-right:1px solid var(--border);overflow-y:auto;padding:12px 0 40px;z-index:100;transition:transform .25s}
+#sidebar::-webkit-scrollbar{width:4px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.nav-group-label{font-size:11px;font-weight:600;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;padding:16px 16px 6px}
+.nav-item{display:flex;align-items:center;gap:8px;padding:6px 16px;font-size:13px;color:var(--text-secondary);text-decoration:none;cursor:pointer;border-left:2px solid transparent;transition:all .12s;user-select:none}
+.nav-item:hover{color:var(--text);background:var(--border-light)}
+.nav-item.active{color:var(--accent);background:var(--accent-bg);border-left-color:var(--accent);font-weight:500}
+.nav-item-icon{font-size:14px;flex-shrink:0;width:18px;text-align:center}
+.nav-item-ext{margin-left:auto;font-size:10px;color:var(--text-muted);opacity:.7}
+.nav-sub .nav-item{font-size:12.5px;padding:5px 16px 5px 42px}
+.nav-divider{height:1px;background:var(--border);margin:8px 16px}
+
+/* MAIN */
+#main{margin-left:var(--sidebar-w);min-height:calc(100vh - var(--topbar-h));padding-top:var(--topbar-h);display:flex}
+#content{flex:1;padding:48px 48px 80px;max-width:800px}
+#toc{width:220px;flex-shrink:0;padding:40px 16px 40px 0}
+.toc-sticky{position:sticky;top:calc(var(--topbar-h) + 24px)}
+.toc-label{font-size:11px;font-weight:600;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.toc-item{display:block;font-size:12px;color:var(--text-muted);text-decoration:none;padding:3px 0 3px 10px;border-left:2px solid transparent;transition:all .12s;line-height:1.4}
+.toc-item:hover{color:var(--text);border-left-color:var(--border)}
+.toc-item.active{color:var(--accent);border-left-color:var(--accent)}
+
+/* TYPOGRAPHY */
+h1{font-size:28px;font-weight:700;line-height:1.25;margin-bottom:16px;color:var(--text)}
+h2{font-size:18px;font-weight:600;line-height:1.35;margin:40px 0 12px;color:var(--text);padding-top:8px;border-top:1px solid var(--border-light)}
+h2:first-of-type{border-top:none;margin-top:24px}
+h3{font-size:14px;font-weight:600;margin:24px 0 8px;color:var(--text)}
+p{margin-bottom:14px;color:var(--text-secondary);font-size:14px}
+p:last-child{margin-bottom:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+strong{color:var(--text);font-weight:600}
+.lead{font-size:15px;color:var(--text-secondary);margin-bottom:24px;line-height:1.75}
+
+/* HINTS */
+.hint{border-radius:8px;padding:14px 18px;margin:20px 0;border-left:4px solid;font-size:13.5px;line-height:1.65}
+.hint.info{background:var(--accent-bg);border-color:var(--accent);color:#065f46}
+body.dark .hint.info{color:#6ee7b7}
+.hint.note{background:var(--violet-bg);border-color:#7c3aed;color:#5b21b6}
+body.dark .hint.note{color:#a78bfa}
+.hint.success{background:#f0fdf4;border-color:#16a34a;color:#166534}
+body.dark .hint.success{background:rgba(22,163,74,0.08);color:#4ade80}
+
+/* PARTS GRID */
+.parts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+.part-card{border:1px solid var(--border);border-radius:8px;padding:20px;cursor:pointer;text-decoration:none;display:block;transition:border-color .15s,box-shadow .15s;background:var(--bg)}
+.part-card:hover{border-color:var(--accent);box-shadow:0 1px 8px rgba(0,0,0,0.06);text-decoration:none}
+.part-card-icon{font-size:20px;margin-bottom:10px}
+.part-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.part-card-desc{font-size:11.5px;color:var(--text-muted);line-height:1.5}
+
+/* TABLE */
+.doc-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.doc-table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);background:var(--bg-sidebar);border-bottom:1px solid var(--border)}
+.doc-table td{padding:10px 12px;border-bottom:1px solid var(--border-light);vertical-align:top;color:var(--text-secondary)}
+.doc-table tr:last-child td{border-bottom:none}
+.doc-table tr:hover td{background:var(--bg-sidebar)}
+.td-name{font-weight:600;color:var(--text)!important;font-family:var(--mono);font-size:12px!important}
+.td-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;font-family:var(--mono);white-space:nowrap}
+.badge-live{background:#dcfce7;color:#15803d;border:1px solid #bbf7d0}
+body.dark .badge-live{background:rgba(22,163,74,0.12);color:#4ade80;border-color:rgba(22,163,74,0.3)}
+.badge-get{background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
+body.dark .badge-get{background:rgba(29,78,216,0.12);color:#60a5fa;border-color:rgba(29,78,216,0.3)}
+.badge-post{background:var(--accent-bg);color:#065f46;border:1px solid var(--accent-border)}
+body.dark .badge-post{background:rgba(0,212,170,0.1);color:#6ee7b7;border-color:rgba(0,212,170,0.3)}
+
+/* CODE */
+.code-block{position:relative;margin:16px 0;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--bg-sidebar);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--text-muted)}
+.copy-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:3px 10px;border-radius:4px;cursor:pointer;font-size:11px;font-family:var(--font);transition:all .15s}
+.copy-btn:hover{border-color:var(--accent);color:var(--accent)}
+pre{margin:0}
+pre code.hljs{background:var(--code-bg)!important;padding:18px 20px!important;font-size:12.5px!important;line-height:1.65!important;font-family:var(--mono)!important;border-radius:0!important}
+code:not(.hljs){font-family:var(--mono);font-size:12px;background:var(--bg-sidebar);border:1px solid var(--border);border-radius:4px;padding:1px 6px;color:var(--accent)}
+
+/* GATE ROWS */
+.gate-row{display:flex;align-items:center;gap:16px;padding:12px 16px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;background:var(--bg)}
+.gate-score{font-family:var(--mono);font-size:14px;font-weight:700;min-width:52px}
+.gate-score.s1{color:#16a34a}.gate-score.s2{color:#d97706}.gate-score.s3{color:#dc2626}.gate-score.s4{color:#7c3aed}
+.gate-info{flex:1}
+.gate-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.gate-desc{font-size:12px;color:var(--text-muted);font-family:var(--mono)}
+
+/* FEE BAR */
+.fee-bar{display:flex;border-radius:6px;overflow:hidden;height:36px;margin:16px 0;gap:2px}
+.fee-seg{display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;font-family:var(--mono)}
+.fee-seg.p{background:#dbeafe;color:#1d4ed8;flex:70}
+.fee-seg.v{background:#dcfce7;color:#15803d;flex:10}
+.fee-seg.a{background:var(--violet-bg);color:#7c3aed;flex:10}
+.fee-seg.r{background:var(--border-light);color:var(--text-muted);flex:10}
+body.dark .fee-seg.p{background:rgba(29,78,216,0.15);color:#60a5fa}
+body.dark .fee-seg.v{background:rgba(22,163,74,0.12);color:#4ade80}
+body.dark .fee-seg.a{background:rgba(124,58,237,0.12);color:#a78bfa}
+body.dark .fee-seg.r{background:rgba(255,255,255,0.04);color:var(--text-muted)}
+.fee-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--text-muted)}
+.fee-leg{display:flex;align-items:center;gap:6px}
+.fee-dot{width:8px;height:8px;border-radius:3px}
+
+/* CHAIN TAGS */
+.chain-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.chain-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;padding:5px 12px;border-radius:6px;border:1px solid var(--border);color:var(--text-secondary);background:var(--bg-sidebar)}
+.chain-tag.preferred{background:var(--accent-bg);border-color:var(--accent-border);color:#065f46;font-weight:600}
+body.dark .chain-tag.preferred{color:#6ee7b7}
+
+/* NEXT BTN */
+.next-prev{display:flex;justify-content:flex-end;margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}
+.next-btn{display:flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--border);border-radius:8px;text-decoration:none;color:var(--text-secondary);font-size:13px;transition:all .15s;cursor:pointer;background:var(--bg)}
+.next-btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.next-btn-lbl{font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:2px}
+
+/* VALIDATOR GRID */
+.v-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.v-card{border:1px solid var(--border);border-radius:8px;padding:18px;background:var(--bg)}
+.v-card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.v-card-body{font-size:12.5px;color:var(--text-secondary);line-height:1.6}
+.v-badge{display:inline-block;margin-top:10px;font-size:10px;font-weight:600;font-family:var(--mono);padding:3px 9px;border-radius:4px;background:var(--accent-bg);color:#065f46;border:1px solid var(--accent-border)}
+body.dark .v-badge{color:#6ee7b7}
+
+/* LIVE BADGE */
+.live-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;background:#dcfce7;color:#15803d;border:1px solid #bbf7d0;font-family:var(--mono)}
+body.dark .live-badge{background:rgba(22,163,74,0.12);color:#4ade80;border-color:rgba(22,163,74,0.3)}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#16a34a;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2px}
+.tl-item{display:flex;gap:18px;padding-bottom:28px}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0}
+.tl-dot-outer{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;background:var(--bg-sidebar);z-index:1;flex-shrink:0;font-family:var(--mono);font-size:10px;font-weight:700;color:var(--text-muted)}
+.tl-dot-outer.active{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.tl-line{width:2px;flex:1;background:var(--border);margin:3px 0}
+.tl-item:last-child .tl-line{display:none}
+.tl-body{padding-top:4px;flex:1}
+.tl-period{font-size:11px;font-weight:600;color:var(--text-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.tl-period.active{color:var(--accent)}
+.tl-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px}
+.tl-desc{font-size:13px;color:var(--text-secondary);line-height:1.65}
+.tl-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chip{font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;background:var(--bg-sidebar);border:1px solid var(--border);color:var(--text-muted);font-family:var(--mono)}
+
+/* FOOTER */
+#footer{margin-left:var(--sidebar-w);border-top:1px solid var(--border);padding:16px 48px;display:flex;align-items:center;justify-content:space-between}
+.footer-txt{font-size:11px;color:var(--text-muted)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){#toc{display:none}}
+@media(max-width:860px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0);box-shadow:4px 0 16px rgba(0,0,0,0.1)}
+  #main,#footer{margin-left:0}
+  .hamburger{display:block}
+  .tb-search{display:none}
+  .tb-brand{width:auto;border-right:none}
+  #content{padding:32px 24px 64px}
+  .parts-grid{grid-template-columns:1fr 1fr}
+  .v-grid{grid-template-columns:1fr}
+}
+@media(max-width:540px){.parts-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="dark">
+
+<div id="topbar">
+  <div class="tb-brand">
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="tb-icon">V</div>
+    <span class="tb-site-name">Verun — Hedera Docs</span>
+  </div>
+  <div class="tb-center">
+    <div class="tb-search">
+      <svg width="13" height="13" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="m15 15 4 4"/></svg>
+      Search docs…
+      <kbd>⌘ K</kbd>
+    </div>
+  </div>
+  <div class="tb-right">
+    <a class="tb-link" href="https://www.bcpp.io" target="_blank">BCP Partners</a>
+    <a class="tb-link" href="https://github.com/Fahad00674/verun-hedera-mvp" target="_blank">GitHub ↗</a>
+    <button class="tb-theme-btn" onclick="toggleTheme()"><span id="theme-icon">☀️</span> <span id="theme-lbl">Light</span></button>
+  </div>
+</div>
+
+<nav id="sidebar">
+  <a class="nav-item active" onclick="show('welcome')" href="javascript:void(0)">
+    <span class="nav-item-icon">🏠</span> Welcome
+  </a>
+  <div class="nav-group-label">Protocol</div>
+  <a class="nav-item" onclick="show('overview')" href="javascript:void(0)"><span class="nav-item-icon">📖</span> Overview</a>
+  <a class="nav-item" onclick="show('architecture')" href="javascript:void(0)"><span class="nav-item-icon">🏗️</span> Architecture</a>
+  <a class="nav-item" onclick="show('trust-gates')" href="javascript:void(0)"><span class="nav-item-icon">🔐</span> Trust Score Gates</a>
+  <a class="nav-item" onclick="show('mica')" href="javascript:void(0)"><span class="nav-item-icon">⚖️</span> Potential MiCA Features</a>
+  <a class="nav-item" onclick="show('validators')" href="javascript:void(0)"><span class="nav-item-icon">🛡️</span> Validator Model</a>
+  <div class="nav-group-label">API Reference</div>
+  <a class="nav-item" onclick="show('api')" href="javascript:void(0)"><span class="nav-item-icon">⚡</span> Endpoints</a>
+  <div class="nav-sub">
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-health')" href="javascript:void(0)">GET /health</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-validators')" href="javascript:void(0)">GET /validators</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-evaluate')" href="javascript:void(0)">POST /evaluate</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-score')" href="javascript:void(0)">POST /score</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-mint-sbt')" href="javascript:void(0)">POST /mint-sbt</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-revoke-sbt')" href="javascript:void(0)">POST /revoke-sbt</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-sbt-status')" href="javascript:void(0)">GET /sbt-status</a>
+    <a class="nav-item" onclick="show('api');scrollToEl('ep-sbt-list')" href="javascript:void(0)">GET /sbt-list</a>
+  </div>
+  <div class="nav-group-label">On-Chain</div>
+  <a class="nav-item" onclick="show('anchor')" href="javascript:void(0)"><span class="nav-item-icon">⛓️</span> Hedera Anchor</a>
+  <a class="nav-item" onclick="show('sbt')" href="javascript:void(0)"><span class="nav-item-icon">🪙</span> Soulbound Token (SBT)</a>
+  <div class="nav-group-label">Technical Reference</div>
+  <a class="nav-item" onclick="show('x402')" href="javascript:void(0)"><span class="nav-item-icon">🔄</span> x402 Sequence Diagram</a>
+  <div class="nav-group-label">Integration</div>
+  <a class="nav-item" onclick="show('agents')" href="javascript:void(0)"><span class="nav-item-icon">🤖</span> For Agents</a>
+  <div class="nav-group-label">Roadmap</div>
+  <a class="nav-item" onclick="show('roadmap')" href="javascript:void(0)"><span class="nav-item-icon">🗺️</span> Mainnet Roadmap</a>
+  <div class="nav-divider"></div>
+  <a class="nav-item" href="https://docs.tokenforge.io/tokensuite-docs" target="_blank">
+    <span class="nav-item-icon">↗</span> tokenforge Docs <span class="nav-item-ext">↗</span>
+  </a>
+  <a class="nav-item" href="https://github.com/Fahad00674/verun-hedera-mvp" target="_blank">
+    <span class="nav-item-icon">↗</span> GitHub Repo <span class="nav-item-ext">↗</span>
+  </a>
+  <a class="nav-item" href="https://hedera.erster.fund" target="_blank">
+    <span class="nav-item-icon">↗</span> Live Demo <span class="nav-item-ext">↗</span>
+  </a>
+  <a class="nav-item" href="https://www.bcpp.io" target="_blank">
+    <span class="nav-item-icon">↗</span> BCP Partners GmbH <span class="nav-item-ext">↗</span>
+  </a>
+</nav>
+
+<div id="main">
+<div id="content">
+
+<!-- WELCOME -->
+<div id="page-welcome">
+  <h1>Verun Protocol — Hedera</h1>
+  <p style="margin-bottom:12px">
+    <span class="live-badge"><span class="live-dot"></span>LIVE on Hedera Testnet</span>
+    &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">Deployed April 2026 · 4 API Endpoints · v0.1.0</span>
+  </p>
+  <p class="lead">Technical documentation for <strong>Verun Protocol</strong> — the AI Agent Trust Layer with potential MiCA features for regulated European finance, built on Hedera by <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a>.</p>
+  <div class="hint info">
+    🔐 <strong>"KYC for humans. KYA for agents. Both auditable on-chain."</strong><br>
+    Verun issues consensus-based Trust Scores (0–1000) that gate access to the tokenforge Chain API. Every evaluation is anchored as a HCS Message on Hedera — immutable, auditable. Potential on-chain MiCA features — to be checked and prior to legal audit.
+  </div>
+  <div class="parts-grid">
+    <a class="part-card" onclick="show('architecture')" href="javascript:void(0)">
+      <div class="part-card-icon">🏗️</div>
+      <div class="part-card-title">Part 1: Architecture</div>
+      <div class="part-card-desc">Hedera Trust Layer, tokenforge Gate, Hedera Settlement. How the three layers connect.</div>
+    </a>
+    <a class="part-card" onclick="show('api')" href="javascript:void(0)">
+      <div class="part-card-icon">⚡</div>
+      <div class="part-card-title">Part 2: API Reference</div>
+      <div class="part-card-desc">All live endpoints with request / response examples. Base URL on Vercel.</div>
+    </a>
+    <a class="part-card" onclick="show('anchor')" href="javascript:void(0)">
+      <div class="part-card-icon">⛓️</div>
+      <div class="part-card-title">Part 3: On-Chain Anchor</div>
+      <div class="part-card-desc">How every verdict is written to Hedera and verified via HashScan.</div>
+    </a>
+  </div>
+  <div class="next-prev"><button class="next-btn" onclick="show('overview')"><div><span class="next-btn-lbl">Next</span>Overview →</div></button></div>
+</div>
+
+<!-- OVERVIEW -->
+<div id="page-overview" style="display:none">
+  <h1>Overview</h1>
+  <p class="lead">Verun is the trust infrastructure layer for AI agents operating in regulated European financial markets.</p>
+  <h2>What is Verun?</h2>
+  <p>As AI agents begin autonomously executing token transfers, minting securities, and placing investment orders, there is no existing standard for establishing <em>who</em> an agent is, whether it can be trusted, and whether it is permitted to act in a regulated context.</p>
+  <p>Verun solves this with the <strong>Verun Accredited Agent Score (0–1000)</strong>: a consensus-based trust verdict issued by registered validators, anchored on Hedera for every evaluation, and enforced at the tokenforge Chain API gate.</p>
+  <div class="hint note">🔮 <strong>Regulatory context:</strong> Verun is designed to generate the machine-readable audit trail relevant to MiCA Art. 67, Art. 72, and Art. 75 for agents acting in regulated financial workflows. These are potential on-chain features — not verified compliance. Verun aggregates existing compliance signals into a single, auditable verdict; legal audit planned Q3 2026.</div>
+  <h2>Key Facts</h2>
+  <table class="doc-table">
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Trust Score Range</td><td>0 – 1000</td></tr>
+      <tr><td class="td-name">Consensus Model</td><td>2-of-N validator votes required (ceil N/2)</td></tr>
+      <tr><td class="td-name">Anchor Chain</td><td>Hedera Testnet — HCS Message per evaluation</td></tr>
+      <tr><td class="td-name">Settlement Layer</td><td>Hedera — eWpG, ISIN, USDC</td></tr>
+      <tr><td class="td-name">Regulated Gate</td><td>tokenforge Chain API — eWpG, BaFin, MiFID II</td></tr>
+      <tr><td class="td-name">Fee Split</td><td>70% Protocol / 10% Validator / 10% Agent Kickback / 10% Reserve</td></tr>
+      <tr><td class="td-name">Live URL</td><td><a href="https://hedera.erster.fund" target="_blank">hedera.erster.fund</a></td></tr>
+    </tbody>
+  </table>
+  <h2>3 Operating Modes</h2>
+  <table class="doc-table">
+    <thead><tr><th>Mode</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Discovery</td><td>Agent scans validated platforms, finds tokenforge, sends structured recommendation to human</td></tr>
+      <tr><td class="td-name">Supervised</td><td>Human receives recommendation, approves with one click — agent executes single action</td></tr>
+      <tr><td class="td-name">Autonomous</td><td>After human approval: agent executes fully automatically, every action anchored on-chain</td></tr>
+    </tbody>
+  </table>
+  <div class="next-prev"><button class="next-btn" onclick="show('architecture')"><div><span class="next-btn-lbl">Next</span>Architecture →</div></button></div>
+</div>
+
+<!-- ARCHITECTURE -->
+<div id="page-architecture" style="display:none">
+  <h1>Architecture</h1>
+  <p class="lead">Three complementary layers — Hedera for trust, tokenforge as the regulated gate, Hedera for settlement. No layer competes with another.</p>
+  <h2>Layer Stack</h2>
+  <div class="chain-row">
+    <div class="chain-tag preferred">🔷 Hedera — Agentic Trust Layer</div>
+    <div class="chain-tag preferred">🔗 tokenforge — Regulated Gate</div>
+    <div class="chain-tag preferred">⭐ Hedera — Asset Settlement</div>
+  </div>
+  <h2>Flow</h2>
+  <div style="border:1px solid var(--border);border-radius:8px;padding:28px 24px;background:var(--bg-sidebar);font-family:var(--mono);font-size:12px;margin:16px 0;overflow-x:auto">
+    <div style="display:flex;align-items:center;gap:0;min-width:520px">
+      <div style="text-align:center;flex:1">
+        <div style="border:1px solid var(--accent-border);background:var(--accent-bg);border-radius:6px;padding:10px 14px;color:#065f46;font-weight:600;font-size:12px">Agent<br><span style="font-size:10px;opacity:.7;font-weight:400">Claude · MCP</span></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Caller</div>
+      </div>
+      <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
+      <div style="text-align:center;flex:1">
+        <div style="border:1px solid var(--accent-border);background:var(--accent-bg);border-radius:6px;padding:10px 14px;color:#065f46;font-weight:600;font-size:12px">Verun<br><span style="font-size:10px;opacity:.7;font-weight:400">Score + Consensus</span></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Trust Gate</div>
+      </div>
+      <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
+      <div style="text-align:center;flex:1">
+        <div style="border:1px solid #ddd6fe;background:var(--violet-bg);border-radius:6px;padding:10px 14px;color:#5b21b6;font-weight:600;font-size:12px">Hedera<br><span style="font-size:10px;opacity:.7;font-weight:400">HCS Anchor</span></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Audit Trail</div>
+      </div>
+      <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
+      <div style="text-align:center;flex:1">
+        <div style="border:1px solid #bfdbfe;background:#eff6ff;border-radius:6px;padding:10px 14px;color:#1d4ed8;font-weight:600;font-size:12px">tokenforge<br><span style="font-size:10px;opacity:.7;font-weight:400">Chain API Gate</span></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Execution</div>
+      </div>
+      <div style="padding:0 8px;color:var(--text-muted);font-size:18px;flex-shrink:0">→</div>
+      <div style="text-align:center;flex:1">
+        <div style="border:1px solid #fde68a;background:#fffbeb;border-radius:6px;padding:10px 14px;color:#92400e;font-weight:600;font-size:12px">⭐ Hedera<br><span style="font-size:10px;opacity:.7;font-weight:400">eWpG · USDC</span></div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:5px">Settlement</div>
+      </div>
+    </div>
+  </div>
+  <h2>Fee Distribution</h2>
+  <div class="fee-bar">
+    <div class="fee-seg p">70% Protocol</div>
+    <div class="fee-seg v">10% Val.</div>
+    <div class="fee-seg a">10% Agent</div>
+    <div class="fee-seg r">10% Res.</div>
+  </div>
+  <div class="fee-legend">
+    <div class="fee-leg"><div class="fee-dot" style="background:#93c5fd"></div>70% Protocol — Infrastructure &amp; Security</div>
+    <div class="fee-leg"><div class="fee-dot" style="background:#86efac"></div>10% Validator — Trust Anchor Reward</div>
+    <div class="fee-leg"><div class="fee-dot" style="background:#c4b5fd"></div>10% Agent Kickback — Referral Incentive</div>
+    <div class="fee-leg"><div class="fee-dot" style="background:#e5e7eb"></div>10% Reserve — Emergency / Upgrade Fund</div>
+  </div>
+  <div class="next-prev"><button class="next-btn" onclick="show('trust-gates')"><div><span class="next-btn-lbl">Next</span>Trust Score Gates →</div></button></div>
+</div>
+
+<!-- TRUST GATES -->
+<div id="page-trust-gates" style="display:none">
+  <h1>Trust Score Gates</h1>
+  <p class="lead">Every tokenforge Chain API capability is gated behind a minimum Trust Score. Scores are computed by validator consensus and anchored on Hedera.</p>
+  <div class="gate-row">
+    <div class="gate-score s1">300+</div>
+    <div class="gate-info"><div class="gate-title">Read Access</div><div class="gate-desc">GET /balance · GET /tokens · GET /positions</div></div>
+    <span class="td-badge badge-get">READ</span>
+  </div>
+  <div class="gate-row">
+    <div class="gate-score s2">500+</div>
+    <div class="gate-info"><div class="gate-title">Transfer &amp; Mint</div><div class="gate-desc">POST /transfer · POST /mint — tokenized securities via tokenforge</div></div>
+    <span class="td-badge badge-post">MINT / TRANSFER</span>
+  </div>
+  <div class="gate-row">
+    <div class="gate-score s3">600+</div>
+    <div class="gate-info"><div class="gate-title">Order Management</div><div class="gate-desc">POST /order · PATCH /order — Full tokenforge Order Engine</div></div>
+    <span class="td-badge badge-post">ORDER</span>
+  </div>
+  <div class="gate-row">
+    <div class="gate-score s4">800+</div>
+    <div class="gate-info"><div class="gate-title">LOW Risk Tier + Full Kickback</div><div class="gate-desc">10% agent kickback active · highest trust tier · autonomous mode eligible</div></div>
+    <span class="td-badge" style="background:var(--violet-bg);color:#7c3aed;border:1px solid #ddd6fe">TIER: LOW</span>
+  </div>
+  <h2>Score Tiers</h2>
+  <table class="doc-table">
+    <thead><tr><th>Tier</th><th>Score</th><th>Permitted Operations</th><th>Kickback</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name" style="color:#16a34a!important">LOW</td><td>800 – 1000</td><td>All operations</td><td>10%</td></tr>
+      <tr><td class="td-name" style="color:#d97706!important">MED</td><td>600 – 799</td><td>read, transfer, mint, order</td><td>5%</td></tr>
+      <tr><td class="td-name" style="color:#dc2626!important">HIGH</td><td>300 – 599</td><td>read, transfer, mint</td><td>0%</td></tr>
+      <tr><td class="td-name" style="color:#6b7280!important">BLOCK</td><td>0 – 299</td><td>None — access denied</td><td>0%</td></tr>
+    </tbody>
+  </table>
+  <div class="next-prev"><button class="next-btn" onclick="show('mica')"><div><span class="next-btn-lbl">Next</span>Potential MiCA Features →</div></button></div>
+</div>
+
+<!-- MICA -->
+<div id="page-mica" style="display:none">
+  <h1>Potential On-Chain MiCA Features</h1>
+  <p class="lead">Verun is designed with MiCA obligations in mind for AI agents acting in regulated European financial operations. The features below are <strong>potential on-chain implementations</strong> — to be checked and prior to legal audit. Not a compliance statement.</p>
+  <div class="hint success">⚖️ <strong>Scope:</strong> MiCA (Markets in Crypto-Assets Regulation) came into full effect December 2024 across all EU member states. The features below are <strong>potential on-chain implementations</strong> designed to support MiCA alignment. They are not a legal compliance statement and have not yet been audited.</div>
+  <h2>Potential On-Chain Features per Article</h2>
+  <table class="doc-table">
+    <thead><tr><th>Article</th><th>Requirement</th><th>Potential Verun Feature</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-name">Art. 67</td>
+        <td>Operational Risk Management</td>
+        <td>Every evaluation anchored on-chain. Anchor failure is non-blocking — verdict is preserved regardless.</td>
+      </tr>
+      <tr>
+        <td class="td-name">Art. 68</td>
+        <td>CASP Authorization</td>
+        <td>Score-gated access. No agent may call tokenforge Chain API without a valid Verun verdict ≥ 300.</td>
+      </tr>
+      <tr>
+        <td class="td-name">Art. 72</td>
+        <td>AML/CFT Obligations</td>
+        <td>2-of-N validator consensus before any transfer or mint operation. Single-validator manipulation impossible.</td>
+      </tr>
+      <tr>
+        <td class="td-name">Art. 75</td>
+        <td>Record-Keeping / Audit Trail</td>
+        <td>Hedera HCS Message per verdict. Timestamp, agentId, score, consensus, operation all written on-chain.</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="hint note">🔮 <strong>tokenforge alignment:</strong> tokenforge (TokenSuite) is eWpG-compliant, BaFin-relevant, and MiFID II-ready. The Verun × tokenforge integration is designed to extend this compliance stack to the agentic layer — subject to legal review.</div>
+  <div class="hint info">📋 <strong>Legal audit status:</strong> MiCA compliance audit is planned for Q3 2026 as part of the Hedera Foundation grant milestones. Until then, all features on this page represent design intent, not verified compliance.</div>
+  <div class="next-prev"><button class="next-btn" onclick="show('validators')"><div><span class="next-btn-lbl">Next</span>Validator Model →</div></button></div>
+</div>
+
+<!-- VALIDATORS -->
+<div id="page-validators" style="display:none">
+  <h1>Validator Model</h1>
+  <p class="lead">Validators are the institutional backbone of Verun. They provide the consensus votes required for every agent evaluation.</p>
+  <h2>Active Validators (Testnet)</h2>
+  <div class="v-grid">
+    <div class="v-card">
+      <div class="v-card-title">BCP Partners GmbH</div>
+      <div class="v-card-body">Founding Validator. Score-based consensus node operated by BCP Partners. Enforces Verun score tiers and operation gates. EU-based. Contact: <a href="https://www.bcpp.io" target="_blank">bcpp.io</a></div>
+      <span class="v-badge">Founding · Active</span>
+    </div>
+    <div class="v-card">
+      <div class="v-card-title">tokenforge</div>
+      <div class="v-card-body">Founding Validator. eWpG-compliant German Security Token platform (TokenSuite). Chain API gate enforces Score 300+ read, 500+ transfer/mint, 600+ order. BaFin-relevant, MiFID II-ready.</div>
+      <span class="v-badge">Founding · Active</span>
+    </div>
+    <div class="v-card">
+      <div class="v-card-title">Test Validator</div>
+      <div class="v-card-body">Raw score-based validator. Used as 3rd slot for 2-of-3 consensus in testnet. Not for production — development and testing only.</div>
+      <span class="v-badge">Test · Testnet Only</span>
+    </div>
+    <div class="v-card">
+      <div class="v-card-title">Open Slot</div>
+      <div class="v-card-body">Third production validator slot open for licensed financial institutions — banks, family offices, regulated custodians. Must pass KYV (Know Your Validator) review and stake on-chain bond.</div>
+      <span class="v-badge" style="background:var(--border-light);border-color:var(--border);color:var(--text-muted)">Open · Apply</span>
+    </div>
+  </div>
+  <h2>Consensus Rules</h2>
+  <p>A verdict requires <strong>ceil(N/2) matching votes</strong> from selected validators. With 3 validators: 2-of-3 required. UNAVAILABLE votes are excluded from the tally. If consensus cannot be reached, the evaluation returns BLOCK.</p>
+  <h2>Validator Economics</h2>
+  <p>Validators earn <strong>10% of all evaluation fees</strong> automatically via the fee distribution contract. No manual claim required. Fee share scales with validation volume.</p>
+  <div class="next-prev"><button class="next-btn" onclick="show('api')"><div><span class="next-btn-lbl">Next</span>API Reference →</div></button></div>
+</div>
+
+<!-- API -->
+<div id="page-api" style="display:none">
+  <h1>API Reference</h1>
+  <p class="lead">Base URL: <code>https://hedera.erster.fund</code></p>
+  <div class="hint info">✅ All endpoints are live on Hedera Testnet. No API key required for testnet access.</div>
+
+  <h2 id="ep-health">GET /api/health</h2>
+  <p>Service status and network confirmation.</p>
+  <div class="code-block">
+    <div class="code-header"><span>Response 200</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "ok": true,
+  "service": "verun-hedera-mvp",
+  "network": "hedera-testnet"
+}</code></pre>
+  </div>
+
+  <h2 id="ep-validators">GET /api/validators</h2>
+  <p>List all registered validators with metadata.</p>
+  <div class="code-block">
+    <div class="code-header"><span>Response 200</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "validators": [
+    {
+      "id": "val-bcp-01",
+      "name": "BCP Partners",
+      "type": "internal",
+      "status": "active",
+      "policy": "score_based"
+    },
+    {
+      "id": "val-tokenforge-02",
+      "name": "tokenforge",
+      "type": "external",
+      "status": "active",
+      "policy": "chain_api_based",
+      "api": {
+        "type": "rest",
+        "network": "testnet",
+        "docs": "https://docs.tokenforge.io"
+      }
+    },
+    {
+      "id": "val-test-03",
+      "name": "Test Validator",
+      "type": "internal",
+      "status": "test",
+      "policy": "score_based"
+    }
+  ]
+}</code></pre>
+  </div>
+
+  <h2 id="ep-evaluate">POST /api/evaluate</h2>
+  <p>Evaluate an agent. Returns 2-of-N validator consensus verdict + Hedera on-chain anchor.</p>
+  <div class="code-block">
+    <div class="code-header"><span>Request body</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "agentId": "agt_demo",
+  "score": 820,
+  "operation": "transfer",
+  "validatorIds": ["val-bcp-01", "val-tokenforge-02", "val-test-03"]
+}</code></pre>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><span>Response 200</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "success": true,
+  "verdict": {
+    "agentId": "agt_demo",
+    "score": 820,
+    "operation": "transfer",
+    "validators_used": [
+      { "id": "val-bcp-01", "name": "BCP Partners" },
+      { "id": "val-tokenforge-02", "name": "tokenforge" },
+      { "id": "val-test-03", "name": "Test Validator" }
+    ],
+    "votes": [
+      { "validatorId": "val-bcp-01", "vote": "LOW", "reason": "score_800+", "source": "val-bcp-01" },
+      { "validatorId": "val-tokenforge-02", "vote": "LOW", "reason": "chain_api_gate_passed_transfer:820>=500", "gate": { "permitted": true } },
+      { "validatorId": "val-test-03", "vote": "LOW", "reason": "score_800+", "source": "val-test-03" }
+    ],
+    "tally": { "LOW": 3 },
+    "consensus": "LOW",
+    "permitted": true,
+    "kickback_rate": 10,
+    "ts": "2026-04-20T09:33:09.734Z"
+  },
+  "anchor": {
+    "txid": "0.0.4567890@1714987654.123456789",
+    "ledger": "62604931",
+    "explorer": "https://hashscan.io/testnet/transaction/0.0.4567890@1714987654.123456789"
+  }
+}</code></pre>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><span>curl example</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-bash">curl -X POST https://hedera.erster.fund/api/evaluate \
+  -H "Content-Type: application/json" \
+  -d '{"agentId":"agt_demo","score":820,"operation":"transfer"}'</code></pre>
+  </div>
+
+  <h2 id="ep-score">POST /api/score</h2>
+  <p>Lightweight evaluation — verdict only, no Hedera anchor written. Use for quick checks where on-chain anchoring is not required.</p>
+  <div class="code-block">
+    <div class="code-header"><span>Request body</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "agentId": "agt_demo",
+  "score": 820,
+  "operation": "transfer"
+}</code></pre>
+  </div>
+
+  <h2 id="ep-mint-sbt">POST /api/mint-sbt</h2>
+  <p>Issues a Soulbound Token credential to an agent, after running consensus. If consensus = BLOCK the request returns <code>HTTP 403</code> and no SBT is minted. Full design + verification details on the <a href="javascript:void(0)" onclick="show('sbt')">Soulbound Token</a> page.</p>
+
+  <h2 id="ep-revoke-sbt">POST /api/revoke-sbt</h2>
+  <p>Kill-switch: clears the agent's <code>vtrust_*</code> HCS message on the protocol topic in a single Hedera transaction. Audit trail (the revoke TX) remains in the on-chain transaction history. Used to satisfy MiFID II Art. 17 + EU AI Act Art. 14.</p>
+
+  <h2 id="ep-sbt-status">GET /api/sbt-status?agentId=…</h2>
+  <p>Returns the current credential for an agent, or <code>credentialed: false</code> if not issued / revoked. Reads directly from the protocol account's on-chain data — no caching, no Verun-side state.</p>
+
+  <h2 id="ep-sbt-list">GET /api/sbt-list</h2>
+  <p>Returns every active SBT issued by this protocol account. Useful for a public registry view — e.g. "all currently credentialed agents."</p>
+
+  <div class="next-prev"><button class="next-btn" onclick="show('anchor')"><div><span class="next-btn-lbl">Next</span>Hedera Anchor →</div></button></div>
+</div>
+
+<!-- ANCHOR -->
+<div id="page-anchor" style="display:none">
+  <h1>Hedera On-Chain Anchor</h1>
+  <p class="lead">Every <code>POST /api/evaluate</code> writes the verdict payload as a HCS Message on Hedera Testnet — creating an immutable, timestamped audit trail.</p>
+  <h2>How It Works</h2>
+  <p>After validator consensus is reached, the Verun protocol wallet sends a <strong>submitMessage to the protocol HCS topic</strong> with <code>sha256(verdict) hex digest in the message body (256-bit commit). The transaction is confirmed in ~1 second on Hedera.</p>
+  <div class="hint success">✅ <strong>Non-blocking design:</strong> If the anchor fails (e.g. wallet unfunded), the verdict is still returned. The anchor failure is reported as <code>anchor.status: "anchor_failed"</code> — the evaluation result is never withheld.</div>
+  <h2>Anchor Payload (note field)</h2>
+  <div class="code-block">
+    <div class="code-header"><span>Note field JSON (on-chain)</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">{
+  "agentId": "agt_demo",
+  "score": 820,
+  "operation": "transfer",
+  "consensus": "LOW",
+  "permitted": true,
+  "validators": ["val-bcp-01", "val-tokenforge-02", "val-test-03"],
+  "ts": "2026-04-20T09:33:09.734Z"
+}</code></pre>
+  </div>
+  <h2>Verify On-Chain</h2>
+  <p>Every anchor can be verified publicly on HashScan:</p>
+  <div class="code-block">
+    <div class="code-header"><span>Explorer URL pattern</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-bash">https://hashscan.io/testnet/transaction/{txid}
+
+# Example live anchor:
+https://hashscan.io/testnet/transaction/0.0.4567890@1714987654.123456789</code></pre>
+  </div>
+  <h2>Protocol Wallet</h2>
+  <table class="doc-table">
+    <thead><tr><th>Property</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Network</td><td>Hedera Testnet</td></tr>
+      <tr><td class="td-name">Node</td><td>Hedera SDK (Mirror Node REST (testnet.mirrornode.hedera.com))</td></tr>
+      <tr><td class="td-name">Cost per anchor</td><td>~100 tinybars (~0.00001 HBAR, base fee + submitMessage)</td></tr>
+      <tr><td class="td-name">Confirmation time</td><td>~3.9 seconds</td></tr>
+    </tbody>
+  </table>
+  <div class="next-prev"><button class="next-btn" onclick="show('sbt')"><div><span class="next-btn-lbl">Next</span>Soulbound Token →</div></button></div>
+</div>
+
+<!-- SBT -->
+<div id="page-sbt" style="display:none">
+  <h1>Soulbound Token (SBT)</h1>
+  <p style="margin-bottom:12px">
+    <span class="live-badge"><span class="live-dot"></span>LIVE on Hedera Testnet</span>
+    &nbsp;&nbsp;<span style="font-size:12px;color:var(--text-muted)">mint · revoke · status · list — all four endpoints in production</span>
+  </p>
+  <p class="lead">Verun issues a non-transferable trust credential — the <strong>VTRUST</strong> SBT — to every agent that passes consensus. The credential is stored as an <code>HCS message</code> on the protocol topic, fully on-chain, publicly verifiable, and revocable in a single transaction.</p>
+
+  <div class="hint info">
+    🪪 <strong>Think of it as a digital passport for AI agents.</strong> The protocol issues it, the protocol revokes it, anyone can verify it via Hedera SDK — no auth, no API call to Verun required.
+  </div>
+
+  <div style="margin:32px 0;text-align:center">
+    <img src="assets/sbt-architecture.png" alt="Verun Soulbound Token — Protocol-Custodial Architecture (full)" style="max-width:100%;height:auto;border:1px solid var(--border);border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.06)"/>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:10px;font-style:italic">Full architecture · Agent → Verun (3-step internal flow) → Consumer · Kill-switch · Money flow note</div>
+  </div>
+
+  <h2>Wallet Architecture (Protocol-Custodial)</h2>
+  <p>Verun's Hedera deployment uses a <strong>protocol-custodial</strong> model — a single responsible party is the issuer, agents do not hold private keys. This aligns with EU AI Act Art. 14 (human oversight) + MiFID II Art. 17 (kill-switch).</p>
+
+  <table class="doc-table">
+    <thead><tr><th>Party</th><th>Wallet?</th><th>Holds</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">Verun (protocol)</td><td><span class="td-badge badge-live">YES — 1 wallet</span></td><td>SBT registry (HCS topic), audit trail, anchor messages</td></tr>
+      <tr><td class="td-name">Agent</td><td><span class="td-badge" style="background:#fee2e2;color:#991b1b;border:1px solid #fecaca">NO</span></td><td>Identified by <code>agentId</code> string only — no keys, no funds, no Hedera address</td></tr>
+      <tr><td class="td-name">tokenforge / consumer</td><td>Their own</td><td>Verifies SBT via public Hedera SDK query before granting access</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hint note">
+    🔐 <strong>Why no agent wallet?</strong> Three reasons: (1) AI agents don't have a mature key-management story yet — losing a key = losing the credential. (2) EU regulators want a single responsible party they can sanction or audit, not 1000 self-sovereign agents. (3) The kill-switch needs to be unilateral — the issuer must be able to revoke without the agent's cooperation.
+  </div>
+
+  <h2>How the credential lives on-chain</h2>
+  <p>The SBT is <strong>not a Hedera asset</strong> in the traditional sense — it's an <code>HCS message</code> on the protocol topic. That means there is no asset balance and no agent-side signature required. The "credential" is an ordered, timestamped HCS message published to a protocol topic and retrievable from any Mirror Node.</p>
+
+  <table class="doc-table">
+    <thead><tr><th>Field</th><th>Format</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">key</td><td><code>vtrust_&lt;agentId&gt;</code></td><td><code>vtrust_agt_fahad_001</code></td></tr>
+      <tr><td class="td-name">value</td><td><code>vtrust-mint:&lt;agentId&gt;:&lt;tier&gt;:&lt;score&gt;:&lt;isoTs&gt;:&lt;hash8&gt;</code></td><td><code>vtrust-mint:agt_fahad_001:MED:720:2026-05-04T18:40:53Z:4f3aaa28</code></td></tr>
+      <tr><td class="td-name">issuer</td><td>Hedera address (base58, 32 bytes)</td><td><code><PROTOCOL_PUBKEY></code> (protocol)</td></tr>
+      <tr><td class="td-name">tamper-proof</td><td>sha256(credential) in HCS message body</td><td>32-byte hash committed alongside the HCS message op</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Mint flow</h2>
+  <div class="code-block">
+    <div class="code-header"><span>POST /api/mint-sbt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">// Request
+{ "agentId": "agt_fahad_001", "score": 720, "operation": "transfer" }
+
+// Response
+{
+  "success": true,
+  "verdict_consensus": "MED",
+  "agentId": "agt_fahad_001",
+  "tier": "MED",
+  "score": 720,
+  "ts": "2026-04-30T14:40:53.913Z",
+  "key": "vtrust_agt_fahad_001",
+  "txid": "0.0.4567890@1714987654.123456789",
+  "ledger": "323456789"  // (Hedera slot),
+  "credential_hash": "4f3aaa283c7cf13ff7427fd9560b49314baaf40bf790efb78cc4e3e00a45ea6d",
+  "issuer": "<PROTOCOL_PUBKEY>",
+  "explorer": "https://hashscan.io/testnet/transaction/a6013d9...",
+  "verify_url": "https://hedera.erster.fund/api/sbt-status?agentId=agt_fahad_001"
+}</code></pre>
+  </div>
+  <p>The endpoint runs validator consensus first. <strong>If consensus = BLOCK, no SBT is issued</strong> — the operation gate is enforced before mint. One transaction includes both the <code>HCS message</code> op and the anchor HCS submitMessage.</p>
+
+  <h2>Revoke flow (kill-switch)</h2>
+  <div class="code-block">
+    <div class="code-header"><span>POST /api/revoke-sbt</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div>
+    <pre><code class="language-json">// Request
+{ "agentId": "agt_fahad_001", "reason": "policy_violation" }
+
+// Response
+{
+  "success": true,
+  "revoked": true,
+  "agentId": "agt_fahad_001",
+  "key": "vtrust_agt_fahad_001",
+  "reason": "policy_violation",
+  "txid": "...",
+  "ledger": "...",
+  "revoke_hash": "...",
+  "explorer": "https://hashscan.io/testnet/transaction/..."
+}</code></pre>
+  </div>
+  <p>Revocation = a <code>vtrust-revoke</code> HCS submitMessage. The entry is removed from the issuer's account state in a single transaction (~1 second). The revoke transaction itself remains in the on-chain transaction history forever — the audit trail is not erased.</p>
+
+  <h2>Public verification (zero-auth)</h2>
+  <p>Anyone — tokenforge, an auditor, a regulator — can verify the credential directly against Hedera SDK. No Verun API call required.</p>
+  <div class="code-block">
+    <div class="code-header"><span>GET /api/sbt-status?agentId=&lt;id&gt;</span></div>
+    <pre><code class="language-bash">curl https://hedera.erster.fund/api/sbt-status?agentId=agt_fahad_001
+
+# Active credential:
+{ "ok": true, "credentialed": true, "credential": { "tier": "MED", "score": 720, "ts": "2026-05-04T18:40:53.913Z" } }
+# Or query the protocol account's signature history:
+
+# Revoked credential:
+HTTP 404 Not Found</code></pre>
+  </div>
+
+  <h2>Endpoint summary</h2>
+  <table class="doc-table">
+    <thead><tr><th>Method</th><th>Path</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/mint-sbt</td><td>Issue credential after consensus check</td></tr>
+      <tr><td><span class="td-badge badge-post">POST</span></td><td class="td-name">/api/revoke-sbt</td><td>Kill-switch: clear credential entry</td></tr>
+      <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-status?agentId=…</td><td>Check credential for one agent</td></tr>
+      <tr><td><span class="td-badge badge-get">GET</span></td><td class="td-name">/api/sbt-list</td><td>List all credentialed agents</td></tr>
+    </tbody>
+  </table>
+
+  <h2>End-to-end demo (one command)</h2>
+  <div class="code-block">
+    <div class="code-header"><span>scripts/sbt-demo.sh</span></div>
+    <pre><code class="language-bash">git clone https://github.com/Fahad00674/verun-hedera-mvp
+cd verun-hedera-mvp &amp;&amp; chmod +x scripts/sbt-demo.sh
+./scripts/sbt-demo.sh agt_fahad_001 720</code></pre>
+  </div>
+  <p>Runs the full lifecycle: status check → mint → public verification → revoke (kill-switch) → re-verification. Two real testnet transactions, ~25 seconds total.</p>
+
+  <h2>Compliance mapping</h2>
+  <table class="doc-table">
+    <thead><tr><th>Regulation</th><th>Article</th><th>Verun mechanism</th></tr></thead>
+    <tbody>
+      <tr><td class="td-name">MiCA</td><td>Art. 68</td><td>2-of-3 validator consensus + on-chain audit trail</td></tr>
+      <tr><td class="td-name">EU AI Act</td><td>Art. 14</td><td>Validators are human/institutional — every action gated by their consensus</td></tr>
+      <tr><td class="td-name">MiFID II</td><td>Art. 17</td><td>Single-TX kill-switch via revoke endpoint (~5s)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="next-prev"><button class="next-btn" onclick="show('roadmap')"><div><span class="next-btn-lbl">Next</span>Mainnet Roadmap →</div></button></div>
+</div>
+
+<!-- ROADMAP -->
+<div id="page-roadmap" style="display:none">
+  <h1>Mainnet Roadmap</h1>
+  <p class="lead">From Hedera Testnet MVP to production infrastructure with legal-audited MiCA alignment.</p>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot-outer active">✓</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-period active">April 2026 — LIVE</div>
+        <div class="tl-title">Hedera Testnet MVP + Soulbound Tokens</div>
+        <div class="tl-desc">10 API endpoints live. BCP Partners + tokenforge + Test validators. 2-of-3 consensus. On-chain anchor via HCS Messages. <strong>SBT mint + revoke + status + list all working</strong> via protocol-custodial HCS message design. Hedera Portal Faucet (1000 HBAR pre-funded). Non-blocking design.</div>
+        <div class="tl-chips">
+          <span class="chip">/evaluate</span>
+          <span class="chip">/mint-sbt</span>
+          <span class="chip">/revoke-sbt</span>
+          <span class="chip">/sbt-status</span>
+          <span class="chip">/sbt-list</span>
+          <span class="chip">Hedera anchor</span>
+          <span class="chip">kill-switch</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot-outer">2</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-period">Q2 2026</div>
+        <div class="tl-title">tokenforge Production Integration</div>
+        <div class="tl-desc">tokenforge Chain API production access (real api.tokensuite.io calls instead of testnet logic gate). Rate limiting + Bearer token auth on all endpoints. SBT-gated platform access live.</div>
+        <div class="tl-chips">
+          <span class="chip">tokenforge prod</span>
+          <span class="chip">API auth</span>
+          <span class="chip">SBT-gated access</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot-outer">3</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-period">Q3 2026</div>
+        <div class="tl-title">Hedera Mainnet + MiCA Audit</div>
+        <div class="tl-desc">Migration from testnet to mainnet. Third production validator onboarded. Full MiCA legal audit + compliance documentation. Hedera Foundation grant milestone delivery.</div>
+        <div class="tl-chips">
+          <span class="chip">Mainnet</span>
+          <span class="chip">MiCA audit</span>
+          <span class="chip">3rd validator</span>
+          <span class="chip">Grant M3</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot-outer">4</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-body">
+        <div class="tl-period">Q4 2026+</div>
+        <div class="tl-title">Open Validator Network</div>
+        <div class="tl-desc">Validator onboarding open to licensed EU financial institutions. KYV (Know Your Validator) process. Fee distribution fully automated. Hedera USDC settlement live.</div>
+        <div class="tl-chips">
+          <span class="chip">Open validators</span>
+          <span class="chip">Hedera USDC</span>
+          <span class="chip">KYV process</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOR AGENTS -->
+<div id="page-agents" style="display:none">
+  <h1>For Agents</h1>
+  <p class="lead">Everything an AI agent needs to connect to Verun Network and get a trust verdict on Hedera — in under 60 seconds.</p>
+
+  <div class="hint success">🤖 <strong>Any agent works.</strong> Claude, GPT, Gemini, open-source — if it can make an HTTP POST, it can use Verun.</div>
+
+  <h2>Step 1 — Add the System Prompt</h2>
+  <p>Paste this into your agent's system instructions. It tells the agent when and how to call Verun before executing any financial operation.</p>
+
+  <div style="background:var(--code-bg);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:20px 0">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid var(--border)">
+      <span style="font-size:11px;font-weight:600;color:var(--text-muted);font-family:var(--mono)">verun · agent system prompt</span>
+      <button onclick="copyDocPrompt(this)" style="font-size:11px;font-weight:700;padding:4px 12px;border-radius:5px;border:1px solid var(--accent-border);background:var(--accent-bg);color:var(--accent);cursor:pointer;font-family:var(--font)">Copy</button>
+    </div>
+    <pre id="doc-agent-prompt" style="margin:0;padding:18px 20px;font-family:var(--mono);font-size:12px;line-height:1.8;color:var(--text-secondary);white-space:pre-wrap;word-break:break-word">You are an AI agent operating within the Verun Network trust framework on Hedera.
+
+Before executing any financial operation, request a Verun trust evaluation.
+
+== HOW TO EVALUATE ==
+POST https://hedera.erster.fund/api/evaluate
+Body: { "agentId": "YOUR_AGENT_ID", "score": YOUR_SCORE, "operation": "transfer" }
+
+== OPERATION GATES ==
+read        → score 300+
+transfer    → score 500+
+order       → score 600+
+
+== VERDICT RULES ==
+permitted: true   → proceed with the operation
+permitted: false  → stop, escalate to human supervisor
+Always store the returned txid as your on-chain audit trail.
+
+== HUMAN ESCALATION ==
+If verdict is denied or pending, notify the human supervisor.
+Never execute financial operations without a valid Verun verdict.
+
+Network: Hedera Testnet
+Validators: tokenforge · BCP Partners
+Docs: https://hedera.erster.fund/docs.html</pre>
+  </div>
+
+  <h2>Step 2 — Make the API Call</h2>
+  <p>Your agent calls <code>/api/evaluate</code> before any operation. Replace <code>YOUR_AGENT_ID</code> with your agent's identifier.</p>
+  <div class="code-block"><span class="k">curl</span> -X POST https://hedera.erster.fund/api/evaluate \
+  -H <span class="s">"Content-Type: application/json"</span> \
+  -d <span class="s">'{"agentId":"agt_my_agent","score":820,"operation":"transfer"}'</span></div>
+
+  <h2>Step 3 — Read the Verdict</h2>
+  <p>Verun returns a verdict with an Hedera TXID as immutable proof.</p>
+  <div class="code-block">{
+  <span class="k">"permitted"</span>: <span class="v">true</span>,
+  <span class="k">"consensus"</span>: <span class="s">"LOW"</span>,
+  <span class="k">"operation"</span>: <span class="s">"transfer"</span>,
+  <span class="k">"score"</span>: <span class="v">820</span>,
+  <span class="k">"txid"</span>: <span class="s">"HEDERA_TESTNET_SIGNATURE"</span>,
+  <span class="k">"anchor"</span>: { <span class="k">"status"</span>: <span class="s">"anchored"</span>, <span class="k">"round"</span>: <span class="v">12345678</span> }
+}</div>
+
+  <div class="hint note">🔗 <strong>On-chain proof:</strong> every <code>txid</code> is verifiable at <a href="https://hashscan.io/testnet/" target="_blank">hashscan.io/testnet</a> — immutable, timestamped, auditable.</div>
+
+  <h2>Operation Reference</h2>
+  <table class="api-table">
+    <thead><tr><th>operation</th><th>Min. Score</th><th>Use case</th></tr></thead>
+    <tbody>
+      <tr><td><code>read</code></td><td>300+</td><td>Query platform data, price feeds</td></tr>
+      <tr><td><code>transfer</code></td><td>500+</td><td>Send tokens, initiate payments</td></tr>
+      <tr><td><code>order</code></td><td>600+</td><td>Place trade orders, mint tokens</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hint info">📋 <strong>AGENT.md</strong> — the full machine-readable version of this prompt lives in the <a href="https://github.com/Fahad00674/verun-hedera-mvp/blob/main/AGENT.md" target="_blank">GitHub repo</a> for direct agent ingestion.</div>
+
+  <div class="next-prev"><button class="next-btn" onclick="show('roadmap')"><div><span class="next-btn-lbl">Next</span>Mainnet Roadmap →</div></button></div>
+</div>
+
+<!-- X402 SEQUENCE DIAGRAM -->
+<div id="page-x402" style="display:none">
+  <h1>x402 Sequence Diagram — Hedera</h1>
+  <p class="lead">Complete message flow between AI Agent, Verun Protocol, Hedera Official x402 Facilitator, and Hedera Network — including error paths.</p>
+
+  <div style="border:1px solid var(--border);border-radius:12px;overflow:hidden;margin:24px 0;background:var(--bg)">
+
+    <!-- Header row -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;border-bottom:1px solid var(--border)">
+      <div style="padding:14px 10px;text-align:center;background:#ede9fe;border-right:1px solid #ddd6fe">
+        <div style="font-size:13px;font-weight:700;color:#5b21b6">AI Agent</div>
+        <div style="font-size:10px;color:#7c3aed;margin-top:2px">Claude · MCP</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;background:#d1fae5;border-right:1px solid #a7f3d0">
+        <div style="font-size:13px;font-weight:700;color:#065f46">Verun Protocol</div>
+        <div style="font-size:10px;color:#059669;margin-top:2px">KYA Score Check</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;background:#fef3c7;border-right:1px solid #fde68a">
+        <div style="font-size:13px;font-weight:700;color:#92400e">Hedera Official Facilitator</div>
+        <div style="font-size:10px;color:#d97706;margin-top:2px">x402 Facilitator</div>
+      </div>
+      <div style="padding:14px 10px;text-align:center;background:#dbeafe">
+        <div style="font-size:13px;font-weight:700;color:#1e40af">Hedera Network</div>
+        <div style="font-size:10px;color:#3b82f6;margin-top:2px">Hedera Testnet · HCS message Anchor</div>
+      </div>
+    </div>
+
+    <!-- Sequence rows -->
+    <div style="font-family:var(--mono);font-size:12px;padding:0">
+
+      <!-- Row 1 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          GET /api/token-data
+          <span style="color:#7c3aed;font-size:16px">→</span>
+        </div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#7c3aed;font-size:16px">←</span>
+          402 + paymentRequirements
+        </div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 3 — client action -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:48px;background:rgba(124,58,237,0.04)">
+        <div style="padding:10px;border-right:1px solid var(--border-light)">
+          <div style="font-style:italic;color:var(--text-muted);font-size:11px">construct PaymentTxn</div>
+          <div style="margin-top:4px;border:1px dashed #c4b5fd;border-radius:4px;padding:3px 8px;font-size:11px;color:#7c3aed;display:inline-block">sign ed25519 / LogicSig</div>
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- Row 4 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          PAYMENT-SIGNATURE header
+          <span style="color:#7c3aed;font-size:16px;font-weight:700">→</span>
+        </div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 5 — Verun action -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px;background:rgba(5,150,105,0.04)">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);font-style:italic;color:var(--text-muted);font-size:11px;display:flex;align-items:center">
+          KYA score check (AgentRegistry)
+        </div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- Row 6 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          forward to facilitator
+          <span style="color:#d97706;font-size:16px">→</span>
+        </div>
+        <div style="padding:10px;border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 7 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          read KYA score on-chain
+          <span style="color:#3b82f6;font-size:16px">→</span>
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 8 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#3b82f6;font-size:16px">←</span>
+          [score: 820 — valid]
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 9 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          dryrun / simulate txn
+          <span style="color:#3b82f6;font-size:16px">→</span>
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 10 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#3b82f6;font-size:16px">←</span>
+          [simulation success]
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 11 — payment verified -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px;background:rgba(217,119,6,0.04)">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center">
+          <span style="background:#fef3c7;border:1px solid #fde68a;color:#92400e;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600">payment verified ✓</span>
+        </div>
+        <div></div>
+      </div>
+
+      <!-- Row 12 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-secondary)">
+          submit signed txn (~0.00001 HBAR fee)
+          <span style="color:#d97706;font-size:16px">→</span>
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 13 — ledger confirmed -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;display:flex;align-items:center">
+          <span style="background:#dbeafe;border:1px solid #bfdbfe;color:#1e40af;padding:3px 10px;border-radius:4px;font-size:11px;font-weight:600">block confirmed ~3.9s</span>
+        </div>
+      </div>
+
+      <!-- Row 14 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#3b82f6;font-size:16px">←</span>
+          transaction result + txid
+        </div>
+        <div style="padding:10px"></div>
+      </div>
+
+      <!-- Row 15 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#059669;font-size:16px">←</span>
+          settlement confirmed
+        </div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- Row 16 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px">
+        <div style="padding:10px;border-right:1px solid var(--border-light);display:flex;align-items:center;gap:6px;color:var(--text-secondary)">
+          <span style="color:#059669;font-size:16px">←</span>
+          200 OK + resource ✓
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- Row 17 — referral -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:40px;background:rgba(156,163,175,0.04)">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar);display:flex;align-items:center;justify-content:flex-end;gap:6px;color:var(--text-muted);font-size:11px">
+          write lead referral (Note Tx)
+          <span style="color:var(--text-muted);font-size:16px">→</span>
+        </div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);font-size:11px;color:var(--text-muted);display:flex;align-items:center">
+        </div>
+        <div style="padding:10px;font-size:11px;color:var(--text-muted);display:flex;align-items:center">→ Hedera Note Tx</div>
+      </div>
+
+      <!-- Row 18 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:2px solid var(--border);min-height:36px;background:rgba(156,163,175,0.04)">
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div style="padding:10px;border-right:1px solid var(--border-light);background:var(--bg-sidebar);font-size:11px;color:var(--text-muted);display:flex;align-items:center;gap:6px">
+          <span style="color:var(--text-muted);font-size:14px">←</span>
+          [referral confirmed]
+        </div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- ERROR PATHS -->
+      <div style="padding:12px 16px;background:rgba(220,38,38,0.04);border-bottom:1px solid var(--border-light)">
+        <div style="font-size:11px;font-weight:700;color:#dc2626;text-align:center;letter-spacing:0.06em">ERROR PATHS</div>
+      </div>
+
+      <!-- E1 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px;background:rgba(220,38,38,0.03)">
+        <div style="padding:10px;border-right:1px solid var(--border-light)">
+          <div style="font-size:11px;color:#dc2626;font-weight:600">E1: score too low → 402 agent_not_verified</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">caught at Verun</div>
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- E2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px;background:rgba(220,38,38,0.03)">
+        <div style="padding:10px;border-right:1px solid var(--border-light)">
+          <div style="font-size:11px;color:#dc2626;font-weight:600">E2: tx expired (max_round) → 402 auth_expired</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">caught at Hedera Facilitator</div>
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- E3 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;border-bottom:1px solid var(--border-light);min-height:44px;background:rgba(220,38,38,0.03)">
+        <div style="padding:10px;border-right:1px solid var(--border-light)">
+          <div style="font-size:11px;color:#dc2626;font-weight:600">E3: insufficient balance → 402 insufficient_funds</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">caught at Hedera Facilitator</div>
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+      <!-- E4 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;min-height:44px;background:rgba(220,38,38,0.03)">
+        <div style="padding:10px;border-right:1px solid var(--border-light)">
+          <div style="font-size:11px;color:#dc2626;font-weight:600">E4: dryrun fail → 402 invalid_payment</div>
+          <div style="font-size:10px;color:var(--text-muted);margin-top:2px">caught at Hedera Network</div>
+        </div>
+        <div style="border-right:1px solid var(--border-light);background:var(--bg-sidebar)"></div>
+        <div style="border-right:1px solid var(--border-light)"></div>
+        <div></div>
+      </div>
+
+    </div><!-- end sequence rows -->
+
+    <!-- Legend -->
+    <div style="padding:12px 20px;border-top:2px solid var(--border);background:var(--bg-sidebar);display:flex;gap:20px;flex-wrap:wrap;font-size:11px;color:var(--text-muted);font-family:var(--mono)">
+      <span><span style="font-size:14px">→</span> Request</span>
+      <span><span style="font-size:14px;opacity:.5">←</span> Response</span>
+      <span style="color:#7c3aed"><span style="font-size:14px">→</span> Agent</span>
+      <span style="color:#059669"><span style="font-size:14px">→</span> Success</span>
+      <span style="color:#d97706"><span style="font-size:14px">→</span> Facilitator</span>
+      <span style="color:#3b82f6"><span style="font-size:14px">→</span> Hedera</span>
+      <span style="color:#dc2626"><span style="font-size:14px">→</span> Error</span>
+    </div>
+
+  </div><!-- end diagram -->
+
+  <div class="hint note">🔷 <strong>Hedera specifics:</strong> <code>HCS consensus timestamp</code> + <code>message body</code> handle tx expiry and verdict commitment. Base fee is 100 tinybars (~0.00001 HBAR). EVM-compatible smart contracts (HSCS) are available for future versions. HCS Messages serve as the on-chain referral anchor.</div>
+
+</div>
+
+</div><!-- end #content -->
+
+<!-- TOC (right sidebar) -->
+<div id="toc">
+  <div class="toc-sticky" id="toc-content"></div>
+</div>
+</div><!-- end #main -->
+
+<div id="footer">
+  <span class="footer-txt">© 2026 <a href="https://www.bcpp.io" target="_blank">BCP Partners GmbH</a> · All rights reserved</span>
+  <span class="footer-txt">
+    <a href="https://github.com/Fahad00674/verun-hedera-mvp" target="_blank">GitHub</a>
+    · <a href="https://hedera.erster.fund" target="_blank">Live Demo</a>
+    · <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
+    · <a href="https://www.bcpp.io" target="_blank">Impressum</a>
+  </span>
+</div>
+
+<script>
+// Page switching
+const pages = ['welcome','overview','architecture','trust-gates','mica','validators','api','anchor','sbt','x402','agents','roadmap'];
+function show(id) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.style.display = (p === id) ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('onclick') && item.getAttribute('onclick').includes("'" + id + "'")) {
+      item.classList.add('active');
+    }
+  });
+  window.scrollTo(0, 0);
+  buildToc();
+}
+
+function scrollToEl(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 50);
+}
+
+// Dark/light theme
+let dark = true;
+function toggleTheme() {
+  dark = !dark;
+  document.body.classList.toggle('dark', dark);
+  document.getElementById('theme-icon').textContent = dark ? '☀️' : '🌙';
+  document.getElementById('theme-lbl').textContent = dark ? 'Light' : 'Dark';
+  document.getElementById('hljs-theme').href = dark
+    ? 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css'
+    : 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css';
+}
+
+// Sidebar mobile
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Copy code
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('code');
+  navigator.clipboard.writeText(code.innerText);
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy', 1500);
+}
+
+// Build TOC
+function buildToc() {
+  const visible = document.querySelector('#content > div:not([style*="display:none"])');
+  const toc = document.getElementById('toc-content');
+  if (!visible || !toc) return;
+  const headings = visible.querySelectorAll('h2');
+  if (headings.length === 0) { toc.innerHTML = ''; return; }
+  let html = '<div class="toc-label">On this page</div>';
+  headings.forEach(h => {
+    const anchor = h.id || h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    if (!h.id) h.id = anchor;
+    html += `<a class="toc-item" href="#${anchor}">${h.textContent}</a>`;
+  });
+  toc.innerHTML = html;
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  // Set dark theme stylesheet
+  document.getElementById('hljs-theme').href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css';
+  hljs.highlightAll();
+  buildToc();
+});
+
+function copyDocPrompt(btn) {
+  const text = document.getElementById('doc-agent-prompt').innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

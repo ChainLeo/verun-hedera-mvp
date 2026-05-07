@@ -1,0 +1,37 @@
+[
+  {
+    "id": "val-bcp-01",
+    "name": "BCP Partners",
+    "type": "internal",
+    "description": "BCP Partners GmbH — Founding Validator. MiCA Art. 68 compliance node. Enforces Verun score tiers and operation gates.",
+    "status": "active",
+    "policy": "score_based",
+    "weight": 1,
+    "api": null
+  },
+  {
+    "id": "val-tokenforge-02",
+    "name": "tokenforge",
+    "type": "external",
+    "description": "Founding Validator. eWpG-compliant German Security Token platform (TokenSuite). Chain API gate enforces Score 300+ read, 500+ transfer/mint, 600+ order.",
+    "status": "active",
+    "policy": "chain_api_based",
+    "weight": 1,
+    "api": {
+      "type": "rest",
+      "endpoint": "https://api.tokensuite.io",
+      "network": "testnet",
+      "docs": "https://docs.tokenforge.io"
+    }
+  },
+  {
+    "id": "val-test-03",
+    "name": "Test Validator",
+    "type": "internal",
+    "description": "Raw test validator. Always returns a score-based vote. For development and 3rd-slot consensus only — not for production.",
+    "status": "test",
+    "policy": "score_based",
+    "weight": 1,
+    "api": null
+  }
+]

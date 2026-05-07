@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "functions": {
+    "api/sbt-list.js":   { "maxDuration": 30 },
+    "api/sbt-status.js": { "maxDuration": 30 },
+    "api/mint-sbt.js":   { "maxDuration": 30 },
+    "api/revoke-sbt.js": { "maxDuration": 30 },
+    "api/evaluate.js":   { "maxDuration": 30 }
+  }
+}

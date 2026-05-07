@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Verun — Competitive Landscape (May 2026)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: #f7f7f5;
+    color: #1a1a1a;
+    line-height: 1.55;
+    padding: 40px 20px;
+  }
+  .wrap { max-width: 1240px; margin: 0 auto; }
+
+  header { margin-bottom: 36px; border-bottom: 2px solid #1a1a1a; padding-bottom: 24px; }
+  .eyebrow {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1.6px;
+    color: #6b6b6b;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .subtitle { font-size: 16px; color: #555; }
+  .meta { margin-top: 14px; font-size: 13px; color: #888; }
+
+  .tldr {
+    background: #1a1a1a;
+    color: #f7f7f5;
+    padding: 28px 32px;
+    border-radius: 10px;
+    margin-bottom: 36px;
+  }
+  .tldr h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #ffb84d;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .tldr p { font-size: 16px; line-height: 1.7; }
+  .tldr strong { color: #ffd57a; }
+
+  h2.section {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 40px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #d8d8d2;
+  }
+
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #d8d8d2; background: white; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    min-width: 1100px;
+  }
+  thead { background: #1a1a1a; color: white; }
+  th {
+    text-align: left;
+    padding: 14px 14px;
+    font-weight: 600;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-right: 1px solid #333;
+  }
+  th:last-child { border-right: none; }
+  td {
+    padding: 16px 14px;
+    border-bottom: 1px solid #ececea;
+    border-right: 1px solid #ececea;
+    vertical-align: top;
+  }
+  td:last-child { border-right: none; }
+  tr:last-child td { border-bottom: none; }
+  tr.us { background: #fff8e6; }
+  tr.us td { font-weight: 500; }
+  .name { font-weight: 700; font-size: 14.5px; color: #1a1a1a; }
+  .name small { display: block; font-weight: 400; color: #888; font-size: 11.5px; margin-top: 2px; letter-spacing: 0; text-transform: none; }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .pill.live { background: #e0f5e9; color: #1d6f3e; }
+  .pill.beta { background: #fff1d6; color: #8a5a00; }
+  .pill.testnet { background: #e6efff; color: #1a4ba8; }
+  .pill.standard { background: #f0e6ff; color: #5b2eaf; }
+
+  .earning {
+    background: #f7f7f5;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    color: #333;
+    line-height: 1.5;
+  }
+  .edge { font-style: italic; color: #5a5a5a; font-size: 12.5px; }
+
+  .match-cell { text-align: center; min-width: 130px; }
+  .match-pct {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.5px;
+  }
+  .match-bar {
+    height: 6px;
+    background: #ececea;
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .match-bar-fill { height: 100%; border-radius: 99px; }
+  .match-what {
+    font-size: 11.5px;
+    color: #555;
+    line-height: 1.45;
+    text-align: left;
+  }
+  .match-high { color: #c2410c; }
+  .match-high .match-bar-fill { background: #f97316; }
+  .match-med  { color: #b8860b; }
+  .match-med  .match-bar-fill { background: #eab308; }
+  .match-low  { color: #1d6f3e; }
+  .match-low  .match-bar-fill { background: #22c55e; }
+  .match-base { color: #1a1a1a; }
+  .match-base .match-bar-fill { background: #1a1a1a; }
+  .chain-note {
+    font-size: 11.5px;
+    color: #888;
+    margin: 8px 0 -8px;
+    font-style: italic;
+  }
+
+  .verun-models {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .model-card {
+    background: white;
+    border: 1px solid #d8d8d2;
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .model-card h3 { font-size: 16px; margin-bottom: 4px; color: #1a1a1a; }
+  .model-card .price { font-size: 13px; color: #b8860b; font-weight: 600; margin-bottom: 12px; }
+  .model-card p { font-size: 13.5px; color: #444; }
+
+  .verdict {
+    background: #fff8e6;
+    border-left: 4px solid #ffb84d;
+    padding: 22px 26px;
+    border-radius: 6px;
+    margin-top: 24px;
+  }
+  .verdict h3 { font-size: 17px; margin-bottom: 10px; }
+  .verdict p { font-size: 14.5px; line-height: 1.65; color: #2a2a2a; }
+  .verdict p + p { margin-top: 10px; }
+
+  footer {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid #d8d8d2;
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+  }
+
+  .private-banner {
+    display: inline-block;
+    background: #fef3c7;
+    color: #92400e;
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+  }
+
+  /* ===== MOBILE / RESPONSIVE ===== */
+  @media (max-width: 880px) {
+    body { padding: 20px 14px; }
+    h1 { font-size: 26px; line-height: 1.2; }
+    .subtitle { font-size: 14px; }
+    .meta { font-size: 12px; }
+    header { margin-bottom: 24px; padding-bottom: 18px; }
+
+    .tldr { padding: 20px 18px; margin-bottom: 26px; }
+    .tldr h2 { font-size: 11px; letter-spacing: 1.4px; }
+    .tldr p { font-size: 14px; line-height: 1.6; }
+
+    h2.section { font-size: 18px; margin: 30px 0 14px; }
+
+    .verun-models { grid-template-columns: 1fr; gap: 14px; }
+    .model-card { padding: 18px; }
+
+    /* Convert table to stacked cards on mobile */
+    .table-wrap {
+      border: none;
+      background: transparent;
+      overflow: visible;
+      border-radius: 0;
+    }
+    table { min-width: 0; display: block; }
+    thead { display: none; }
+    tbody { display: block; }
+    tr {
+      display: block;
+      background: white;
+      border: 1px solid #d8d8d2;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    tr.us {
+      background: #fff8e6;
+      border: 2px solid #ffb84d;
+    }
+    td {
+      display: block;
+      padding: 10px 0;
+      border: none;
+      border-bottom: 1px dashed #ececea;
+      font-size: 13.5px;
+    }
+    td:last-child { border-bottom: none; padding-bottom: 0; }
+    td:first-child { padding-top: 0; }
+    td::before {
+      content: attr(data-label);
+      display: block;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #888;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    td:first-child::before, td.match-cell::before { display: none; }
+    .name { font-size: 16px; }
+
+    /* Match cell stays prominent on mobile */
+    .match-cell {
+      text-align: left;
+      padding: 14px;
+      background: #fafaf7;
+      border-radius: 8px;
+      margin-top: 10px;
+      border-bottom: none !important;
+    }
+    .match-pct { font-size: 26px; display: inline-block; margin-right: 10px; vertical-align: middle; }
+    .match-bar { display: inline-block; width: calc(100% - 80px); vertical-align: middle; margin-bottom: 0; height: 8px; }
+    .match-what { margin-top: 8px; font-size: 12.5px; }
+
+    .verdict { padding: 18px; }
+    .verdict h3 { font-size: 16px; }
+    .verdict p { font-size: 13.5px; }
+
+    .chain-note { font-size: 11px; }
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 22px; }
+    .tldr p { font-size: 13.5px; }
+    .name { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="private-banner">🔒 Internal · Unlisted · Do not share publicly</div>
+    <div class="eyebrow">Competitive Landscape Brief</div>
+    <h1>Verun vs. The AI-Agent Trust Layer</h1>
+    <div class="subtitle">A high-level comparison of who else is building "trust + identity for AI agents on-chain" — and how each one makes money.</div>
+    <div class="meta">Prepared for: Fahad Farooq · BCP Partners GmbH · May 2026</div>
+  </header>
+
+  <div class="tldr">
+    <h2>TL;DR — 30-Second Read</h2>
+    <p>
+      The space went from "open" to <strong>crowded</strong> between Q4 2025 and Q1 2026.
+      <strong>ERC-8004</strong> went live on Ethereum mainnet on Jan 29, 2026 and became the de-facto standard
+      (backed by MetaMask, Ethereum Foundation, Google, Coinbase). <strong>KYA</strong> ("Know Your Agent")
+      is now the regulatory term — Trulioo, Worldpay, Visa, Mastercard, Skyfire are all in.
+      Verun's mechanism (validator consensus + SBT + on-chain anchor) <strong>is no longer unique</strong>,
+      but its <strong>EU-regulatory framing</strong>, <strong>protocol-custodial design</strong>, and
+      <strong>opinionated 2-of-3 consensus</strong> are still defensible — if repositioned quickly as an
+      ERC-8004-compatible compliance layer for EU regulated entities.
+    </p>
+  </div>
+
+  <h2 class="section">High-Level Comparison</h2>
+  <p class="chain-note">Match % is based on mechanism + product positioning overlap with Verun. Chain (which blockchain) is shown for reference only and does <strong>not</strong> affect the match score.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:13%">Project</th>
+          <th style="width:13%">Match with Verun</th>
+          <th style="width:8%">Chain</th>
+          <th style="width:17%">What it does</th>
+          <th style="width:17%">Earning model</th>
+          <th style="width:8%">Stage</th>
+          <th style="width:12%">Backers / Who</th>
+          <th style="width:12%">Verun's edge</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="us">
+          <td><span class="pill live">Live</span><div class="name">Verun (us) <small>verun-hedera-mvp</small></div></td>
+          <td class="match-cell match-base">
+            <div class="match-pct">100%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:100%"></div></div>
+            <div class="match-what">Baseline — this is us.</div>
+          </td>
+          <td>Hedera testnet</td>
+          <td>2-of-3 validator consensus scores AI agents; verdict anchored on-chain via memo-hash; SBT mint / revoke / status / list. Protocol-custodial (no agent wallet).</td>
+          <td class="earning"><strong>To define:</strong> proposed B2B SaaS — per-verification fee, enterprise license, anchor-as-a-service. See section below.</td>
+          <td><span class="pill testnet">Testnet</span></td>
+          <td>BCP Partners GmbH · solo build · 16+ confirmed testnet TXs</td>
+          <td class="edge">— this is the baseline —</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill standard">Standard</span><div class="name">ERC-8004 <small>"Trustless Agents"</small></div></td>
+          <td class="match-cell match-high">
+            <div class="match-pct">90%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:90%"></div></div>
+            <div class="match-what">Identity + Reputation + Validation registries — same 3 mechanisms as Verun. Multi-validator consensus supported.</div>
+          </td>
+          <td>Ethereum mainnet (multi-chain)</td>
+          <td>3 on-chain registries: Identity, Reputation, Validation. Validation Registry supports any consensus model (incl. multi-validator like Verun's 2-of-3).</td>
+          <td class="earning">Open standard — no direct revenue. Money flows to implementers (verifiers, registries, audit firms) building on top.</td>
+          <td><span class="pill live">Mainnet Jan 2026</span></td>
+          <td>MetaMask · Ethereum Foundation · Google · Coinbase</td>
+          <td class="edge">Verun is essentially an opinionated implementation of this standard — should declare ERC-8004 compatibility.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill live">Live</span><div class="name">Chitin <small>chitin.id</small></div></td>
+          <td class="match-cell match-high">
+            <div class="match-pct">80%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:80%"></div></div>
+            <div class="match-what">SBT-as-passport + ERC-8004 + agent identity registry. Missing: explicit validator consensus, EU compliance angle.</div>
+          </td>
+          <td>Base L2</td>
+          <td>"Birth certificates for AI agents." ERC-8004 + Soulbound Token agent passport. Open source.</td>
+          <td class="earning">Open source today; likely future SaaS / verification API fees + enterprise tier.</td>
+          <td><span class="pill live">Live</span></td>
+          <td>Independent / open-source community</td>
+          <td class="edge">Same SBT thesis. Chitin has Base ecosystem reach; Verun has EU-compliance framing.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill live">Live</span><div class="name">RNWY <small>rnwy.com</small></div></td>
+          <td class="match-cell match-high">
+            <div class="match-pct">85%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:85%"></div></div>
+            <div class="match-what">KYA + agent passport + reputation/trust score + revoke. Closest product positioning to Verun. Missing: EU compliance frame, Hedera anchoring.</div>
+          </td>
+          <td>Base + multi-chain</td>
+          <td>"Trust Intelligence" for AI agents, MCP servers, wallets. KYA infrastructure, fraud detection, reputation tracking. 100,000+ registered agents.</td>
+          <td class="earning">SaaS — trust-score API, enterprise verification subscriptions, agent-passport issuance fees. Outcome-based pricing emerging.</td>
+          <td><span class="pill live">Live, scaling</span></td>
+          <td>Series-stage startup</td>
+          <td class="edge">Furthest-along direct competitor on product-positioning. Verun must differentiate on regulation, not features.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill standard">Standard</span><div class="name">AIS-1 <small>ais-1.org</small></div></td>
+          <td class="match-cell match-med">
+            <div class="match-pct">65%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:65%"></div></div>
+            <div class="match-what">Legal-entity binding + non-transferable identity (matches Verun's protocol-custodial + EU angle). Missing: validator consensus, scoring layer.</div>
+          </td>
+          <td>EVM (open contract)</td>
+          <td>"Bonded identity pair" — single token permanently links AI agent to legal entity / responsible party. Cannot be separated without revoking the bond.</td>
+          <td class="earning">Open standard; revenue likely via certified issuers (KYC-style) charging legal-binding fees.</td>
+          <td><span class="pill standard">Standard / spec</span></td>
+          <td>Open-spec working group</td>
+          <td class="edge">Closest to Verun's MiCA / legal-entity story. Real risk of overlap — Verun should consider AIS-1 compatibility.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill testnet">Testnet</span><div class="name">Twin3 <small>Web4 Soul Protocol</small></div></td>
+          <td class="match-cell match-low">
+            <div class="match-pct">40%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:40%"></div></div>
+            <div class="match-what">Only the SBT-for-identity concept overlaps. Different audience (consumer soul-graph), different stack, no compliance focus.</div>
+          </td>
+          <td>Own L1 (testnet)</td>
+          <td>256-dimensional Soulbound Token for digital identity (humans + AI). Soul-bound personality + capability hash.</td>
+          <td class="earning">Tokenomics — native token captures network value (transaction fees, staking, governance).</td>
+          <td><span class="pill testnet">Testnet</span></td>
+          <td>VC-backed crypto-native team</td>
+          <td class="edge">Different angle (consumer / soul-graph). Not a direct enterprise-compliance threat.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill live">Live</span><div class="name">Trulioo DAP <small>Digital Agent Passport</small></div></td>
+          <td class="match-cell match-med">
+            <div class="match-pct">60%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:60%"></div></div>
+            <div class="match-what">Same KYA + provenance + revocation thesis. Missing: on-chain anchor, decentralized validator pool. Stronger on merchant distribution.</div>
+          </td>
+          <td>Off-chain + payment rails</td>
+          <td>Tamper-proof credential: who built the agent, who it represents, what permissions it has. 5 checkpoints: provenance, user binding, scope, telemetry, risk score.</td>
+          <td class="earning">Per-verification fee (extends existing KYC pricing model). Enterprise contracts with merchants & PSPs.</td>
+          <td><span class="pill live">Live (B2B)</span></td>
+          <td>Trulioo · Worldpay partnership · Google AP2</td>
+          <td class="edge">Biggest threat on the regulatory positioning. Trulioo already has the merchant relationships Verun would need.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill live">Live</span><div class="name">Skyfire / KYAPay <small>skyfire.xyz</small></div></td>
+          <td class="match-cell match-med">
+            <div class="match-pct">50%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:50%"></div></div>
+            <div class="match-what">Agent identity + verification overlap. But Skyfire is primarily payment rails (2-3% margin) — Verun is trust-only, no money flow.</div>
+          </td>
+          <td>Off-chain + USDC on-chain</td>
+          <td>Open KYAPay protocol + Agent Checkout. Identity + payment rails for AI agents. Agent-to-agent and agent-to-business microtransactions.</td>
+          <td class="earning"><strong>2–3% of every transaction</strong> + future verification fees. Targeting $46B agent-to-agent commerce market.</td>
+          <td><span class="pill live">GA, exited beta</span></td>
+          <td>Series-A · enterprise-ready</td>
+          <td class="edge">Owns the payment-flow margin Verun can't easily reach (Verun is trust-only, not custody).</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill live">Live</span><div class="name">Know Your Agent Network <small>knowyouragent.network</small></div></td>
+          <td class="match-cell match-med">
+            <div class="match-pct">55%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:55%"></div></div>
+            <div class="match-what">Verification + revocation registry concept matches. But it's an aggregator/standard body, not a verifier. Verun could plug into it.</div>
+          </td>
+          <td>Off-chain + multi-chain anchor</td>
+          <td>Verification standard for autonomous AI agents. Aggregator / registry of KYA-verified agents.</td>
+          <td class="earning">Network membership fees + per-verification API + premium directory listing.</td>
+          <td><span class="pill live">Live</span></td>
+          <td>Industry coalition</td>
+          <td class="edge">Becoming the "Visa logo" of agent verification — Verun could become a recognised verifier inside it.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill beta">Pilot</span><div class="name">Visa / Mastercard <small>agent-payment KYA</small></div></td>
+          <td class="match-cell match-low">
+            <div class="match-pct">35%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:35%"></div></div>
+            <div class="match-what">Only the agent-verification concept overlaps. Different scale, different rails (cards), different revenue model (interchange).</div>
+          </td>
+          <td>Card rails + on-chain anchor</td>
+          <td>Both launching agent-verification overlays on existing card networks. Designed for agent checkout at scale.</td>
+          <td class="earning">Interchange + per-verification fee. Massive distribution leverage (every merchant already accepts them).</td>
+          <td><span class="pill beta">Pilot 2026</span></td>
+          <td>Visa, Mastercard (with payment partners)</td>
+          <td class="edge">Verun cannot beat them on rails. Only path: be a regulated verifier they consume from.</td>
+        </tr>
+
+        <tr>
+          <td><span class="pill standard">Research</span><div class="name">AgentBound Tokens <small>academic / arXiv</small></div></td>
+          <td class="match-cell match-med">
+            <div class="match-pct">50%</div>
+            <div class="match-bar"><div class="match-bar-fill" style="width:50%"></div></div>
+            <div class="match-what">SBT + revocation matches Verun. Adds slashing on top — could be a future feature for Verun. No commercial product yet.</div>
+          </td>
+          <td>EVM-style</td>
+          <td>SBT + economic stake — agent stakes tokens, slashed automatically on bad behavior.</td>
+          <td class="earning">Concept / research — no commercial product yet. Likely future protocol-level fees + slashing distribution.</td>
+          <td><span class="pill standard">Paper only</span></td>
+          <td>Academic researchers</td>
+          <td class="edge">Possible future feature for Verun (add slashing on top of revoke).</td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section">Earning Models — Verun's Realistic Options</h2>
+  <p style="font-size: 14.5px; color: #444; margin-bottom: 6px;">
+    Verun is the trust layer, not the money layer. That rules out interchange / transaction-percentage models
+    (which is where Skyfire, Visa, Mastercard make their margin). Three viable models, in order of EU-fit:
+  </p>
+
+  <div class="verun-models">
+    <div class="model-card">
+      <h3>1 · Per-verification fee (B2B API)</h3>
+      <div class="price">€0.05 – €0.50 per verdict</div>
+      <p>tokenforge and other regulated entities pay per <code>/api/evaluate</code> call. Hedera anchor cost is sub-cent, so margin is high. Same model as Trulioo & RNWY — proven.</p>
+    </div>
+    <div class="model-card">
+      <h3>2 · Enterprise compliance license</h3>
+      <div class="price">€20K – €200K / year</div>
+      <p>Annual contract with EU-regulated firms (banks, MiFID II investment firms, MiCA CASPs). Includes SLA, audit dashboard, kill-switch, custom validator pool. Higher-value, lower-volume — fits the regulation pitch.</p>
+    </div>
+    <div class="model-card">
+      <h3>3 · Anchor-as-a-Service</h3>
+      <div class="price">€0.001 per anchor + fixed monthly</div>
+      <p>Sell the on-chain anchor (memo-hash) to other KYA platforms that need an immutable audit trail but don't want to operate Hedera accounts. Verun becomes "the notary" inside someone else's stack.</p>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <h3>Strategic Verdict</h3>
+    <p>
+      <strong>Don't compete with ERC-8004 — be a recognised implementation of it.</strong>
+      Verun's 2-of-3 consensus is a concrete answer to ERC-8004's deliberately-unopinionated Validation Registry,
+      and that is genuinely useful to EU regulated buyers who need a defined, auditable validator pool — not a
+      "pick-your-own-validator" framework.
+    </p>
+    <p>
+      <strong>Lean into the EU-compliance moat.</strong> MiCA Art. 68, AI Act Art. 14, and MiFID II Art. 17
+      mapping is something almost no US-led competitor (RNWY, Skyfire, Trulioo's commercial pitch) leads with.
+      The EU AI Act high-risk requirements take full effect Aug 2, 2026 — that's a 90-day window to be the
+      go-to "EU-native, ERC-8004-compatible, protocol-custodial verifier."
+    </p>
+    <p>
+      <strong>Recommended pricing wedge:</strong> Model 2 (enterprise compliance license) for the first 2–3
+      design partners (BCP, tokenforge, one bank), then open Model 1 (per-verification API) for general
+      developer access. Model 3 only if a partnership with another KYA platform materialises.
+    </p>
+  </div>
+
+  <footer>
+    Verun · BCP Partners GmbH · May 2026 · Sources: ERC-8004 (eips.ethereum.org), Trulioo, Skyfire BusinessWire,
+    RNWY, Stellagent, Chitin, AIS-1, KYA Network.
+  </footer>
+
+</div>
+<script>
+  // Auto-add data-label attributes to table cells for mobile card view
+  (function() {
+    document.querySelectorAll('table').forEach(function(table) {
+      var headers = Array.from(table.querySelectorAll('thead th')).map(function(th) {
+        return th.textContent.trim();
+      });
+      table.querySelectorAll('tbody tr').forEach(function(row) {
+        Array.from(row.children).forEach(function(td, i) {
+          if (headers[i]) td.setAttribute('data-label', headers[i]);
+        });
+      });
+    });
+  })();
+</script>
+</body>
+</html>
