@@ -533,9 +533,9 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .flow-label{font-size:8px !important;margin-top:3px !important}
   .flow-arrow{transform:rotate(90deg);font-size:14px !important;padding:0 !important;height:14px}
 
-  /* Architecture 3 fact cards (Validators / Settlement / Verification) — stack tighter */
-  section#architecture > .container > div[style*="grid-template-columns:repeat(3"]{display:grid !important;grid-template-columns:1fr !important;gap:8px !important;margin-top:10px !important}
-  section#architecture > .container > div[style*="grid-template-columns:repeat(3"] > div{padding:10px 12px !important}
+  /* Architecture 3 fact cards (Validators / Settlement / Verification) — hidden on mobile
+     to fit the 6-stage flow within one viewport */
+  #architecture .x402-grid{display:none !important}
 
   /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
   .x402-grid{gap:14px !important}
