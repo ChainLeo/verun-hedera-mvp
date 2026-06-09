@@ -72,8 +72,8 @@ a{color:var(--teal);text-decoration:none}
 /* Hero — soft lavender-grey base (var(--bg2)); brand green reserved for ERSTER finale section */
 .hero{padding:80px 0 0;position:relative;overflow:visible;background:var(--bg2)}
 /* Phone overflows into next white section for visual depth */
-.hero-phone-wrap{margin-bottom:-160px}
-.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:start;gap:0;padding-bottom:0}
+.hero-phone-wrap{margin-bottom:0}
+.hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:center;gap:0;padding-bottom:0}
 .hero-copy{text-align:left;padding-bottom:0;align-self:center;grid-area:copy}
 .hero h1{font-size:clamp(40px,4.5vw,60px);font-weight:800;line-height:1.04;color:var(--text);margin-bottom:24px;letter-spacing:-0.03em}
 .hero h1 .hl{color:var(--text)}
@@ -95,7 +95,7 @@ a{color:var(--teal);text-decoration:none}
 .pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
 
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
-.hero-phone-wrap{display:flex;justify-content:center;align-items:flex-start;padding:0;position:relative;margin-bottom:-80px;z-index:5;grid-area:phone}
+.hero-phone-wrap{display:flex;justify-content:center;align-items:center;padding:0;position:relative;margin-bottom:0;z-index:5;grid-area:phone}
 .hero-phone{
   width:285px;height:570px;
   background:#0a2540;
@@ -493,7 +493,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 /* Tablet — 2-column x402 grid + fact cards stack */
 @media(min-width:641px) and (max-width:1024px){
   .x402-grid{grid-template-columns:1fr !important;gap:24px !important}
-  .hero-phone-wrap{margin-bottom:-80px !important}
+  .hero-phone-wrap{margin-bottom:0 !important}
 }
 /* Tablet 2-col grid for validator + regulatory cards */
 @media(min-width:601px) and (max-width:900px){
