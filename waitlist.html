@@ -165,7 +165,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
       <div class="form-card">
         <h2>We'll send project updates.</h2>
 
-        <form id="waitlistForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+        <form id="waitlistForm" action="https://api.web3forms.com/submit" method="POST">
           <!-- Web3Forms config -->
           <input type="hidden" name="access_key" value="ecb3f63a-2104-4b56-a78a-f8326660cc1e">
           <input type="hidden" name="subject" value="New Verun Waitlist Signup">
@@ -227,6 +227,29 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
 
     // Honeypot — if filled, it's a bot
     if (form.querySelector('[name=botcheck]').checked) return;
+
+    // Explicit field validation (belt + suspenders on top of HTML5 required)
+    const nameInput = form.querySelector('[name=name]');
+    const emailInput = form.querySelector('[name=email]');
+    const name = (nameInput.value || '').trim();
+    const email = (emailInput.value || '').trim();
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name) {
+      showMessage('Please enter your name.', 'error');
+      nameInput.focus();
+      return;
+    }
+    if (!email) {
+      showMessage('Please enter your email.', 'error');
+      emailInput.focus();
+      return;
+    }
+    if (!emailRe.test(email)) {
+      showMessage('Please enter a valid email address.', 'error');
+      emailInput.focus();
+      return;
+    }
 
     btn.classList.add('loading');
     btn.disabled = true;
