@@ -545,9 +545,11 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   /* Payment schemes block — tighter */
 
   /* === ERSTER OPENER (Assets. Agentic Investors.) === */
-  .erster-section{padding:48px 0 !important}
+  /* ERSTER opener: top 48px (matches), bottom 16px (tighter — user wants less below dashboard) */
+  .erster-section{padding:48px 0 16px !important}
   .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important;margin-bottom:18px !important}
-  .erster-browser{margin-bottom:0 !important;transform:scale(0.92);transform-origin:center top}
+  .erster-inner{gap:24px !important}
+  .erster-browser{margin:0 !important;transform:none !important}
   .er-dash{min-height:auto !important}
   .erster-browser{transform:scale(0.85);transform-origin:center top;margin-top:-20px}
   .er-dash{min-height:280px !important}
