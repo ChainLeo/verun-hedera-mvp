@@ -155,10 +155,12 @@ a{color:var(--teal);text-decoration:none}
      Use 100svh (small viewport height) so content fits when Chrome/Safari
      toolbars are visible — most strict guarantee. */
   html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
-  section, .hero{scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;position:relative;overflow:hidden}
+  /* ALL sections: same edge padding, same vertical rhythm */
+  section, .hero{scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;position:relative;overflow:hidden;padding:20px 0 !important}
   section > .container, .hero > .container{width:100%}
-  /* Hero content sits at TOP — phone bigger */
-  .hero{padding:16px 0 0}
+  .container{padding:0 18px !important}
+  /* Hero: align content top (since it has phone below) */
+  .hero{justify-content:flex-start;padding:16px 0 0 !important}
   .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
   /* Flex-column gap = mathematically equal spacing between all 4 elements */
   .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
