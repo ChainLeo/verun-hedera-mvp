@@ -161,8 +161,8 @@ a{color:var(--teal);text-decoration:none}
     box-sizing:border-box;
   }
   .container{padding:0 20px !important;max-width:100% !important}
-  /* Hero: bit tighter top since no header above */
-  .hero{padding:32px 0 48px !important}
+  /* Hero: uniform 48px top + 48px bottom (matches all other sections) */
+  .hero{padding:48px 0 !important}
   .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
   /* Flex-column gap = mathematically equal spacing between all 4 elements */
   .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
@@ -545,8 +545,10 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   /* Payment schemes block — tighter */
 
   /* === ERSTER OPENER (Assets. Agentic Investors.) === */
-  .erster-section{padding:36px 0 !important}
-  .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important}
+  .erster-section{padding:48px 0 !important}
+  .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important;margin-bottom:18px !important}
+  .erster-browser{margin-bottom:0 !important;transform:scale(0.92);transform-origin:center top}
+  .er-dash{min-height:auto !important}
   .erster-browser{transform:scale(0.85);transform-origin:center top;margin-top:-20px}
   .er-dash{min-height:280px !important}
   .arch-node{flex:1 1 50%;min-width:0}
