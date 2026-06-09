@@ -151,7 +151,9 @@ a{color:var(--teal);text-decoration:none}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
-  /* ─── Mobile responsive: scroll-snap section-by-section + uniform margins ─── */
+  /* ─── Mobile responsive: scroll-snap + UNIFORM TOP+BOTTOM padding ───
+     Every section starts at the same vertical position (32px from top)
+     so spacing rhythm is identical across the entire page. */
   html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
   section, .hero{
     scroll-snap-align:start;
@@ -160,17 +162,15 @@ a{color:var(--teal);text-decoration:none}
     min-height:100svh;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:flex-start; /* content sticks to top — uniform start position */
     align-items:stretch;
     position:relative;
     overflow:hidden;
-    padding:24px 0 !important;
+    padding:32px 0 32px !important; /* same top + same bottom on every section */
     box-sizing:border-box;
   }
   section > .container, .hero > .container{width:100%;height:auto}
   .container{padding:0 20px !important;max-width:100% !important}
-  /* Hero: align content top (since phone is below copy) */
-  .hero{justify-content:flex-start;padding:20px 0 !important}
   .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
   /* Flex-column gap = mathematically equal spacing between all 4 elements */
   .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
@@ -548,9 +548,9 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   #architecture .x402-grid{display:none !important}
 
   /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
-  .x402-grid{gap:14px !important}
+  .x402-grid{gap:10px !important}
   /* Terminal block on mobile — smaller */
-  pre#x402-terminal{font-size:10px !important;min-height:160px !important;max-height:200px !important;padding:12px 14px !important}
+  pre#x402-terminal{font-size:10px !important;min-height:130px !important;max-height:160px !important;padding:10px 12px !important}
   /* Payment schemes block — tighter */
 
   /* === ERSTER OPENER (Assets. Agentic Investors.) === */
