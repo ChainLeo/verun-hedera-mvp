@@ -165,12 +165,13 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
       <div class="form-card">
         <h2>We'll send project updates.</h2>
 
-        <form id="waitlistForm" action="https://formsubmit.co/ajax/fahad@bcpp.io" method="POST">
+        <form id="waitlistForm" action="https://formsubmit.co/fahad@bcpp.io" method="POST">
           <!-- FormSubmit config — free tier supports real multi-recipient CC -->
           <input type="hidden" name="_subject" value="New Verun Waitlist Signup">
           <input type="hidden" name="_cc" value="rafael@bcpp.io,nils@bcpp.io">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://hedera.erster.fund/waitlist.html?ok=1">
           <input type="hidden" name="source" value="hedera.erster.fund/waitlist">
 
           <!-- Honeypot (spam protection) -->
@@ -220,13 +221,19 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
     msg.className = 'form-message ' + kind;
   }
 
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    msg.className = 'form-message';
-    msg.textContent = '';
+  // Show success message after redirect-back from FormSubmit
+  if (new URLSearchParams(window.location.search).get('ok') === '1') {
+    showMessage("✓ You're on the list. We'll email you when your batch opens.", 'success');
+    // Clean URL so refresh doesn't keep showing it
+    if (history.replaceState) history.replaceState(null, '', window.location.pathname);
+  }
 
-    // Honeypot — if filled, it's a bot
-    if (form.querySelector('[name=botcheck]').checked) return;
+  form.addEventListener('submit', function(e){
+    // Honeypot — if filled, it's a bot — block silently
+    if (form.querySelector('[name=botcheck]').checked) {
+      e.preventDefault();
+      return;
+    }
 
     // Explicit field validation (belt + suspenders on top of HTML5 required)
     const nameInput = form.querySelector('[name=name]');
@@ -236,47 +243,28 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
     const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name) {
+      e.preventDefault();
       showMessage('Please enter your name.', 'error');
       nameInput.focus();
       return;
     }
     if (!email) {
+      e.preventDefault();
       showMessage('Please enter your email.', 'error');
       emailInput.focus();
       return;
     }
     if (!emailRe.test(email)) {
+      e.preventDefault();
       showMessage('Please enter a valid email address.', 'error');
       emailInput.focus();
       return;
     }
 
+    // All valid — let the form post natively to FormSubmit.
+    // FormSubmit will: (1) send the email, (2) redirect back to _next (?ok=1)
     btn.classList.add('loading');
     btn.disabled = true;
-
-    const formData = new FormData(form);
-    const payload = Object.fromEntries(formData.entries());
-
-    try {
-      const r = await fetch('https://formsubmit.co/ajax/fahad@bcpp.io', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      const data = await r.json().catch(() => ({}));
-
-      if (r.ok && (data.success === 'true' || data.success === true)) {
-        showMessage("✓ You're on the list. We'll email you when your batch opens.", 'success');
-        form.reset();
-      } else {
-        showMessage('Something went wrong. Please try again or email fahad@bcpp.io directly.', 'error');
-      }
-    } catch (err) {
-      showMessage('Network error. Please check your connection and try again.', 'error');
-    } finally {
-      btn.classList.remove('loading');
-      btn.disabled = false;
-    }
   });
 })();
 </script>
