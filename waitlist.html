@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Join the Verun Waitlist · Hedera</title>
+<meta name="description" content="Get notified when Verun opens for AI agents on Hedera. MiFID II + EU AI Act compliant trust verdicts, anchored on the Hedera Consensus Service.">
+<link rel="icon" href="data:image/svg+xml;utf8,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;circle cx='50' cy='50' r='40' fill='%2316a34a'/&gt;&lt;text x='50' y='66' font-size='52' text-anchor='middle' fill='white' font-family='Inter,sans-serif' font-weight='800'&gt;V&lt;/text&gt;&lt;/svg&gt;">
+<style>
+:root{
+  --bg:#ffffff;
+  --bg2:#f8f9fe;
+  --text:#0f172a;
+  --text2:#334155;
+  --text3:#64748b;
+  --border:#e5e7eb;
+  --border-strong:#cbd5e1;
+  --teal:#16a34a;
+  --teal-bright:#16a34a;
+  --teal-soft:#dcfce7;
+  --teal-border:#86efac;
+  --purple:#7c3aed;
+  --purple-soft:#ede9fe;
+  --purple-border:#c4b5fd;
+  --mono:'SF Mono','JetBrains Mono',Menlo,Consolas,monospace;
+  --shadow-sm:0 1px 2px rgba(15,23,42,0.04);
+  --shadow-lg:0 30px 80px rgba(15,23,42,0.10);
+}
+*{box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--text);background:var(--bg2);min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:rgba(248,249,254,0.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%}
+.nav-logo{font-weight:800;font-size:18px;letter-spacing:0.12em;color:var(--text);text-decoration:none}
+.nav-links{display:flex;gap:28px;font-size:14px;font-weight:500}
+.nav-links a{color:var(--text2);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.algo-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;background:var(--teal-soft);color:#065f46;padding:5px 11px;border-radius:999px;letter-spacing:0.05em;text-transform:uppercase}
+.algo-dot{width:6px;height:6px;border-radius:50%;background:var(--teal)}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 0}
+.waitlist-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;max-width:1080px}
+
+.waitlist-copy .eyebrow{font-family:var(--mono);font-size:11px;font-weight:800;color:var(--teal);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:18px}
+.waitlist-copy h1{font-size:clamp(38px,4.5vw,56px);font-weight:800;line-height:1.04;letter-spacing:-0.025em;margin:0 0 22px;color:var(--text)}
+.waitlist-copy h1 .muted{color:var(--text3);font-weight:700}
+.waitlist-copy p{font-size:16px;line-height:1.6;color:var(--text2);max-width:480px;margin:0 0 14px}
+.waitlist-copy .perks{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.waitlist-copy .perk{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.waitlist-copy .perk-tick{width:18px;height:18px;border-radius:50%;background:var(--teal-soft);color:var(--teal);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0}
+
+/* FORM CARD */
+.form-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:36px;box-shadow:var(--shadow-lg)}
+.form-card .label-mono{font-family:var(--mono);font-size:11px;font-weight:800;color:var(--text3);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px}
+.form-card h2{margin:0 0 22px;font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+
+.field-group{margin-bottom:18px}
+.field-group label{display:block;font-size:12px;font-weight:700;color:var(--text2);margin-bottom:6px;letter-spacing:0.02em}
+.field-group input[type=text],
+.field-group input[type=email]{
+  width:100%;
+  font-family:inherit;
+  font-size:15px;
+  padding:13px 16px;
+  background:#fff;
+  border:1px solid var(--border-strong);
+  border-radius:10px;
+  color:var(--text);
+  transition:border-color .15s, box-shadow .15s;
+}
+.field-group input:focus{
+  outline:none;
+  border-color:var(--teal);
+  box-shadow:0 0 0 3px rgba(22,163,74,0.15);
+}
+.field-group input::placeholder{color:#9ca3af}
+
+.honeypot{display:none !important}
+
+.submit-btn{
+  width:100%;
+  padding:14px 20px;
+  background:var(--teal);
+  color:#fff;
+  border:0;
+  border-radius:10px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  transition:background .15s, transform .1s;
+  box-shadow:0 6px 16px rgba(22,163,74,0.25);
+}
+.submit-btn:hover{background:#15803d}
+.submit-btn:active{transform:translateY(1px)}
+.submit-btn:disabled{opacity:0.5;cursor:not-allowed}
+.submit-btn .spinner{display:none;width:14px;height:14px;border:2px solid rgba(255,255,255,0.4);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite}
+.submit-btn.loading .spinner{display:inline-block}
+.submit-btn.loading .label{opacity:0.6}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.form-meta{margin-top:18px;font-size:12px;color:var(--text3);line-height:1.5}
+.form-meta a{color:var(--teal);text-decoration:none}
+.form-meta a:hover{text-decoration:underline}
+
+/* Success / error states */
+.form-message{margin-top:18px;padding:14px 16px;border-radius:10px;font-size:14px;line-height:1.5;display:none}
+.form-message.success{background:var(--teal-soft);border:1px solid var(--teal-border);color:#065f46;display:block}
+.form-message.error{background:#fee2e2;border:1px solid #fca5a5;color:#991b1b;display:block}
+
+/* FOOTER */
+.foot{padding:32px 0;border-top:1px solid var(--border);background:#fff;color:var(--text3);font-size:12px}
+.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.foot a{color:var(--text3);text-decoration:none}
+.foot a:hover{color:var(--text)}
+
+@media(max-width:900px){
+  .waitlist-wrap{grid-template-columns:1fr;gap:36px}
+  .form-card{padding:28px 22px}
+  .nav-links{display:none}
+  main{padding:36px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo">VERUN</a>
+    <div class="nav-links">
+      <a href="/#x402">x402</a>
+      <a href="/docs.html">Tech Docs</a>
+      <a href="https://github.com/ChainLeo/verun-hedera-mvp" target="_blank">GitHub</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="algo-badge">
+        <span class="algo-dot"></span>
+        Hedera Testnet
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="container">
+    <div class="waitlist-wrap">
+
+      <!-- LEFT: Copy -->
+      <div class="waitlist-copy">
+        <h1>Join the Verun <span class="muted">waitlist.</span></h1>
+        <p>The trust layer for AI agents on Hedera. Be the first to know when we open up.</p>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div class="form-card">
+        <h2>We'll send project updates.</h2>
+
+        <form id="waitlistForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+          <!-- Web3Forms config -->
+          <input type="hidden" name="access_key" value="ecb3f63a-2104-4b56-a78a-f8326660cc1e">
+          <input type="hidden" name="subject" value="New Verun Waitlist Signup">
+          <input type="hidden" name="from_name" value="Verun Waitlist Form">
+          <input type="hidden" name="cc" value="rafael@bcpp.io,nils@bcpp.io">
+          <input type="hidden" name="source" value="hedera.erster.fund/waitlist">
+
+          <!-- Honeypot (spam protection) -->
+          <input type="checkbox" name="botcheck" class="honeypot" tabindex="-1" autocomplete="off">
+
+          <div class="field-group">
+            <input id="wl-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+          </div>
+
+          <div class="field-group">
+            <input id="wl-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+          </div>
+
+          <button type="submit" id="wl-submit" class="submit-btn">
+            <span class="label">Join waitlist →</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+
+          <div id="wl-message" class="form-message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="container foot-inner">
+    <div>© 2026 BCP Partners GmbH · All rights reserved</div>
+    <div style="display:flex;gap:18px">
+      <a href="/">Home</a>
+      <a href="/docs.html">Tech Docs</a>
+      <a href="https://github.com/ChainLeo/verun-hedera-mvp" target="_blank">GitHub</a>
+      <a href="https://www.bcpp.io/contact-us" target="_blank">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const form = document.getElementById('waitlistForm');
+  const btn = document.getElementById('wl-submit');
+  const msg = document.getElementById('wl-message');
+
+  function showMessage(text, kind){
+    msg.textContent = text;
+    msg.className = 'form-message ' + kind;
+  }
+
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    msg.className = 'form-message';
+    msg.textContent = '';
+
+    // Honeypot — if filled, it's a bot
+    if (form.querySelector('[name=botcheck]').checked) return;
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await r.json().catch(() => ({}));
+
+      if (r.ok && data.success !== false) {
+        showMessage("✓ You're on the list. We'll email you when your batch opens.", 'success');
+        form.reset();
+      } else {
+        showMessage('Something went wrong. Please try again or email fahad@bcpp.io directly.', 'error');
+      }
+    } catch (err) {
+      showMessage('Network error. Please check your connection and try again.', 'error');
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
