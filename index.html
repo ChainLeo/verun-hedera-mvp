@@ -483,6 +483,69 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .mode-tabs button{flex:1;min-width:0;width:auto;font-size:11px;padding:8px 6px;letter-spacing:-0.01em}
   /* Smaller section headings on mobile — proportional to hero */
   .section-h2{font-size:clamp(26px,7vw,34px) !important;margin-bottom:20px !important;line-height:1.08}
+  /* === DEMO WINDOW: compress all 9 windows to fit one viewport === */
+  /* Headers + step indicator */
+  .step-header{margin-bottom:8px}
+  .step-num{font-size:9px;letter-spacing:0.06em;margin-bottom:2px}
+  .step-title{font-size:14px;line-height:1.25}
+  /* Info cards (key/value data) */
+  .info-card{padding:9px 11px;margin-bottom:7px;border-radius:8px}
+  .ic-row{flex-direction:row !important;justify-content:space-between !important;align-items:center !important;gap:6px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid var(--border)}
+  .ic-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+  .ic-label{font-size:9px;letter-spacing:0.06em}
+  .ic-val{font-size:10.5px !important;text-align:right !important;word-break:break-word}
+  /* Check lists (animated ticks) */
+  .check-list{gap:5px}
+  .check-list li{font-size:10.5px;line-height:1.3;gap:7px}
+  .check-list li::before, .check-list li.ok::before, .check-list li.ok-purple::before{width:14px;height:14px;font-size:8px}
+  /* Verdict boxes (approved / executed / etc) */
+  .verdict-box{padding:9px 11px;margin-bottom:7px}
+  .verdict-icon{font-size:22px !important;margin-bottom:2px !important}
+  .verdict-title{font-size:13px !important;margin-bottom:2px !important}
+  .verdict-sub{font-size:10px !important;line-height:1.3 !important}
+  /* Human action card (Supervised mode) */
+  .human-action{padding:10px 11px;margin-bottom:7px}
+  .ha-label{font-size:9px;margin-bottom:5px}
+  .ha-msg{font-size:11px;line-height:1.35;margin-bottom:7px}
+  .ha-btns{flex-direction:column;gap:5px}
+  .ha-btn{font-size:11px;padding:7px 10px;width:100%}
+  /* Hide chunky elements on mobile */
+  .code-block, pre.code{display:none !important}
+  .score-bar-wrap{margin:6px 0}
+  .progress-wrap{height:3px;margin:6px 0}
+  /* Anchor box (Hedera txid display) */
+  .anchor-box{padding:8px 10px !important;margin:6px 0 !important}
+  .anchor-box .lbl, .anchor-box .tx{font-size:10px !important}
+  /* Step controls (Back / Next buttons) */
+  .step-controls{padding:8px 10px !important;gap:6px !important;flex-wrap:wrap}
+  .step-controls button{font-size:11px !important;padding:7px 10px !important}
+  /* Terminal/logs panel — kept hidden on mobile (sticky desktop sidebar) */
+  .terminal-panel{display:none !important}
+
+  /* === ARCHITECTURE (One request. Full settlement.) === */
+  .flow-box{padding:0;border-radius:10px}
+  .flow-row{flex-direction:column !important;padding:14px 12px !important;gap:6px;min-height:0 !important;overflow-x:visible !important}
+  .flow-step{flex:0 0 auto;min-width:0 !important;width:100%}
+  .flow-tag{padding:8px 10px !important;font-size:11px !important}
+  .flow-tag .sub{font-size:9px !important;margin-top:1px !important}
+  .flow-label{font-size:8px !important;margin-top:3px !important}
+  .flow-arrow{transform:rotate(90deg);font-size:14px !important;padding:0 !important;height:14px}
+
+  /* Architecture 3 fact cards (Validators / Settlement / Verification) — stack tighter */
+  section#architecture > .container > div[style*="grid-template-columns:repeat(3"]{display:grid !important;grid-template-columns:1fr !important;gap:8px !important;margin-top:10px !important}
+  section#architecture > .container > div[style*="grid-template-columns:repeat(3"] > div{padding:10px 12px !important}
+
+  /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
+  .x402-grid{gap:14px !important}
+  /* Terminal block on mobile — smaller */
+  pre#x402-terminal{font-size:10px !important;min-height:160px !important;max-height:200px !important;padding:12px 14px !important}
+  /* Payment schemes block — tighter */
+
+  /* === ERSTER OPENER (Assets. Agentic Investors.) === */
+  .erster-section{padding:36px 0 !important}
+  .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important}
+  .erster-browser{transform:scale(0.85);transform-origin:center top;margin-top:-20px}
+  .er-dash{min-height:280px !important}
   .arch-node{flex:1 1 50%;min-width:0}
   .terminal-panel{font-size:11px}
   .footer{font-size:12px}
