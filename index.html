@@ -674,12 +674,10 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .nav-cta:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 8px 20px rgba(22,163,74,0.32)}
   .nav-cta .arrow{transition:transform .2s ease}
   .nav-cta:hover .arrow{transform:translateX(2px)}
-  /* Centered nav menu on desktop, hidden on mobile */
+  /* Centered nav menu on desktop, full nav hidden on mobile */
   .nav-links-center{display:flex;gap:36px;justify-self:center}
   @media(max-width:760px){
-    .nav-pill, .nav-links, .nav-links-center{display:none !important}
-    .nav-brand-mark{width:28px;height:28px;font-size:14px}
-    .container.nav-inner{grid-template-columns:1fr auto !important}
+    .nav{display:none !important}
   }
   @media(max-width:560px){
     .nav-cta{padding:8px 14px;font-size:12px}
