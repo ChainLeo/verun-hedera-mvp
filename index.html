@@ -151,16 +151,26 @@ a{color:var(--teal);text-decoration:none}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
-  /* SCROLL-SNAP: each section locks to one full viewport on mobile.
-     Use 100svh (small viewport height) so content fits when Chrome/Safari
-     toolbars are visible — most strict guarantee. */
+  /* ─── Mobile responsive: scroll-snap section-by-section + uniform margins ─── */
   html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
-  /* ALL sections: same edge padding, same vertical rhythm */
-  section, .hero{scroll-snap-align:start;scroll-snap-stop:always;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center;align-items:stretch;position:relative;overflow:hidden;padding:20px 0 !important}
-  section > .container, .hero > .container{width:100%}
-  .container{padding:0 18px !important}
-  /* Hero: align content top (since it has phone below) */
-  .hero{justify-content:flex-start;padding:16px 0 0 !important}
+  section, .hero{
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    min-height:100vh;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:stretch;
+    position:relative;
+    overflow:hidden;
+    padding:24px 0 !important;
+    box-sizing:border-box;
+  }
+  section > .container, .hero > .container{width:100%;height:auto}
+  .container{padding:0 20px !important;max-width:100% !important}
+  /* Hero: align content top (since phone is below copy) */
+  .hero{justify-content:flex-start;padding:20px 0 !important}
   .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
   /* Flex-column gap = mathematically equal spacing between all 4 elements */
   .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
@@ -172,7 +182,7 @@ a{color:var(--teal);text-decoration:none}
   .btn{font-size:12px;padding:9px 16px;border-radius:8px;font-weight:600}
   /* Phone — small frame, tight inner content */
   .hero-phone-wrap{padding:0;margin:0 !important;align-items:flex-start;z-index:1;display:flex;justify-content:center}
-  .hero-phone{width:200px;height:385px;border-radius:34px;padding:6px;box-shadow:0 0 0 1.5px rgba(74,81,96,0.35),0 14px 28px rgba(15,23,42,0.11)}
+  .hero-phone{width:225px;height:430px;border-radius:38px;padding:7px;box-shadow:0 0 0 1.5px rgba(74,81,96,0.35),0 16px 32px rgba(15,23,42,0.12)}
   .hero-phone::before{top:98px;height:34px;width:4px;right:-2px}
   .hero-phone::after{top:72px;height:22px;width:4px;left:-2px;box-shadow:0 30px 0 #4a5160,0 60px 0 #4a5160}
   .hero-phone-island{width:62px;height:17px;top:9px;border-radius:10px}
@@ -511,8 +521,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .ha-msg{font-size:11px;line-height:1.35;margin-bottom:7px}
   .ha-btns{flex-direction:column;gap:5px}
   .ha-btn{font-size:11px;padding:7px 10px;width:100%}
-  /* Hide chunky elements on mobile */
-  .code-block, pre.code{display:none !important}
+  /* Code blocks stay visible on mobile but scrollable + smaller */
+  .code-block{font-size:9px !important;padding:8px 10px !important;line-height:1.45 !important;overflow-x:auto;margin-bottom:8px}
   .score-bar-wrap{margin:6px 0}
   .progress-wrap{height:3px;margin:6px 0}
   /* Anchor box (Hedera txid display) */
@@ -534,7 +544,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .flow-arrow{transform:rotate(90deg);font-size:14px !important;padding:0 !important;height:14px}
 
   /* Architecture 3 fact cards (Validators / Settlement / Verification) — hidden on mobile
-     to fit the 6-stage flow within one viewport */
+     to fit the 6-stage flow within one viewport (the flow tells the story alone) */
   #architecture .x402-grid{display:none !important}
 
   /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
