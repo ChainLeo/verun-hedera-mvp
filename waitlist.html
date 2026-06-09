@@ -165,12 +165,12 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
       <div class="form-card">
         <h2>We'll send project updates.</h2>
 
-        <form id="waitlistForm" action="https://api.web3forms.com/submit" method="POST">
-          <!-- Web3Forms config -->
-          <input type="hidden" name="access_key" value="ecb3f63a-2104-4b56-a78a-f8326660cc1e">
-          <input type="hidden" name="subject" value="New Verun Waitlist Signup">
-          <input type="hidden" name="from_name" value="Verun Waitlist Form">
-          <input type="hidden" name="cc" value="rafael@bcpp.io,nils@bcpp.io">
+        <form id="waitlistForm" action="https://formsubmit.co/ajax/fahad@bcpp.io" method="POST">
+          <!-- FormSubmit config — free tier supports real multi-recipient CC -->
+          <input type="hidden" name="_subject" value="New Verun Waitlist Signup">
+          <input type="hidden" name="_cc" value="rafael@bcpp.io,nils@bcpp.io">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="source" value="hedera.erster.fund/waitlist">
 
           <!-- Honeypot (spam protection) -->
@@ -258,14 +258,14 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:60px 
     const payload = Object.fromEntries(formData.entries());
 
     try {
-      const r = await fetch('https://api.web3forms.com/submit', {
+      const r = await fetch('https://formsubmit.co/ajax/fahad@bcpp.io', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
       const data = await r.json().catch(() => ({}));
 
-      if (r.ok && data.success !== false) {
+      if (r.ok && (data.success === 'true' || data.success === true)) {
         showMessage("✓ You're on the list. We'll email you when your batch opens.", 'success');
         form.reset();
       } else {
