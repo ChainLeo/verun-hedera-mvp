@@ -151,26 +151,18 @@ a{color:var(--teal);text-decoration:none}
 
 /* === MOBILE HERO OVERRIDES (placed AFTER defaults so cascade wins without !important) === */
 @media(max-width:760px){
-  /* ─── Mobile responsive: scroll-snap + UNIFORM TOP+BOTTOM padding ───
-     Every section starts at the same vertical position (32px from top)
-     so spacing rhythm is identical across the entire page. */
-  html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+  /* ─── Mobile responsive: NATURAL SCROLL ───
+     No scroll-snap, no forced viewport fit. Each section sizes to its
+     content with uniform 48px top + 48px bottom padding for consistent
+     vertical rhythm. */
   section, .hero{
-    scroll-snap-align:start;
-    scroll-snap-stop:always;
-    min-height:100vh;
-    min-height:100svh;
-    display:flex;
-    flex-direction:column;
-    justify-content:flex-start; /* content sticks to top — uniform start position */
-    align-items:stretch;
-    position:relative;
-    overflow:hidden;
-    padding:32px 0 32px !important; /* same top + same bottom on every section */
+    padding:48px 0 !important;
+    min-height:auto !important;
     box-sizing:border-box;
   }
-  section > .container, .hero > .container{width:100%;height:auto}
   .container{padding:0 20px !important;max-width:100% !important}
+  /* Hero: bit tighter top since no header above */
+  .hero{padding:32px 0 48px !important}
   .hero-inner{grid-template-columns:1fr;gap:12px;grid-template-areas:"copy" "phone";align-items:start}
   /* Flex-column gap = mathematically equal spacing between all 4 elements */
   .hero-copy{padding:0;text-align:left;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
@@ -543,9 +535,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .flow-label{font-size:8px !important;margin-top:3px !important}
   .flow-arrow{transform:rotate(90deg);font-size:14px !important;padding:0 !important;height:14px}
 
-  /* Architecture 3 fact cards (Validators / Settlement / Verification) — hidden on mobile
-     to fit the 6-stage flow within one viewport (the flow tells the story alone) */
-  #architecture .x402-grid{display:none !important}
+  /* Architecture 3 fact cards (Validators / Settlement / Verification) — stack as 1 column on mobile */
+  #architecture .x402-grid{grid-template-columns:1fr !important;gap:10px !important;margin-top:14px !important}
 
   /* === x402 (Pay-per-evaluation. Agent-native commerce.) === */
   .x402-grid{gap:10px !important}
