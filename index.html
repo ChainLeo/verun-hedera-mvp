@@ -670,13 +670,16 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .nav-pill .dot{width:6px;height:6px;border-radius:50%}
   .nav-pill.purple .dot{background:#7c3aed;box-shadow:0 0 0 2px rgba(124,58,237,0.18)}
   .nav-pill.teal .dot{background:#10b981;box-shadow:0 0 0 2px rgba(16,185,129,0.18)}
-  .nav-cta{display:inline-flex;align-items:center;gap:6px;background:#16a34a;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:999px;text-decoration:none;letter-spacing:0;line-height:1;box-shadow:0 6px 14px rgba(22,163,74,0.22);transition:transform .15s ease, box-shadow .2s ease, background .15s}
+  .nav-cta{display:inline-flex;align-items:center;gap:6px;background:#16a34a;color:#fff;font-size:13px;font-weight:700;padding:9px 18px;border-radius:999px;text-decoration:none;letter-spacing:0;line-height:1;white-space:nowrap;box-shadow:0 6px 14px rgba(22,163,74,0.22);transition:transform .15s ease, box-shadow .2s ease, background .15s}
   .nav-cta:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 8px 20px rgba(22,163,74,0.32)}
   .nav-cta .arrow{transition:transform .2s ease}
   .nav-cta:hover .arrow{transform:translateX(2px)}
-  @media(max-width:900px){
-    .nav-pill, .nav-links{display:none}
+  /* Centered nav menu on desktop, hidden on mobile */
+  .nav-links-center{display:flex;gap:36px;justify-self:center}
+  @media(max-width:760px){
+    .nav-pill, .nav-links, .nav-links-center{display:none !important}
     .nav-brand-mark{width:28px;height:28px;font-size:14px}
+    .container.nav-inner{grid-template-columns:1fr auto !important}
   }
   @media(max-width:560px){
     .nav-cta{padding:8px 14px;font-size:12px}
@@ -688,7 +691,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
       <span class="nav-brand-mark">V</span>
       <span class="nav-brand-text">VERUN</span>
     </a>
-    <div class="nav-links" style="display:flex;gap:36px;justify-self:center">
+    <div class="nav-links nav-links-center">
       <a class="nav-link" href="javascript:void(0)" onclick="scrollToDemo()">Demo</a>
       <a class="nav-link" href="#x402">x402</a>
       <a class="nav-link" href="/docs.html" target="_blank">Tech Docs</a>
