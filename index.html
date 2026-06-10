@@ -1031,7 +1031,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
       <div class="pricing-card" style="position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:14px">
         <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:var(--text3);letter-spacing:0.14em">FREE</div>
         <div style="display:flex;align-items:baseline;gap:4px">
-          <span style="font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1">$0</span>
+          <span class="pc-price">$0</span>
         </div>
         <div style="height:1px;background:var(--border);margin:4px 0"></div>
         <div style="font-size:14px;color:var(--text2);line-height:1.55">Pay <strong style="color:var(--text)">0.01 USDC</strong> per call via x402.<br>On-chain, no signup.</div>
@@ -1040,7 +1040,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
       <div class="pricing-card" style="position:relative;background:#fff;border:1px solid var(--border);border-radius:16px;padding:32px 28px;display:flex;flex-direction:column;gap:14px">
         <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:var(--text3);letter-spacing:0.14em">STARTER</div>
         <div style="display:flex;align-items:baseline;gap:4px">
-          <span style="font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1">$20</span>
+          <span class="pc-price">$20</span>
           <span style="font-size:14px;color:var(--text3);font-weight:600">/mo</span>
         </div>
         <div style="height:1px;background:var(--border);margin:4px 0"></div>
@@ -1051,7 +1051,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <span style="position:absolute;top:-11px;right:18px;background:var(--teal);color:#fff;font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:0.1em;padding:5px 11px;border-radius:999px">SAVE 30%</span>
         <div style="font-family:var(--mono);font-size:11px;font-weight:800;color:var(--teal);letter-spacing:0.14em">PRO</div>
         <div style="display:flex;align-items:baseline;gap:4px">
-          <span style="font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1">$50</span>
+          <span class="pc-price">$50</span>
           <span style="font-size:14px;color:var(--text3);font-weight:600">/mo</span>
         </div>
         <div style="height:1px;background:var(--border);margin:4px 0"></div>
@@ -1062,13 +1062,14 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 </section>
 
 <style>
+/* Pricing card price numbers — guaranteed uniform across all 3 cards */
+.pc-price{font-size:34px;font-weight:700;color:var(--text);letter-spacing:-0.02em;line-height:1}
 @media(max-width:760px){
   .pricing-section{padding:48px 0 !important}
   .pricing-grid{grid-template-columns:1fr !important;gap:12px !important;max-width:420px !important}
   .pricing-card{padding:20px 18px !important;gap:8px !important}
-  /* Price number on mobile — proportional to other body text */
-  .pricing-card div[style*="display:flex;align-items:baseline"] span:first-child{font-size:26px !important;font-weight:700 !important}
-  .pricing-card div[style*="display:flex;align-items:baseline"] span:last-child{font-size:12px !important}
+  .pc-price{font-size:30px !important}
+  .pricing-card div[style*="display:flex;align-items:baseline"] span:last-child{font-size:13px !important}
 }
 </style>
 
