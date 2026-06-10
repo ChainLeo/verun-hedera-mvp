@@ -1069,7 +1069,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .pricing-grid{grid-template-columns:1fr !important;gap:12px !important;max-width:420px !important}
   .pricing-card{padding:20px 18px !important;gap:8px !important}
   .pc-price{font-size:30px !important}
-  .pricing-card div[style*="display:flex;align-items:baseline"] span:last-child{font-size:13px !important}
+  /* Target ONLY the /mo span (2nd child) — skip when there's a single span like $0 */
+  .pricing-card div[style*="display:flex;align-items:baseline"] span:nth-child(2){font-size:13px !important}
 }
 </style>
 
