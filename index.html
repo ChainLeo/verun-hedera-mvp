@@ -584,18 +584,36 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
 .erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
 
-/* Phone-framed dashboard mockup (iPhone-style: bezel + status bar + dynamic island + home indicator) */
-.erster-browser{background:#000;border:1px solid #000;border-radius:38px;overflow:hidden;box-shadow:var(--shadow-lg);padding:10px}
-.erster-browser-inner{background:#fff;border-radius:30px;overflow:hidden}
-.erster-bar{background:#fff;padding:9px 26px 6px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;min-height:32px}
-.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:14px;font-weight:600;color:#000;letter-spacing:-0.01em}
-.erster-island{position:absolute;left:50%;top:6px;transform:translateX(-50%);width:100px;height:26px;background:#000;border-radius:14px}
+/* iPhone portrait phone frame */
+.erster-browser{background:#000;border:1px solid #000;border-radius:48px;overflow:hidden;box-shadow:var(--shadow-lg);padding:12px;max-width:380px;margin:0 auto}
+.erster-browser-inner{background:#f8f9fe;border-radius:36px;overflow:hidden;position:relative}
+.erster-bar{background:#fff;padding:14px 24px 8px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;min-height:36px}
+.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:15px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.erster-island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:18px}
 .erster-status{display:flex;align-items:center;gap:5px;color:#000}
 .erster-status svg{display:block}
-.erster-home-indicator{display:flex;justify-content:center;padding:6px 0 10px;background:#fff}
-.erster-home-indicator span{display:block;width:135px;height:5px;background:#000;border-radius:3px}
-/* legacy dots/url no longer used but harmless if present */
+.erster-home-indicator{display:flex;justify-content:center;padding:8px 0 14px;background:#f8f9fe}
+.erster-home-indicator span{display:block;width:128px;height:5px;background:#000;border-radius:3px}
+/* legacy dots/url no longer used */
 .erster-dots,.erster-url{display:none}
+
+/* Mobile-fit overrides: hide sidebar, single column, scale text for portrait phone */
+.erster-browser .er-dash{grid-template-columns:1fr !important;min-height:auto !important;background:#f8f9fe}
+.erster-browser .er-sidebar{display:none !important}
+.erster-browser .er-main{padding:16px 16px 8px !important}
+.erster-browser .er-title{font-size:18px !important;margin-bottom:14px !important}
+.erster-browser .er-card-h{font-size:12px !important;margin-bottom:10px !important}
+.erster-browser .er-tag-mini{font-size:8px !important;padding:3px 7px !important}
+.erster-browser .er-asset-name{font-size:11px !important}
+.erster-browser .er-asset-amount{font-size:15px !important;margin-bottom:7px !important}
+.erster-browser .er-bar{height:4px !important}
+.erster-browser .er-table-card{padding:12px !important}
+.erster-browser .er-table-card h3{font-size:12px !important}
+.erster-browser .er-table-card p{font-size:10px !important;margin-bottom:10px !important}
+.erster-browser .er-table{font-size:10px !important}
+.erster-browser .er-table th{font-size:8px !important;padding:6px 0 !important}
+.erster-browser .er-table td{padding:7px 0 !important}
+.erster-browser .er-pill-status{font-size:9px !important;padding:3px 8px !important}
 
 /* Dashboard layout — compact for laptop viewport */
 .er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
@@ -1076,7 +1094,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <div class="er-nav-item amber"><span class="er-bullet"></span>VERUN Validator</div>
           </div>
           <div class="er-main">
-            <input class="er-search" placeholder="Search">
             <div class="er-title">Platform overview</div>
             <div class="er-grid">
               <div class="er-card">
@@ -1103,7 +1120,6 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
                   <tr><td>Tommy Sicilia</td><td>openai</td><td>0X3FC…478</td><td>02/04/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
                   <tr><td>Waldemar Mannering</td><td>claude</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
                   <tr><td>Louetta Esses</td><td>hermes</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
-                  <tr><td>Tessa Meyer</td><td>openclaw</td><td>0X1FC…532</td><td>04/08/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
                 </tbody>
               </table>
             </div>
