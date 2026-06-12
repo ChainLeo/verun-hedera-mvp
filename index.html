@@ -133,9 +133,11 @@ a{color:var(--teal);text-decoration:none}
 .hp-card{background:#f1f5f9;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:5px}
 .hp-card-label{font-family:var(--mono);font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:0.1em}
 .hp-card-value{font-family:var(--mono);font-size:15px;color:#0f172a;font-weight:600}
-.hp-checks{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.hp-checks{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.hp-status{font-family:var(--mono);font-size:13px;color:#0f172a;font-weight:700;margin-bottom:2px}
 .hp-check{display:flex;align-items:flex-start;gap:10px;font-family:var(--mono);font-size:13px;color:#475569;line-height:1.4;font-weight:500}
 .hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
+.hp-pending{width:14px;height:14px;border-radius:50%;background:transparent;border:1.5px solid #cbd5e1;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
 .market-section{background:#fff;padding-top:120px;padding-bottom:60px}
@@ -188,8 +190,10 @@ a{color:var(--teal);text-decoration:none}
   .hp-card-label{font-size:8px;letter-spacing:0.07em}
   .hp-card-value{font-size:10px}
   .hp-checks{gap:4px;margin-top:3px}
+  .hp-status{font-size:10px;margin-bottom:1px}
   .hp-check{font-size:9px;gap:5px}
   .hp-tick{width:12px;height:12px;font-size:8px}
+  .hp-pending{width:12px;height:12px;border-width:1.2px}
 }
 
 /* 3 MODES — reference exact */
@@ -870,7 +874,10 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
                 <div class="hp-card-value">€500,000+ EUR</div>
               </div>
               <div class="hp-checks">
-                <div class="hp-check"><span class="hp-tick">✓</span><span>Scanning investment platforms…</span></div>
+                <div class="hp-status">Scanning.</div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Banks.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>RWA platforms.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>Brokers.</span></div>
               </div>
             </div>
           </div>
