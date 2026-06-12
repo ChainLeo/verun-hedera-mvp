@@ -584,9 +584,28 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
 .erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
 
-/* iPhone portrait phone frame */
-.erster-browser{background:#000;border:1px solid #000;border-radius:48px;overflow:hidden;box-shadow:var(--shadow-lg);padding:12px;max-width:380px;margin:0 auto}
-.erster-browser-inner{background:#f8f9fe;border-radius:36px;overflow:hidden;position:relative}
+/* iPhone portrait phone frame — EXACT same as hero (285×570) */
+.erster-browser{
+  background:#0a2540;
+  border-radius:54px;
+  padding:8px;
+  width:285px;
+  height:570px;
+  margin:0 auto;
+  position:relative;
+  box-shadow:
+    0 0 0 1.5px rgba(74,81,96,0.35),
+    0 2px 6px rgba(15,23,42,0.05),
+    0 12px 24px rgba(15,23,42,0.07),
+    0 28px 56px rgba(15,23,42,0.10),
+    0 56px 100px rgba(15,23,42,0.10);
+}
+/* Side buttons — EXACT same positions as hero phone */
+.erster-browser::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.erster-browser::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
+.erster-browser-inner{background:#f8f9fe;border-radius:46px;overflow:hidden;position:relative;height:100%;display:flex;flex-direction:column}
+/* Dashboard fills available space */
+.erster-browser .er-dash{flex:1;overflow:hidden}
 .erster-bar{background:#fff;padding:14px 24px 8px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;min-height:36px}
 .erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:15px;font-weight:600;color:#000;letter-spacing:-0.01em}
 .erster-island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:18px}
@@ -594,26 +613,42 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-status svg{display:block}
 .erster-home-indicator{display:flex;justify-content:center;padding:8px 0 14px;background:#f8f9fe}
 .erster-home-indicator span{display:block;width:128px;height:5px;background:#000;border-radius:3px}
+/* Safari-style browser bar inside phone (below status bar) */
+.erster-safari-bar{background:#fff;padding:6px 12px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.erster-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:#f1f3f6;border-radius:10px;padding:7px 12px;font-size:13px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
+.erster-safari-url svg{width:11px;height:11px;color:#6b6b70;flex-shrink:0}
 /* legacy dots/url no longer used */
 .erster-dots,.erster-url{display:none}
 
-/* Mobile-fit overrides: hide sidebar, single column, scale text for portrait phone */
+/* Mobile-fit polished overrides: compact + bold for proper iPhone aspect ratio */
 .erster-browser .er-dash{grid-template-columns:1fr !important;min-height:auto !important;background:#f8f9fe}
 .erster-browser .er-sidebar{display:none !important}
-.erster-browser .er-main{padding:16px 16px 8px !important}
-.erster-browser .er-title{font-size:18px !important;margin-bottom:14px !important}
-.erster-browser .er-card-h{font-size:12px !important;margin-bottom:10px !important}
-.erster-browser .er-tag-mini{font-size:8px !important;padding:3px 7px !important}
-.erster-browser .er-asset-name{font-size:11px !important}
-.erster-browser .er-asset-amount{font-size:15px !important;margin-bottom:7px !important}
-.erster-browser .er-bar{height:4px !important}
-.erster-browser .er-table-card{padding:12px !important}
-.erster-browser .er-table-card h3{font-size:12px !important}
-.erster-browser .er-table-card p{font-size:10px !important;margin-bottom:10px !important}
-.erster-browser .er-table{font-size:10px !important}
-.erster-browser .er-table th{font-size:8px !important;padding:6px 0 !important}
-.erster-browser .er-table td{padding:7px 0 !important}
-.erster-browser .er-pill-status{font-size:9px !important;padding:3px 8px !important}
+.erster-browser .er-main{padding:14px 14px 8px !important;display:flex;flex-direction:column;gap:10px}
+.erster-browser .er-grid{margin-bottom:0 !important;gap:10px !important}
+/* Title */
+.erster-browser .er-title{font-size:20px !important;font-weight:800 !important;margin-bottom:0 !important;letter-spacing:-0.02em}
+/* Asset card */
+.erster-browser .er-card{padding:14px !important;border-radius:12px !important}
+.erster-browser .er-card-h{font-size:13px !important;font-weight:800 !important;margin-bottom:10px !important;color:var(--text)}
+.erster-browser .er-asset{background:transparent !important;padding:0 !important}
+.erster-browser .er-tag-mini{font-size:9.5px !important;padding:3px 8px !important;font-weight:800 !important;margin-bottom:8px !important}
+.erster-browser .er-asset-name{font-size:13px !important;font-weight:600 !important;margin-bottom:8px !important;color:var(--text2)}
+.erster-browser .er-asset-amount{font-size:22px !important;font-weight:800 !important;margin-bottom:10px !important;letter-spacing:-0.025em !important}
+.erster-browser .er-bar{height:4px !important;border-radius:2px !important}
+/* Investors table card */
+.erster-browser .er-table-card{padding:14px !important;border-radius:12px !important}
+.erster-browser .er-table-card h3{font-size:14px !important;font-weight:800 !important;margin-bottom:2px !important;color:var(--text)}
+.erster-browser .er-table-card p{font-size:10.5px !important;margin-bottom:10px !important;color:var(--text3)}
+.erster-browser .er-table{font-size:12.5px !important}
+.erster-browser .er-table th{font-size:9px !important;padding:6px 0 !important;font-weight:700 !important;letter-spacing:0.12em !important;color:var(--text3)}
+.erster-browser .er-table td{padding:8px 0 !important;font-weight:600 !important}
+.erster-browser .er-table td:first-child{font-weight:700 !important;color:var(--text) !important}
+/* Agent column → mono font */
+.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:11.5px !important;font-weight:500 !important}
+/* Status pills */
+.erster-browser .er-pill-status{font-size:10.5px !important;padding:3px 9px !important;font-weight:800 !important;border-radius:9px !important}
+/* USER WISH: Approved pill purple (like AI referred) instead of green */
+.erster-browser .er-pill-status.approved{background:#efe9ff !important;color:#7B61FF !important}
 
 /* Dashboard layout — compact for laptop viewport */
 .er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
@@ -696,36 +731,15 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .erster-section{padding:80px 0 60px}
   .erster-inner{grid-template-columns:1fr;gap:36px}
   .erster-copy{padding-right:0;max-width:680px}
-  .erster-browser{max-width:none;margin:0 auto;width:100%}
-  /* slight internal tighten */
-  .er-dash{grid-template-columns:160px 1fr;min-height:400px}
-  .er-main{padding:14px 16px}
+  /* keep phone shape — fixed 285×570 on tablet/mobile too (exact Section 1 hero match) */
+  .erster-browser{width:285px;height:570px;margin:0 auto}
 }
 
 @media(max-width:780px){
   .erster-section{padding:60px 0 40px}
   .erster-section .section-h2{font-size:62px;line-height:1.02;letter-spacing:-0.035em}
   .erster-section .section-h2 .ln{white-space:normal}
-  .er-dash{grid-template-columns:140px 1fr;min-height:360px}
-  .er-sidebar{padding:13px 9px}
-  .er-logo{font-size:11px;margin-bottom:11px;padding:0 6px}
-  .er-nav-item{font-size:9.5px;padding:4px 6px;gap:5px}
-  .er-nav-item .er-bullet{width:5px;height:5px}
-  .er-nav-label{font-size:7px;margin:11px 6px 3px}
-  .er-main{padding:13px 15px}
-  .er-search{font-size:9px;padding:5px 8px 5px 22px;margin-bottom:11px}
-  .er-title{font-size:14px;margin-bottom:11px}
-  .er-card{padding:11px}
-  .er-asset-amount{font-size:11px}
-  .er-asset-name{font-size:8.5px}
-  .er-chart{height:60px}
-  .er-table-card{padding:9px}
-  .er-table th{font-size:7px}
-  .er-table td{font-size:8px}
-  .er-pill-status{font-size:7.5px;padding:2px 7px}
-  .er-table th:nth-child(3),.er-table td:nth-child(3),
-  .er-table th:nth-child(4),.er-table td:nth-child(4),
-  .er-table th:nth-child(6),.er-table td:nth-child(6){display:none}
+  /* phone frame stays portrait — all 4 columns (Name/Agent/Wallet/KYC) stay visible */
 }
 
 @media(max-width:640px){
@@ -1070,12 +1084,18 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
           <div class="erster-time">9:41</div>
           <div class="erster-island"></div>
           <div class="erster-status">
-            <!-- signal -->
-            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.6"/><rect x="4.5" y="5" width="3" height="6" rx="0.6"/><rect x="9" y="3" width="3" height="8" rx="0.6"/><rect x="13.5" y="0" width="3" height="11" rx="0.6"/></svg>
+            <!-- signal bars removed -->
             <!-- wifi -->
             <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
             <!-- battery -->
             <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+          </div>
+        </div>
+        <!-- Safari browser URL bar -->
+        <div class="erster-safari-bar">
+          <div class="erster-safari-url">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
+            erster.fund
           </div>
         </div>
         <div class="er-dash">
@@ -1098,14 +1118,11 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <div class="er-grid">
               <div class="er-card">
                 <div class="er-card-h">Current Sales Status of Assets</div>
-                <div class="er-asset-row">
-                  <div class="er-asset">
-                    <div class="er-asset-icon purple"></div>
-                    <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
-                    <div class="er-asset-name">SpaceX Pre-IPO · AI share</div>
-                    <div class="er-asset-amount">€1.2M of €4M <span class="ai">AI referred</span></div>
-                    <div class="er-bar"><div class="er-bar-fill purple"></div></div>
-                  </div>
+                <div class="er-asset" style="margin-bottom:0">
+                  <span class="er-tag-mini purple">VERUN AI REFERRALS</span>
+                  <div class="er-asset-name">SpaceX Pre-IPO · AI share</div>
+                  <div class="er-asset-amount">€4M <span class="ai">AI referred</span></div>
+                  <div class="er-bar"><div class="er-bar-fill purple"></div></div>
                 </div>
               </div>
             </div>
@@ -1114,12 +1131,11 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
               <p>Your detailed overview about your investors.</p>
               <table class="er-table">
                 <thead>
-                  <tr><th>Name</th><th>Agent</th><th>Wallet</th><th>Reg.</th><th>KYC</th></tr>
+                  <tr><th>Name</th><th>Agent</th><th>KYC</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Tommy Sicilia</td><td>openai</td><td>0X3FC…478</td><td>02/04/26</td><td><span class="er-pill-status approved">Approved</span></td></tr>
-                  <tr><td>Waldemar Mannering</td><td>claude</td><td>0XVDD…Z46</td><td>10/05/26</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
-                  <tr><td>Louetta Esses</td><td>hermes</td><td>7XJFQ…V12</td><td>22/06/26</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
+                  <tr><td>Tom Lee</td><td>openai</td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Maya Chen</td><td>claude</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
                 </tbody>
               </table>
             </div>
