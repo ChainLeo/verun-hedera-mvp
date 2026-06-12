@@ -584,15 +584,18 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
 .erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
 
-/* Browser-framed dashboard mockup */
-.erster-browser{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow-lg)}
-.erster-bar{background:#f1f5f9;border-bottom:1px solid var(--border);padding:10px 14px;display:flex;align-items:center;gap:14px}
-.erster-dots{display:flex;gap:6px}
-.erster-dots span{width:10px;height:10px;border-radius:50%}
-.erster-dots span:nth-child(1){background:#ff5f57}
-.erster-dots span:nth-child(2){background:#febc2e}
-.erster-dots span:nth-child(3){background:#28c840}
-.erster-url{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:5px 14px;font-family:var(--mono);font-size:11px;color:var(--text3);max-width:260px;margin:0 auto;text-align:center}
+/* Phone-framed dashboard mockup (iPhone-style: bezel + status bar + dynamic island + home indicator) */
+.erster-browser{background:#000;border:1px solid #000;border-radius:38px;overflow:hidden;box-shadow:var(--shadow-lg);padding:10px}
+.erster-browser-inner{background:#fff;border-radius:30px;overflow:hidden}
+.erster-bar{background:#fff;padding:9px 26px 6px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;min-height:32px}
+.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:14px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.erster-island{position:absolute;left:50%;top:6px;transform:translateX(-50%);width:100px;height:26px;background:#000;border-radius:14px}
+.erster-status{display:flex;align-items:center;gap:5px;color:#000}
+.erster-status svg{display:block}
+.erster-home-indicator{display:flex;justify-content:center;padding:6px 0 10px;background:#fff}
+.erster-home-indicator span{display:block;width:135px;height:5px;background:#000;border-radius:3px}
+/* legacy dots/url no longer used but harmless if present */
+.erster-dots,.erster-url{display:none}
 
 /* Dashboard layout — compact for laptop viewport */
 .er-dash{display:grid;grid-template-columns:160px 1fr;background:#f8f9fe;min-height:400px}
@@ -1044,9 +1047,18 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <h2 class="section-h2"><span class="ln">Assets.</span><span class="ln">Agentic Investors.</span><span class="ln muted">One Workflow.</span></h2>
       </div>
       <div class="erster-browser">
+        <div class="erster-browser-inner">
         <div class="erster-bar">
-          <div class="erster-dots"><span></span><span></span><span></span></div>
-          <div class="erster-url">hedera.erster.fund</div>
+          <div class="erster-time">9:41</div>
+          <div class="erster-island"></div>
+          <div class="erster-status">
+            <!-- signal -->
+            <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="0.6"/><rect x="4.5" y="5" width="3" height="6" rx="0.6"/><rect x="9" y="3" width="3" height="8" rx="0.6"/><rect x="13.5" y="0" width="3" height="11" rx="0.6"/></svg>
+            <!-- wifi -->
+            <svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
+            <!-- battery -->
+            <svg width="26" height="12" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+          </div>
         </div>
         <div class="er-dash">
           <div class="er-sidebar">
@@ -1097,6 +1109,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             </div>
           </div>
         </div>
+        <div class="erster-home-indicator"><span></span></div>
+        </div><!-- /.erster-browser-inner -->
       </div>
     </div>
   </div>
