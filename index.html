@@ -887,6 +887,45 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 </section>
 
 
+<!-- MARKET STATS (TAM / institutions / coverage / projected agents) -->
+<section class="section market-stats" id="market" style="background:var(--bg);padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="market-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:32px;max-width:1180px;margin:0 auto">
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">5,000<span style="color:var(--teal)">+</span></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">regulated financial institutions in EU <span style="color:var(--text3)">(potential validators)</span></div>
+      </div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">€ 33.7T</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">EU assets under management <span style="color:var(--text3)">(TAM)</span></div>
+      </div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">27</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">EU member states covered by single MiFID II + AI Act framework</div>
+      </div>
+      <div>
+        <div style="font-size:48px;font-weight:800;color:var(--text);letter-spacing:-0.03em;line-height:1;margin-bottom:14px">450M<span style="color:var(--teal)">+</span></div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.5">projected agents by 2030 — one per EU resident</div>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:32px auto 0;font-size:12px;color:var(--text3);font-family:var(--mono);line-height:1.6">
+      Sources: EBA register · Eurostat · McKinsey Agentic Finance forecast · ECB AUM data 2024. Numbers represent addressable market — not Verun's current customer base.
+    </div>
+  </div>
+</section>
+<style>
+@media(max-width:1024px){
+  .market-stats .market-grid{grid-template-columns:repeat(2,1fr) !important;gap:32px 24px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:42px !important}
+}
+@media(max-width:560px){
+  .market-stats{padding:48px 0 !important}
+  .market-stats .market-grid{grid-template-columns:1fr !important;gap:28px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:40px !important;margin-bottom:10px !important}
+  .market-stats .market-grid > div > div:last-child{font-size:13px !important}
+}
+</style>
+
 <!-- DEMO -->
 <section class="section demo-section" id="demo">
   <div class="container">
