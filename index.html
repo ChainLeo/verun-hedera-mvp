@@ -416,7 +416,22 @@ footer{background:#0a1929;border-top:0;padding:48px 0;color:rgba(255,255,255,0.7
 .footer-note{font-size:11px;color:#64748b;font-family:var(--mono)}
 footer .footer-inner > div:first-child > div:last-child{color:#64748b !important}
 
-@media(max-width:900px){
+/* Tablet (760-1024px): 2-column grids for better space usage */
+@media(min-width:761px) and (max-width:1024px){
+  .modes-grid,.platform-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .demo-layout{grid-template-columns:1fr}
+  .terminal-panel{position:static}
+  .arch-flow{flex-wrap:wrap}
+  .arch-node{min-width:120px}
+  .section{padding:70px 0}
+  .market-section{padding:80px 0 40px !important}
+  .market-grid{grid-template-columns:repeat(2,1fr);gap:24px}
+  .ms-num{font-size:42px;margin-bottom:12px}
+  .ms-desc{font-size:15px}
+  .mode-card{padding:26px 22px}
+}
+/* Mobile (≤760px): single-column collapse */
+@media(max-width:760px){
   .demo-layout,.modes-grid,.platform-grid{grid-template-columns:1fr}
   .terminal-panel{position:static}
   .arch-flow{flex-wrap:wrap}
@@ -726,11 +741,18 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 }
 
 /* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
-@media(max-width:1024px){
+/* Tablet (761-1024px): keep ERSTER side-by-side (text | phone) like hero */
+@media(min-width:761px) and (max-width:1024px){
   .erster-section{padding:80px 0 60px}
+  .erster-inner{grid-template-columns:1.05fr 0.95fr;gap:32px;align-items:center;justify-items:stretch}
+  .erster-copy{padding-right:0;max-width:none;text-align:left;width:auto}
+  .erster-browser{width:228px;height:456px;margin:0 auto}
+}
+/* Mobile (≤760px): stack ERSTER vertically (text on top, phone below centered) */
+@media(max-width:760px){
+  .erster-section{padding:60px 0 40px}
   .erster-inner{grid-template-columns:1fr;gap:36px;justify-items:center}
   .erster-copy{padding-right:0;max-width:680px;text-align:left;width:100%}
-  /* keep phone shape — fixed 228×456 on tablet/mobile too (matches hero phone size) */
   .erster-browser{width:228px;height:456px;margin:0 auto}
 }
 
