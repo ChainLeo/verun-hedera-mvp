@@ -631,7 +631,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-browser .er-card-h{font-size:10.5px !important;font-weight:800 !important;margin-bottom:8px !important;color:var(--text)}
 .erster-browser .er-asset{background:transparent !important;padding:0 !important}
 .erster-browser .er-tag-mini{font-size:7.5px !important;padding:2px 6px !important;font-weight:800 !important;margin-bottom:6px !important}
-.erster-browser .er-asset-name{font-size:10.5px !important;font-weight:600 !important;margin-bottom:6px !important;color:var(--text2)}
+.erster-browser .er-asset-name{font-size:13px !important;font-weight:700 !important;margin-bottom:7px !important;color:var(--text) !important}
 .erster-browser .er-asset-amount{font-size:18px !important;font-weight:800 !important;margin-bottom:8px !important;letter-spacing:-0.025em !important}
 .erster-browser .er-bar{height:3px !important;border-radius:2px !important}
 /* Investors table card */
@@ -1130,6 +1130,49 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 </section>
 
 
+
+<!-- INLINE WAITLIST FORM (mobile only — shows before footer) -->
+<section class="inline-waitlist" id="inline-waitlist">
+  <div class="container">
+    <h2 class="iw-h2">Join the Verun <span class="muted">waitlist.</span></h2>
+    <p class="iw-sub">The trust layer for AI agents on Hedera. Be the first to know when we open up.</p>
+    <div class="iw-card">
+      <h3>We'll send project updates.</h3>
+      <form id="iwForm" action="https://formsubmit.co/fahad@bcpp.io" method="POST">
+        <input type="hidden" name="_subject" value="New Verun Waitlist Signup">
+        <input type="hidden" name="_cc" value="rafael@bcpp.io,nils@bcpp.io">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://hedera.erster.fund/waitlist.html?ok=1">
+        <input type="hidden" name="source" value="hedera.erster.fund/inline-mobile">
+        <input type="checkbox" name="botcheck" class="iw-honeypot" tabindex="-1" autocomplete="off">
+        <input id="iw-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <input id="iw-email" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
+        <button type="submit" class="iw-btn">Join waitlist →</button>
+      </form>
+    </div>
+  </div>
+</section>
+<style>
+  /* Hidden by default (desktop/tablet) — only visible on mobile */
+  .inline-waitlist{display:none}
+  @media(max-width:760px){
+    .inline-waitlist{display:block;background:var(--bg2);padding:60px 0 48px;border-top:1px solid var(--border)}
+    .inline-waitlist .iw-h2{font-size:34px;font-weight:800;line-height:1.06;letter-spacing:-0.025em;color:var(--text);margin:0 0 14px}
+    .inline-waitlist .iw-h2 .muted{color:var(--text3);font-weight:700}
+    .inline-waitlist .iw-sub{font-size:15px;color:var(--text2);line-height:1.5;margin:0 0 26px;max-width:520px}
+    .inline-waitlist .iw-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow-sm)}
+    .inline-waitlist .iw-card h3{margin:0 0 18px;font-size:18px;font-weight:700;color:var(--text);letter-spacing:-0.01em}
+    .inline-waitlist #iwForm input[type=text],
+    .inline-waitlist #iwForm input[type=email]{width:100%;font-family:inherit;font-size:15px;padding:13px 16px;background:#fff;border:1px solid var(--border-strong);border-radius:10px;color:var(--text);margin-bottom:12px;transition:border-color .15s,box-shadow .15s}
+    .inline-waitlist #iwForm input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(22,163,74,0.15)}
+    .inline-waitlist #iwForm input::placeholder{color:#9ca3af}
+    .inline-waitlist .iw-honeypot{display:none !important}
+    .inline-waitlist .iw-btn{width:100%;padding:14px 20px;background:var(--teal);color:#fff;border:0;border-radius:10px;font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;margin-top:6px;box-shadow:0 6px 16px rgba(22,163,74,0.25);transition:background .15s,transform .1s}
+    .inline-waitlist .iw-btn:hover{background:#15803d}
+    .inline-waitlist .iw-btn:active{transform:translateY(1px)}
+  }
+</style>
 
 <!-- FOOTER -->
 <footer>
