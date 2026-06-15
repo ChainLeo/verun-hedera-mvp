@@ -97,7 +97,7 @@ a{color:var(--teal);text-decoration:none}
 .pill-amber{background:var(--amber-dim);color:var(--amber);border-color:rgba(217,119,6,0.25)}
 
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
-.hero-phone-wrap{display:flex;justify-content:center;align-items:center;padding:0;position:relative;margin-bottom:0;z-index:5;grid-area:phone}
+.hero-phone-wrap{display:flex;justify-content:flex-start;align-items:center;padding:0;position:relative;margin-bottom:0;z-index:5;grid-area:phone}
 .hero-phone{
   width:228px;height:456px;
   background:#0a2540;
@@ -600,6 +600,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 /* iPhone portrait phone frame — 228×456 (20% smaller than 285×570) */
 .erster-browser{
   grid-area:phone;
+  justify-self:end;
   background:#0a2540;
   border-radius:43px;
   padding:6px;
