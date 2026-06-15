@@ -993,16 +993,13 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
             <span style="font-size:11px;color:#94a3b8;margin-left:8px">agent · x402 live terminal</span>
             <span id="x402-status" style="margin-left:auto;font-size:10px;color:#7c3aed;font-weight:700;letter-spacing:0.08em">READY</span>
           </div>
-          <pre id="x402-terminal" style="margin:0;padding:18px 20px;font-size:12px;line-height:1.7;color:#e2e8f0;white-space:pre-wrap;word-break:break-word;min-height:340px;max-height:480px;overflow-y:auto"><span style="color:#94a3b8"># Click "Step 1" below to fire a real HTTP request.
-# Then "Step 2" to run the paid Verun evaluation.
+          <pre id="x402-terminal" style="margin:0;padding:18px 20px;font-size:12px;line-height:1.7;color:#e2e8f0;white-space:pre-wrap;word-break:break-word;min-height:340px;max-height:480px;overflow-y:auto"><span style="color:#94a3b8"># Click "Run x402 Evaluation" to fire a live request.
+# Server issues HTTP 402 → agent pays → consensus runs → anchor on HCS.
 # All transactions are live on Hedera testnet.</span></pre>
         </div>
         <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-          <button id="btn-x402-step1" onclick="runX402Step1()" class="btn btn-teal" style="padding:11px 20px;font-size:14px;background:#7c3aed;box-shadow:0 4px 14px rgba(124,58,237,0.3)">
-            Step 1 · Trigger HTTP 402 →
-          </button>
-          <button id="btn-x402-step2" onclick="runX402Step2()" class="btn btn-outline" style="padding:11px 20px;font-size:14px" disabled>
-            Step 2 · Run Paid Evaluation →
+          <button id="btn-x402-run" onclick="runX402Full()" class="btn btn-teal" style="padding:11px 20px;font-size:14px;background:#7c3aed;box-shadow:0 4px 14px rgba(124,58,237,0.3)">
+            Run x402 Evaluation →
           </button>
           <button onclick="resetX402()" style="background:transparent;border:0;color:var(--text2);font-size:12px;text-decoration:underline;cursor:pointer">reset</button>
         </div>
@@ -1189,15 +1186,17 @@ function _x402SetStatus(text, color = '#7c3aed') {
 }
 function resetX402() {
   const term = document.getElementById('x402-terminal');
-  if (term) term.innerHTML = '<span style="color:#94a3b8"># Click "Step 1" below to fire a real HTTP request.\n# Then "Step 2" to run the paid Verun evaluation.\n# All transactions are live on Hedera testnet.</span>';
+  if (term) term.innerHTML = '<span style="color:#94a3b8"># Click "Run x402 Evaluation" to fire a live request.\n# Server issues HTTP 402 → agent pays → consensus runs → anchor on HCS.\n# All transactions are live on Hedera testnet.</span>';
   _x402SetStatus('READY', '#7c3aed');
-  document.getElementById('btn-x402-step1').disabled = false;
-  document.getElementById('btn-x402-step2').disabled = true;
+  const btn = document.getElementById('btn-x402-run');
+  if (btn) btn.disabled = false;
 }
-async function runX402Step1() {
-  document.getElementById('btn-x402-step1').disabled = true;
+async function runX402Full() {
+  const btn = document.getElementById('btn-x402-run');
+  btn.disabled = true;
   const term = document.getElementById('x402-terminal');
   if (term) term.innerHTML = '';
+  // ── Phase 1: trigger HTTP 402 ────────────────────────────────────
   _x402SetStatus('REQUESTING…', '#fbbf24');
   _x402WriteLine('$ curl -i https://hedera.erster.fund/api/x402/evaluate', '#a78bfa');
   _x402WriteLine('');
@@ -1208,33 +1207,24 @@ async function runX402Step1() {
     const facHdr = res.headers.get('x-402-powered');
     if (facHdr) _x402WriteLine('X-402-Powered: ' + facHdr, '#94a3b8');
     _x402WriteLine('');
-    _x402WriteLine('// paymentRequirements (3 schemes accepted)', '#94a3b8');
+    _x402WriteLine('// paymentRequirements (schemes accepted)', '#94a3b8');
     body.accepts.forEach((a, i) => {
       const asset = a.extra?.name || a.asset;
       const amt = (Number(a.maxAmountRequired) / 1e6).toFixed(2);
       _x402WriteRaw(`<span style="color:#fbbf24">  scheme ${i + 1}:</span> <span style="color:#34d399">${a.scheme}</span> · <span style="color:#a78bfa">${a.network.split(':')[0]}</span> · <span style="color:#e2e8f0;font-weight:700">${amt} ${asset}</span> <span style="color:#94a3b8">→ ${a.extra?.facilitator || a.extra?.provider || '—'}</span>`);
     });
     _x402WriteLine('');
-    _x402WriteLine('# Next: agent signs PaymentTxn + retries with X-PAYMENT header', '#94a3b8');
     _x402SetStatus('402 RECEIVED', '#fbbf24');
-    document.getElementById('btn-x402-step2').disabled = false;
-  } catch (e) {
-    _x402WriteLine('ERROR: ' + e.message, '#f87171');
-    _x402SetStatus('ERROR', '#f87171');
-    document.getElementById('btn-x402-step1').disabled = false;
-  }
-}
-async function runX402Step2() {
-  document.getElementById('btn-x402-step2').disabled = true;
-  _x402WriteLine('');
-  _x402WriteLine('$ curl -X POST /api/evaluate  # paid call → run consensus + anchor', '#a78bfa');
-  _x402WriteLine('# (in production: -H "X-PAYMENT: $SIGNED_TXN_BASE64")', '#94a3b8');
-  _x402WriteLine('');
-  _x402SetStatus('EVALUATING…', '#fbbf24');
-  try {
+    // ── Phase 2: paid evaluation (auto-chained) ───────────────────
+    await new Promise(r => setTimeout(r, 600));
+    _x402WriteLine('# Agent signs PaymentTxn + retries with X-PAYMENT header →', '#94a3b8');
+    _x402WriteLine('$ curl -X POST /api/evaluate  # paid call → run consensus + anchor', '#a78bfa');
+    _x402WriteLine('# (in production: -H "X-PAYMENT: $SIGNED_TXN_BASE64")', '#94a3b8');
+    _x402WriteLine('');
+    _x402SetStatus('EVALUATING…', '#fbbf24');
     const payload = { agentId: 'agt_demo', score: 820, operation: 'transfer', validatorIds: ['val-erster-01', 'val-tokenforge-02', 'val-test-03'] };
-    const res = await fetch('/api/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-    const data = await res.json();
+    const res2 = await fetch('/api/evaluate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+    const data = await res2.json();
     const verdict = data.verdict || {};
     const anchor = data.anchor || {};
     _x402WriteLine('HTTP/1.1 200 OK', '#34d399');
@@ -1259,6 +1249,7 @@ async function runX402Step2() {
   } catch (e) {
     _x402WriteLine('ERROR: ' + e.message, '#f87171');
     _x402SetStatus('ERROR', '#f87171');
+    btn.disabled = false;
   }
 }
 
