@@ -179,7 +179,8 @@ a{color:var(--teal);text-decoration:none}
   .hero-btns{justify-content:flex-start;margin:0 !important;gap:8px}
   .btn{font-size:12px;padding:9px 16px;border-radius:8px;font-weight:600}
   /* Phone — KEEP same as desktop (285×570) on mobile, same as Section 2 ERSTER phone */
-  .hero-phone-wrap{padding:0;margin:0 !important;align-items:flex-start;z-index:1;display:flex;justify-content:center}
+  .hero-phone-wrap{padding:0;margin:0 auto !important;align-items:center;z-index:1;display:flex;justify-content:center;width:100%}
+  .hero-phone{margin:0 auto}
   /* hero-phone dimensions inherit from desktop (285×570) — no shrink */
   /* hp-content/typography also inherit from desktop — no shrink */
 }
@@ -541,9 +542,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .erster-section{padding:32px 0 !important}
   .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important;margin-bottom:18px !important}
   .erster-inner{gap:24px !important}
-  .erster-browser{margin:0 !important;transform:none !important}
+  .erster-browser{margin:0 auto !important;transform:none !important;width:285px;height:570px}
   .er-dash{min-height:auto !important}
-  .erster-browser{transform:scale(0.85);transform-origin:center top;margin-top:-20px}
   .er-dash{min-height:280px !important}
   .arch-node{flex:1 1 50%;min-width:0}
   .terminal-panel{font-size:11px}
@@ -721,8 +721,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 /* TABLET — stack copy + browser, dashboard fills container width (same edges as rest of website) */
 @media(max-width:1024px){
   .erster-section{padding:80px 0 60px}
-  .erster-inner{grid-template-columns:1fr;gap:36px}
-  .erster-copy{padding-right:0;max-width:680px}
+  .erster-inner{grid-template-columns:1fr;gap:36px;justify-items:center}
+  .erster-copy{padding-right:0;max-width:680px;text-align:left;width:100%}
   /* keep phone shape — fixed 285×570 on tablet/mobile too (exact Section 1 hero match) */
   .erster-browser{width:285px;height:570px;margin:0 auto}
 }
@@ -904,13 +904,14 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 <style>
 @media(max-width:1024px){
   .market-stats .market-grid{grid-template-columns:repeat(2,1fr) !important;gap:32px 24px !important}
-  .market-stats .market-grid > div > div:first-child{font-size:42px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:38px !important}
 }
 @media(max-width:560px){
-  .market-stats{padding:48px 0 !important}
-  .market-stats .market-grid{grid-template-columns:1fr !important;gap:28px !important}
-  .market-stats .market-grid > div > div:first-child{font-size:40px !important;margin-bottom:10px !important}
-  .market-stats .market-grid > div > div:last-child{font-size:13px !important}
+  .market-stats{padding:40px 0 !important}
+  .market-stats .market-grid{grid-template-columns:1fr !important;gap:22px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:30px !important;margin-bottom:6px !important}
+  .market-stats .market-grid > div > div:last-child{font-size:12px !important;line-height:1.45 !important}
+  .market-stats div[style*="font-family:var(--mono)"]{font-size:10px !important;margin-top:20px !important}
 }
 </style>
 
