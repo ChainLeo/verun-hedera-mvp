@@ -48,8 +48,8 @@ const HEDERA_X402_FACILITATOR_DEFAULT = 'https://x402.hedera.com';
 
 // ── Resolved config (env-overridable) ────────────────────────
 const FACILITATOR_URL = process.env.X402_FACILITATOR_URL || HEDERA_X402_FACILITATOR_DEFAULT;
-const PRICE_USDC      = Number(process.env.X402_PRICE_USDC || '0.01'); // $0.01
-const PRICE_HBAR      = Number(process.env.X402_PRICE_HBAR || '0.01'); // 0.01 HBAR
+const PRICE_USDC      = Number(process.env.X402_PRICE_USDC || '0.05'); // $0.05
+const PRICE_HBAR      = Number(process.env.X402_PRICE_HBAR || '0.05'); // 0.05 HBAR
 const NETWORK_KIND    = (process.env.X402_NETWORK || 'testnet').toLowerCase();
 const NETWORK_CAIP2   = NETWORK_KIND === 'mainnet' ? HEDERA_MAINNET_CAIP2 : HEDERA_TESTNET_CAIP2;
 const USDC_TOKEN_ID   = NETWORK_KIND === 'mainnet' ? USDC_MAINNET_TOKEN_ID : USDC_TESTNET_TOKEN_ID;
@@ -81,8 +81,8 @@ function buildPaymentRequirements({
   if (!payTo) throw new Error('HEDERA_OPERATOR_ID / HEDERA_PAY_TO not configured');
 
   // Convert decimal amounts → smallest unit per asset.
-  // USDC: 6 decimals → 0.01 USDC = 10,000 micro-USDC
-  // HBAR: 8 decimals → 0.01 HBAR = 1,000,000 tinybars
+  // USDC: 6 decimals → 0.05 USDC = 50,000 micro-USDC
+  // HBAR: 8 decimals → 0.05 HBAR = 5,000,000 tinybars
   const microUSDC = Math.round(amountUSDC * Math.pow(10, USDC_DECIMALS)).toString();
   const tinybars  = Math.round(amountHBAR * Math.pow(10, HBAR_DECIMALS)).toString();
 
