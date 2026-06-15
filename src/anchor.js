@@ -33,7 +33,18 @@ const {
 } = require('./hedera');
 
 const ANCHOR_PREFIX = 'verun-eval';
-const DEFAULT_ANCHOR_AMOUNT = process.env.X402_PRICE_HBAR || '0.005';
+// Default anchor amount fetched lazily from market oracle if not env-overridden
+const { convertUSDtoNative } = require('./priceOracle');
+const PRICE_USD = Number(process.env.X402_PRICE_USD || '0.005');
+const PRICE_HBAR_FIXED = process.env.X402_PRICE_HBAR ? Number(process.env.X402_PRICE_HBAR) : null;
+
+async function resolveAnchorAmount(opts) {
+  if (opts.amount != null) return String(opts.amount);
+  if (PRICE_HBAR_FIXED != null && Number.isFinite(PRICE_HBAR_FIXED)) return String(PRICE_HBAR_FIXED);
+  const hbar = await convertUSDtoNative(PRICE_USD, 'HBAR');
+  // Round to 8 decimals (HBAR precision) to avoid SDK rejection
+  return hbar.toFixed(8).replace(/\.?0+$/, '');
+}
 
 async function anchorEvaluation(payload, opts = {}) {
   const { accountId } = getOperator();
@@ -51,8 +62,8 @@ async function anchorEvaluation(payload, opts = {}) {
   const messageText = `${ANCHOR_PREFIX}:${consensus}:${agentId}:${ts}:${hashHex.slice(0, 16)}`;
 
   // ── Step 1: HBAR self-transfer (visible amount on HashScan) ───────────
-  const amount = String(opts.amount || DEFAULT_ANCHOR_AMOUNT);
-  const hbarAmount = Hbar.fromString(`${amount} ℏ`); // parse "0.005" as 0.005 HBAR
+  const amount = await resolveAnchorAmount(opts);
+  const hbarAmount = Hbar.fromString(`${amount} ℏ`); // parse human HBAR string
 
   const client = getClient();
   let transferResult;

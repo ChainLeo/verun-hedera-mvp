@@ -47,9 +47,15 @@ const HBAR_DECIMALS = 8;
 const HEDERA_X402_FACILITATOR_DEFAULT = 'https://x402.hedera.com';
 
 // ── Resolved config (env-overridable) ────────────────────────
+const { convertUSDtoNative } = require('./priceOracle');
+
 const FACILITATOR_URL = process.env.X402_FACILITATOR_URL || HEDERA_X402_FACILITATOR_DEFAULT;
-const PRICE_USDC      = Number(process.env.X402_PRICE_USDC || '0.005'); // $0.005
-const PRICE_HBAR      = Number(process.env.X402_PRICE_HBAR || '0.005'); // 0.005 HBAR
+// USD-target evaluation price. HBAR amount is derived from this at the current
+// market rate (oracle). USDC amount is 1:1 with USD. Override via env if needed.
+const PRICE_USD       = Number(process.env.X402_PRICE_USD || '0.005');   // $0.005 target
+const PRICE_USDC      = Number(process.env.X402_PRICE_USDC || PRICE_USD); // 1:1 with USD
+// PRICE_HBAR direct override is still supported (forces a fixed HBAR amount)
+const PRICE_HBAR_FIXED = process.env.X402_PRICE_HBAR ? Number(process.env.X402_PRICE_HBAR) : null;
 const NETWORK_KIND    = (process.env.X402_NETWORK || 'testnet').toLowerCase();
 const NETWORK_CAIP2   = NETWORK_KIND === 'mainnet' ? HEDERA_MAINNET_CAIP2 : HEDERA_TESTNET_CAIP2;
 const USDC_TOKEN_ID   = NETWORK_KIND === 'mainnet' ? USDC_MAINNET_TOKEN_ID : USDC_TESTNET_TOKEN_ID;
@@ -70,19 +76,30 @@ function getPayToAddress() {
 /**
  * Build x402 paymentRequirements payload (returned with HTTP 402).
  * Spec: https://docs.x402.org
+ *
+ * Now async because HBAR amount is derived from the current market price
+ * (USD-pegged target). Pass `amountHBAR` to bypass the oracle.
  */
-function buildPaymentRequirements({
+async function buildPaymentRequirements({
   resource,
   description,
   amountUSDC = PRICE_USDC,
-  amountHBAR = PRICE_HBAR,
+  amountHBAR, // if omitted → derived from market rate
 } = {}) {
+  // Resolve HBAR amount: explicit override > env fixed > market-rate conversion
+  if (amountHBAR == null) {
+    if (PRICE_HBAR_FIXED != null && Number.isFinite(PRICE_HBAR_FIXED)) {
+      amountHBAR = PRICE_HBAR_FIXED;
+    } else {
+      amountHBAR = await convertUSDtoNative(PRICE_USD, 'HBAR');
+    }
+  }
   const payTo = getPayToAddress();
   if (!payTo) throw new Error('HEDERA_OPERATOR_ID / HEDERA_PAY_TO not configured');
 
   // Convert decimal amounts → smallest unit per asset.
-  // USDC: 6 decimals → 0.005 USDC = 5,000 micro-USDC
-  // HBAR: 8 decimals → 0.005 HBAR = 500,000 tinybars
+  // USDC: 6 decimals
+  // HBAR: 8 decimals
   const microUSDC = Math.round(amountUSDC * Math.pow(10, USDC_DECIMALS)).toString();
   const tinybars  = Math.round(amountHBAR * Math.pow(10, HBAR_DECIMALS)).toString();
 
@@ -211,8 +228,9 @@ module.exports = {
   HBAR_DECIMALS,
   HEDERA_X402_FACILITATOR_DEFAULT,
   FACILITATOR_URL,
+  PRICE_USD,
   PRICE_USDC,
-  PRICE_HBAR,
+  PRICE_HBAR_FIXED,
   NETWORK_CAIP2,
   USDC_TOKEN_ID,
   NETWORK_KIND,
