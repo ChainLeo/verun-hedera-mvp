@@ -119,11 +119,11 @@ a{color:var(--teal);text-decoration:none}
 .hero-phone-island{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:14px;z-index:5}
 .hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:46px;overflow:hidden;isolation:isolate}
 /* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
-.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 22px;display:flex;flex-direction:column;gap:14px;font-family:var(--sans);overflow:hidden}
+.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 20px;display:flex;flex-direction:column;gap:13px;font-family:var(--sans);overflow:hidden}
 .hp-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;flex-wrap:nowrap}
-.hp-back{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500;white-space:nowrap}
-.hp-counter{font-family:var(--mono);font-size:12px;color:#94a3b8;font-weight:500;white-space:nowrap;text-align:center;flex:1}
-.hp-next{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--teal);color:#fff;padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.hp-back{font-family:var(--mono);font-size:13px;color:#94a3b8;font-weight:600;white-space:nowrap}
+.hp-counter{font-family:var(--mono);font-size:13px;color:#94a3b8;font-weight:600;white-space:nowrap;text-align:center;flex:1}
+.hp-next{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--teal);color:#fff;padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
 @media(max-width:380px){
   .hp-counter{display:none}
 }
@@ -133,15 +133,15 @@ a{color:var(--teal);text-decoration:none}
 .hp-step-dot.inactive{background:#fff;border:1px solid #e2e8f0;color:#94a3b8}
 .hp-step-line{flex:1;height:1px;background:#e2e8f0}
 .hp-step-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:0.06em;margin-top:4px}
-.hp-title{font-size:22px;font-weight:800;color:#0f172a;letter-spacing:-0.02em;line-height:1.2;margin-top:6px}
-.hp-card{background:#f1f5f9;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:5px}
-.hp-card-label{font-family:var(--mono);font-size:11px;font-weight:700;color:#94a3b8;letter-spacing:0.1em}
-.hp-card-value{font-family:var(--mono);font-size:15px;color:#0f172a;font-weight:600}
-.hp-checks{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.hp-status{font-family:var(--mono);font-size:13px;color:#0f172a;font-weight:700;margin-bottom:2px}
-.hp-check{display:flex;align-items:flex-start;gap:10px;font-family:var(--mono);font-size:13px;color:#475569;line-height:1.4;font-weight:500}
-.hp-tick{width:14px;height:14px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;flex-shrink:0;margin-top:1px}
-.hp-pending{width:14px;height:14px;border-radius:50%;background:transparent;border:1.5px solid #cbd5e1;flex-shrink:0;margin-top:1px}
+.hp-title{font-size:25px;font-weight:800;color:#0f172a;letter-spacing:-0.025em;line-height:1.15;margin-top:6px}
+.hp-card{background:#f1f5f9;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.hp-card-label{font-family:var(--mono);font-size:12px;font-weight:800;color:#94a3b8;letter-spacing:0.12em}
+.hp-card-value{font-family:var(--mono);font-size:17px;color:#0f172a;font-weight:700}
+.hp-checks{display:flex;flex-direction:column;gap:9px;margin-top:10px}
+.hp-status{font-family:var(--mono);font-size:15px;color:#0f172a;font-weight:800;margin-bottom:2px}
+.hp-check{display:flex;align-items:flex-start;gap:10px;font-family:var(--mono);font-size:14px;color:#475569;line-height:1.4;font-weight:600}
+.hp-tick{width:16px;height:16px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px}
+.hp-pending{width:16px;height:16px;border-radius:50%;background:transparent;border:1.5px solid #cbd5e1;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
 .market-section{background:#fff;padding-top:120px;padding-bottom:60px}
@@ -178,26 +178,10 @@ a{color:var(--teal);text-decoration:none}
   .hero-flag{width:62px}
   .hero-btns{justify-content:flex-start;margin:0 !important;gap:8px}
   .btn{font-size:12px;padding:9px 16px;border-radius:8px;font-weight:600}
-  /* Phone — small frame, tight inner content */
+  /* Phone — KEEP same as desktop (285×570) on mobile, same as Section 2 ERSTER phone */
   .hero-phone-wrap{padding:0;margin:0 !important;align-items:flex-start;z-index:1;display:flex;justify-content:center}
-  .hero-phone{width:225px;height:430px;border-radius:38px;padding:7px;box-shadow:0 0 0 1.5px rgba(74,81,96,0.35),0 16px 32px rgba(15,23,42,0.12)}
-  .hero-phone::before{top:98px;height:34px;width:4px;right:-2px}
-  .hero-phone::after{top:72px;height:22px;width:4px;left:-2px;box-shadow:0 30px 0 #4a5160,0 60px 0 #4a5160}
-  .hero-phone-island{width:62px;height:17px;top:9px;border-radius:10px}
-  .hero-phone-screen{border-radius:30px}
-  .hp-content{top:26px;padding:0 13px;gap:8px}
-  .hp-nav{margin-top:0}
-  .hp-back, .hp-counter, .hp-next{font-size:9px}
-  .hp-next{padding:4px 9px;border-radius:16px}
-  .hp-title{font-size:15px;margin-top:2px}
-  .hp-card{padding:7px 10px;gap:2px;border-radius:8px}
-  .hp-card-label{font-size:8px;letter-spacing:0.07em}
-  .hp-card-value{font-size:10px}
-  .hp-checks{gap:4px;margin-top:3px}
-  .hp-status{font-size:10px;margin-bottom:1px}
-  .hp-check{font-size:9px;gap:5px}
-  .hp-tick{width:12px;height:12px;font-size:8px}
-  .hp-pending{width:12px;height:12px;border-width:1.2px}
+  /* hero-phone dimensions inherit from desktop (285×570) — no shrink */
+  /* hp-content/typography also inherit from desktop — no shrink */
 }
 
 /* 3 MODES — reference exact */
