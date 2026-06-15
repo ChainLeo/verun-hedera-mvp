@@ -1267,7 +1267,11 @@ async function runX402Full() {
     _x402WriteLine('// paymentRequirements (schemes accepted)', '#94a3b8');
     body.accepts.forEach((a, i) => {
       const asset = a.extra?.name || a.asset;
-      const amt = (Number(a.maxAmountRequired) / 1e6).toFixed(2);
+      // Use the asset's actual decimal precision from extra.decimals (USDC=6, HBAR=8)
+      const decimals = a.extra?.decimals ?? 6;
+      const value = Number(a.maxAmountRequired) / Math.pow(10, decimals);
+      // Strip trailing zeros for clean display (0.005 not 0.005000)
+      const amt = parseFloat(value.toFixed(decimals)).toString();
       _x402WriteRaw(`<span style="color:#fbbf24">  scheme ${i + 1}:</span> <span style="color:#34d399">${a.scheme}</span> · <span style="color:#a78bfa">${a.network.split(':')[0]}</span> · <span style="color:#e2e8f0;font-weight:700">${amt} ${asset}</span> <span style="color:#94a3b8">→ ${a.extra?.facilitator || a.extra?.provider || '—'}</span>`);
     });
     _x402WriteLine('');
