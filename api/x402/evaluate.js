@@ -2,7 +2,7 @@
  * POST /api/x402/evaluate — x402-paid Verun Trust Evaluation on Hedera
  * ──────────────────────────────────────────────────────────────────────
  * Hedera-native agentic-commerce endpoint:
- *   pay 0.05 USDC (or 0.05 HBAR) → get consensus trust verdict → anchored on HCS.
+ *   pay 0.005 USDC (or 0.005 HBAR) → get consensus trust verdict → anchored on HCS.
  *
  * Without X-PAYMENT header → returns HTTP 402 + paymentRequirements (USDC + HBAR)
  * With    X-PAYMENT header → verifies + settles via Hedera Official Facilitator
