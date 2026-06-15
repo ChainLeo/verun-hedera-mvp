@@ -61,16 +61,20 @@ async function anchorEvaluation(payload, opts = {}) {
   const memoShort = `${ANCHOR_PREFIX}:${consensus}:${agentId.slice(0, 24)}:${hashHex.slice(0, 16)}`;
   const messageText = `${ANCHOR_PREFIX}:${consensus}:${agentId}:${ts}:${hashHex.slice(0, 16)}`;
 
-  // ── Step 1: HBAR self-transfer (visible amount on HashScan) ───────────
+  // ── Step 1: HBAR transfer (visible amount on HashScan) ─────────────────
+  // If HEDERA_ANCHOR_RECIPIENT is set, transfer goes there (visible).
+  // Otherwise it's a self-transfer (sender = receiver = invisible on HashScan UI
+  // since Hedera collapses net-zero transfers in the display).
   const amount = await resolveAnchorAmount(opts);
   const hbarAmount = Hbar.fromString(`${amount} ℏ`); // parse human HBAR string
+  const recipient = (process.env.HEDERA_ANCHOR_RECIPIENT || '').trim() || accountId;
 
   const client = getClient();
   let transferResult;
   try {
     const tx = await new TransferTransaction()
       .addHbarTransfer(accountId, hbarAmount.negated())
-      .addHbarTransfer(accountId, hbarAmount)
+      .addHbarTransfer(recipient, hbarAmount)
       .setTransactionMemo(memoShort.slice(0, 100)) // Hedera memo max 100 bytes
       .execute(client);
     const receipt = await tx.getReceipt(client);
@@ -99,6 +103,7 @@ async function anchorEvaluation(payload, opts = {}) {
     topic_id: topicId,
     network: `hedera-${HEDERA_NETWORK}`,
     payer: accountId,
+    recipient,
     amount,
     asset: 'HBAR',
     memo_hash: hashHex,

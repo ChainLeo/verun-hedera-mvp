@@ -1294,7 +1294,6 @@ async function runX402Full() {
     _x402WriteRaw(`  consensus  : <span style="color:#34d399;font-weight:700">${verdict.consensus || 'n/a'}</span>`);
     _x402WriteRaw(`  permitted  : <span style="color:#34d399;font-weight:700">${String(verdict.permitted)}</span>`);
     _x402WriteRaw(`  validators : <span style="color:#a78bfa">${(verdict.validators_used || []).map(v => v.name).join(' · ')}</span>`);
-    _x402WriteRaw(`  kickback   : <span style="color:#fbbf24">${verdict.kickback_rate}%</span>`);
     _x402WriteLine('');
     _x402WriteRaw(`<span style="color:#94a3b8">// anchor (Hedera Testnet)</span>`);
     if (anchor.txid) {
