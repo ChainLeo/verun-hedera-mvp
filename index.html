@@ -908,10 +908,14 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 }
 @media(max-width:560px){
   .market-stats{padding:40px 0 !important}
-  .market-stats .market-grid{grid-template-columns:1fr !important;gap:22px !important}
-  .market-stats .market-grid > div > div:first-child{font-size:30px !important;margin-bottom:6px !important}
-  .market-stats .market-grid > div > div:last-child{font-size:12px !important;line-height:1.45 !important}
-  .market-stats div[style*="font-family:var(--mono)"]{font-size:10px !important;margin-top:20px !important}
+  .market-stats .market-grid{grid-template-columns:repeat(2,1fr) !important;gap:24px 16px !important}
+  .market-stats .market-grid > div > div:first-child{font-size:28px !important;margin-bottom:6px !important;letter-spacing:-0.025em !important}
+  .market-stats .market-grid > div > div:last-child{font-size:11px !important;line-height:1.4 !important}
+  .market-stats div[style*="font-family:var(--mono)"]{font-size:10px !important;margin-top:20px !important;line-height:1.55 !important}
+}
+@media(max-width:380px){
+  .market-stats .market-grid > div > div:first-child{font-size:26px !important}
+  .market-stats .market-grid > div > div:last-child{font-size:10.5px !important}
 }
 </style>
 
