@@ -586,11 +586,12 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 }
 
 /* ============== ERSTER OPENER SECTION (above hero) ============== */
-.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:100px 0;overflow:hidden}
+.erster-section{background:linear-gradient(#22c55e 0%,#16a34a 100%);padding:80px 0 60px;overflow:hidden}
 .erster-section .section-h2{color:#fff}
 .erster-section .section-h2 .muted{color:rgba(255,255,255,0.55);font-weight:600}
-.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
-.erster-copy{padding-right:8px}
+/* Mirror Hero's grid: same ratios, same gap=0 — unified feel */
+.erster-inner{display:grid;grid-template-columns:1.05fr 0.95fr;grid-template-areas:"copy phone";gap:0;align-items:center}
+.erster-copy{grid-area:copy;padding-right:0}
 .erster-section .section-label{margin-bottom:18px}
 .erster-section .section-h2{margin-bottom:24px;font-size:clamp(40px,4.5vw,60px);line-height:1.04;letter-spacing:-0.03em}
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
@@ -598,6 +599,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 
 /* iPhone portrait phone frame — 228×456 (20% smaller than 285×570) */
 .erster-browser{
+  grid-area:phone;
   background:#0a2540;
   border-radius:43px;
   padding:6px;
