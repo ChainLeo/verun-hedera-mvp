@@ -970,73 +970,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   </div>
 </section>
 
-<!-- ARCHITECTURE DIAGRAM -->
-<section class="section" id="architecture" style="background:var(--bg);padding:90px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="container">
-    <h2 class="section-h2" style="text-align:center;margin-bottom:14px;margin-top:12px">
-      One request. <span class="muted">Full agent settlement.</span>
-    </h2>
-    <!-- HORIZONTAL HIGH-LEVEL FLOW (docs-style) -->
-    <div style="max-width:1100px;margin:0 auto">
-      <style>
-        .flow-box{border:1px solid var(--border);border-radius:10px;padding:0;background:#fff;font-family:var(--mono);box-shadow:var(--shadow-sm);overflow:hidden}
-        .flow-row{display:flex;align-items:stretch;gap:0;flex-wrap:nowrap;padding:30px 24px;overflow-x:auto;min-height:128px}
-        .flow-step{text-align:center;flex:1;min-width:130px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-        .flow-tag{border-radius:8px;padding:11px 14px;font-weight:700;font-size:13px;line-height:1.25;width:100%;letter-spacing:-0.005em}
-        .flow-tag .sub{display:block;font-size:10px;opacity:0.7;font-weight:500;margin-top:3px;font-family:var(--mono);letter-spacing:0.02em}
-        .flow-label{font-size:10px;color:var(--text3);margin-top:8px;letter-spacing:0.06em;text-transform:uppercase;font-weight:600}
-        .flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 4px;color:var(--text3);font-size:22px;flex-shrink:0;font-family:var(--sans)}
-        /* Only 3 colors — same family as nav badges and section accents */
-        .flow-tag.green{background:var(--teal-soft);border:1px solid var(--teal-border);color:#065f46}
-        .flow-tag.purple{background:var(--purple-soft);border:1px solid var(--purple-border);color:var(--purple)}
-        .flow-tag.amber{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
-        .flow-tag.blue{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
-        .flow-tag.yellow{background:var(--bg2);border:1px solid var(--border);color:var(--text)}
-        @media (max-width:760px){
-          .flow-row{flex-wrap:wrap;justify-content:center}
-          .flow-step{min-width:42%}
-          .flow-arrow{display:none}
-        }
-      </style>
-
-      <div class="flow-box">
-        <div class="flow-row">
-          <div class="flow-step">
-            <div class="flow-tag green">Agent<span class="sub">Claude · MCP</span></div>
-            <div class="flow-label">Caller</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-tag purple">x402<span class="sub">HTTP 402 · paymentRequirements</span></div>
-            <div class="flow-label">Challenge</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-tag purple">Hedera Official Facilitator<span class="sub">verify · settle</span></div>
-            <div class="flow-label">Facilitator</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-tag amber">Verun<span class="sub">2-of-3 consensus</span></div>
-            <div class="flow-label">Trust Gate</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-tag blue">Hedera<span class="sub">HCS topic anchor</span></div>
-            <div class="flow-label">Audit Trail</div>
-          </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-step">
-            <div class="flow-tag yellow">HashScan<span class="sub">Public verification</span></div>
-            <div class="flow-label">Verification</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 fact cards (Validators / Settlement / Verification) removed -->
-    </div>
-  </div>
-</section>
+<!-- Architecture section removed -->
 
 <!-- x402 COMMERCE SECTION -->
 <section class="section" id="x402" style="background:linear-gradient(180deg,#faf5ff 0%,#f3f4ff 100%);padding:80px 0;border-top:1px solid var(--border)">
