@@ -115,9 +115,18 @@ a{color:var(--teal);text-decoration:none}
 .hero-phone::before{content:'';position:absolute;right:-2px;top:128px;width:4px;height:48px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
 .hero-phone::after{content:'';position:absolute;left:-2px;top:94px;width:4px;height:27px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 42px 0 #4a5160,0 80px 0 #4a5160}
 .hero-phone-island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:62px;height:18px;background:#000;border-radius:12px;z-index:5}
-.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:37px;overflow:hidden;isolation:isolate}
+.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:37px;overflow:hidden;isolation:isolate;display:flex;flex-direction:column}
+/* iPhone status bar (time + WiFi + battery) — sits at very top, island overlaps */
+.hp-status-bar{background:#fff;padding:11px 19px 6px;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;min-height:28px;font-family:-apple-system,'SF Pro Text',Inter,sans-serif;flex-shrink:0}
+.hp-time{font-size:12px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.hp-status-icons{display:flex;align-items:center;gap:4px;color:#000}
+.hp-status-icons svg{display:block}
+/* Safari browser bar (URL pill: verun.network) */
+.hp-safari-bar{background:#fff;padding:5px 10px 8px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,0.06);flex-shrink:0}
+.hp-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#f1f3f6;border-radius:8px;padding:5px 10px;font-size:10.5px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
+.hp-safari-url svg{width:9px;height:9px;color:#6b6b70;flex-shrink:0}
 /* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
-.hp-content{position:absolute;top:40px;left:0;right:0;bottom:0;padding:0 16px;display:flex;flex-direction:column;gap:10px;font-family:var(--sans);overflow:hidden}
+.hp-content{position:relative;flex:1;padding:10px 16px 0;display:flex;flex-direction:column;gap:10px;font-family:var(--sans);overflow:hidden}
 .hp-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:3px;flex-wrap:nowrap}
 .hp-back{font-family:var(--mono);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap}
 .hp-counter{font-family:var(--mono);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap;text-align:center;flex:1}
@@ -843,6 +852,23 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
         <div class="hero-phone">
           <div class="hero-phone-island"></div>
           <div class="hero-phone-screen">
+            <!-- iPhone status bar -->
+            <div class="hp-status-bar">
+              <div class="hp-time">9:41</div>
+              <div class="hp-status-icons">
+                <!-- wifi -->
+                <svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
+                <!-- battery -->
+                <svg width="22" height="10" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+              </div>
+            </div>
+            <!-- Safari URL bar -->
+            <div class="hp-safari-bar">
+              <div class="hp-safari-url">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
+                verun.network
+              </div>
+            </div>
             <div class="hp-content">
               <div class="hp-nav">
                 <span class="hp-back">← Back</span>
