@@ -73,6 +73,8 @@ a{color:var(--teal);text-decoration:none}
 .hero{padding:80px 0 0;position:relative;overflow:visible;background:var(--bg)}
 /* Desktop-only grey background for hero (mobile stays white) */
 @media(min-width:1024px){.hero{background:#f1f5f9}}
+/* Hide Demo section on mobile only (visible on tablet/desktop) */
+@media(max-width:760px){#demo{display:none !important}}
 /* Phone overflows into next white section for visual depth */
 .hero-phone-wrap{margin-bottom:0}
 .hero-inner{position:relative;display:grid;grid-template-columns:0.95fr 1.05fr;grid-template-areas:"phone copy";align-items:center;gap:0;padding-bottom:0}
