@@ -101,29 +101,27 @@ a{color:var(--teal);text-decoration:none}
 /* HERO PHONE — iPhone 15 Pro style mockup showing live demo content (overflows into white section) */
 .hero-phone-wrap{display:flex;justify-content:center;align-items:center;padding:0;position:relative;margin-bottom:0;z-index:5;grid-area:phone}
 .hero-phone{
-  width:285px;height:570px;
+  width:228px;height:456px;
   background:#0a2540;
-  border-radius:54px;padding:8px;
-  /* Reference exact shadow: subtle ring + dark shadow + green ambient glow */
-  /* Apple-style layered shadow on white bg — neutral dark, no green tint */
+  border-radius:43px;padding:6px;
   box-shadow:
-    0 0 0 1.5px rgba(74,81,96,0.35),
-    0 2px 6px rgba(15,23,42,0.05),
-    0 12px 24px rgba(15,23,42,0.07),
-    0 28px 56px rgba(15,23,42,0.10),
-    0 56px 100px rgba(15,23,42,0.10);
+    0 0 0 1.2px rgba(74,81,96,0.35),
+    0 2px 5px rgba(15,23,42,0.05),
+    0 10px 19px rgba(15,23,42,0.07),
+    0 22px 45px rgba(15,23,42,0.10),
+    0 45px 80px rgba(15,23,42,0.10);
   position:relative;
 }
-.hero-phone::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
-.hero-phone::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
-.hero-phone-island{position:absolute;left:50%;top:14px;transform:translateX(-50%);width:78px;height:22px;background:#000;border-radius:14px;z-index:5}
-.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:46px;overflow:hidden;isolation:isolate}
+.hero-phone::before{content:'';position:absolute;right:-2px;top:128px;width:4px;height:48px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.hero-phone::after{content:'';position:absolute;left:-2px;top:94px;width:4px;height:27px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 42px 0 #4a5160,0 80px 0 #4a5160}
+.hero-phone-island{position:absolute;left:50%;top:11px;transform:translateX(-50%);width:62px;height:18px;background:#000;border-radius:12px;z-index:5}
+.hero-phone-screen{position:relative;width:100%;height:100%;background:#fff;border-radius:37px;overflow:hidden;isolation:isolate}
 /* Hero phone content — native HTML/CSS (replaces hero-phone-screen.png) */
-.hp-content{position:absolute;top:50px;left:0;right:0;bottom:0;padding:0 20px;display:flex;flex-direction:column;gap:13px;font-family:var(--sans);overflow:hidden}
-.hp-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:4px;flex-wrap:nowrap}
-.hp-back{font-family:var(--mono);font-size:13px;color:#94a3b8;font-weight:600;white-space:nowrap}
-.hp-counter{font-family:var(--mono);font-size:13px;color:#94a3b8;font-weight:600;white-space:nowrap;text-align:center;flex:1}
-.hp-next{font-family:var(--mono);font-size:13px;font-weight:700;background:var(--teal);color:#fff;padding:7px 13px;border-radius:20px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.hp-content{position:absolute;top:40px;left:0;right:0;bottom:0;padding:0 16px;display:flex;flex-direction:column;gap:10px;font-family:var(--sans);overflow:hidden}
+.hp-nav{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:3px;flex-wrap:nowrap}
+.hp-back{font-family:var(--mono);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap}
+.hp-counter{font-family:var(--mono);font-size:10.5px;color:#94a3b8;font-weight:600;white-space:nowrap;text-align:center;flex:1}
+.hp-next{font-family:var(--mono);font-size:10.5px;font-weight:700;background:var(--teal);color:#fff;padding:5px 10px;border-radius:16px;display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
 @media(max-width:380px){
   .hp-counter{display:none}
 }
@@ -133,15 +131,15 @@ a{color:var(--teal);text-decoration:none}
 .hp-step-dot.inactive{background:#fff;border:1px solid #e2e8f0;color:#94a3b8}
 .hp-step-line{flex:1;height:1px;background:#e2e8f0}
 .hp-step-label{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--teal);letter-spacing:0.06em;margin-top:4px}
-.hp-title{font-size:25px;font-weight:800;color:#0f172a;letter-spacing:-0.025em;line-height:1.15;margin-top:6px}
-.hp-card{background:#f1f5f9;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
-.hp-card-label{font-family:var(--mono);font-size:12px;font-weight:800;color:#94a3b8;letter-spacing:0.12em}
-.hp-card-value{font-family:var(--mono);font-size:17px;color:#0f172a;font-weight:700}
-.hp-checks{display:flex;flex-direction:column;gap:9px;margin-top:10px}
-.hp-status{font-family:var(--mono);font-size:15px;color:#0f172a;font-weight:800;margin-bottom:2px}
-.hp-check{display:flex;align-items:flex-start;gap:10px;font-family:var(--mono);font-size:14px;color:#475569;line-height:1.4;font-weight:600}
-.hp-tick{width:16px;height:16px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;flex-shrink:0;margin-top:1px}
-.hp-pending{width:16px;height:16px;border-radius:50%;background:transparent;border:1.5px solid #cbd5e1;flex-shrink:0;margin-top:1px}
+.hp-title{font-size:20px;font-weight:800;color:#0f172a;letter-spacing:-0.025em;line-height:1.15;margin-top:5px}
+.hp-card{background:#f1f5f9;border-radius:10px;padding:11px 13px;display:flex;flex-direction:column;gap:4px}
+.hp-card-label{font-family:var(--mono);font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:0.12em}
+.hp-card-value{font-family:var(--mono);font-size:14px;color:#0f172a;font-weight:700}
+.hp-checks{display:flex;flex-direction:column;gap:7px;margin-top:8px}
+.hp-status{font-family:var(--mono);font-size:12px;color:#0f172a;font-weight:800;margin-bottom:2px}
+.hp-check{display:flex;align-items:flex-start;gap:8px;font-family:var(--mono);font-size:11.5px;color:#475569;line-height:1.4;font-weight:600}
+.hp-tick{width:13px;height:13px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:800;flex-shrink:0;margin-top:1px}
+.hp-pending{width:13px;height:13px;border-radius:50%;background:transparent;border:1.3px solid #cbd5e1;flex-shrink:0;margin-top:1px}
 
 /* Ensure the next section after the hero has breathing room for the phone overflow */
 .market-section{background:#fff;padding-top:120px;padding-bottom:60px}
@@ -542,7 +540,7 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .erster-section{padding:32px 0 !important}
   .erster-section .section-h2{font-size:clamp(32px,8.5vw,42px) !important;margin-bottom:18px !important}
   .erster-inner{gap:24px !important}
-  .erster-browser{margin:0 auto !important;transform:none !important;width:285px;height:570px}
+  .erster-browser{margin:0 auto !important;transform:none !important;width:228px;height:456px}
   .er-dash{min-height:auto !important}
   .er-dash{min-height:280px !important}
   .arch-node{flex:1 1 50%;min-width:0}
@@ -576,69 +574,69 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 .erster-section .section-h2 .ln{display:block;white-space:nowrap}
 .erster-sub{font-size:17px;color:var(--text2);line-height:1.55;max-width:520px}
 
-/* iPhone portrait phone frame — EXACT same as hero (285×570) */
+/* iPhone portrait phone frame — 228×456 (20% smaller than 285×570) */
 .erster-browser{
   background:#0a2540;
-  border-radius:54px;
-  padding:8px;
-  width:285px;
-  height:570px;
+  border-radius:43px;
+  padding:6px;
+  width:228px;
+  height:456px;
   margin:0 auto;
   position:relative;
   box-shadow:
-    0 0 0 1.5px rgba(74,81,96,0.35),
-    0 2px 6px rgba(15,23,42,0.05),
-    0 12px 24px rgba(15,23,42,0.07),
-    0 28px 56px rgba(15,23,42,0.10),
-    0 56px 100px rgba(15,23,42,0.10);
+    0 0 0 1.2px rgba(74,81,96,0.35),
+    0 2px 5px rgba(15,23,42,0.05),
+    0 10px 19px rgba(15,23,42,0.07),
+    0 22px 45px rgba(15,23,42,0.10),
+    0 45px 80px rgba(15,23,42,0.10);
 }
-/* Side buttons — EXACT same positions as hero phone */
-.erster-browser::before{content:'';position:absolute;right:-2px;top:160px;width:4px;height:60px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
-.erster-browser::after{content:'';position:absolute;left:-2px;top:118px;width:4px;height:34px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 52px 0 #4a5160,0 100px 0 #4a5160}
-.erster-browser-inner{background:#f8f9fe;border-radius:46px;overflow:hidden;position:relative;height:100%;display:flex;flex-direction:column}
+/* Side buttons — scaled 0.8× from hero positions */
+.erster-browser::before{content:'';position:absolute;right:-2px;top:128px;width:4px;height:48px;background:linear-gradient(90deg,#1a1f2a,#4a5160);border-radius:0 3px 3px 0}
+.erster-browser::after{content:'';position:absolute;left:-2px;top:94px;width:4px;height:27px;background:linear-gradient(270deg,#1a1f2a,#4a5160);border-radius:3px 0 0 3px;box-shadow:0 42px 0 #4a5160,0 80px 0 #4a5160}
+.erster-browser-inner{background:#f8f9fe;border-radius:37px;overflow:hidden;position:relative;height:100%;display:flex;flex-direction:column}
 /* Dashboard fills available space */
 .erster-browser .er-dash{flex:1;overflow:hidden}
-.erster-bar{background:#fff;padding:14px 24px 8px;display:flex;align-items:center;justify-content:space-between;gap:14px;position:relative;min-height:36px}
-.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:15px;font-weight:600;color:#000;letter-spacing:-0.01em}
-.erster-island{position:absolute;left:50%;top:8px;transform:translateX(-50%);width:110px;height:32px;background:#000;border-radius:18px}
-.erster-status{display:flex;align-items:center;gap:5px;color:#000}
+.erster-bar{background:#fff;padding:11px 19px 6px;display:flex;align-items:center;justify-content:space-between;gap:11px;position:relative;min-height:28px}
+.erster-time{font-family:-apple-system,'SF Pro Text',Inter,sans-serif;font-size:12px;font-weight:600;color:#000;letter-spacing:-0.01em}
+.erster-island{position:absolute;left:50%;top:6px;transform:translateX(-50%);width:88px;height:26px;background:#000;border-radius:14px}
+.erster-status{display:flex;align-items:center;gap:4px;color:#000}
 .erster-status svg{display:block}
-.erster-home-indicator{display:flex;justify-content:center;padding:8px 0 14px;background:#f8f9fe}
-.erster-home-indicator span{display:block;width:128px;height:5px;background:#000;border-radius:3px}
+.erster-home-indicator{display:flex;justify-content:center;padding:6px 0 11px;background:#f8f9fe}
+.erster-home-indicator span{display:block;width:102px;height:4px;background:#000;border-radius:3px}
 /* Safari-style browser bar inside phone (below status bar) */
-.erster-safari-bar{background:#fff;padding:6px 12px 10px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(0,0,0,0.06)}
-.erster-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;background:#f1f3f6;border-radius:10px;padding:7px 12px;font-size:13px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
-.erster-safari-url svg{width:11px;height:11px;color:#6b6b70;flex-shrink:0}
+.erster-safari-bar{background:#fff;padding:5px 10px 8px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.erster-safari-url{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#f1f3f6;border-radius:8px;padding:5px 10px;font-size:10.5px;color:#1c1c1e;font-weight:500;font-family:-apple-system,'SF Pro Text',Inter,sans-serif}
+.erster-safari-url svg{width:9px;height:9px;color:#6b6b70;flex-shrink:0}
 /* legacy dots/url no longer used */
 .erster-dots,.erster-url{display:none}
 
-/* Mobile-fit polished overrides: compact + bold for proper iPhone aspect ratio */
+/* Mobile-fit polished overrides — 20% smaller (compact for 228×456 phone) */
 .erster-browser .er-dash{grid-template-columns:1fr !important;min-height:auto !important;background:#f8f9fe}
 .erster-browser .er-sidebar{display:none !important}
-.erster-browser .er-main{padding:14px 14px 8px !important;display:flex;flex-direction:column;gap:10px}
-.erster-browser .er-grid{margin-bottom:0 !important;gap:10px !important}
+.erster-browser .er-main{padding:11px 11px 6px !important;display:flex;flex-direction:column;gap:8px}
+.erster-browser .er-grid{margin-bottom:0 !important;gap:8px !important}
 /* Title */
-.erster-browser .er-title{font-size:20px !important;font-weight:800 !important;margin-bottom:0 !important;letter-spacing:-0.02em}
+.erster-browser .er-title{font-size:16px !important;font-weight:800 !important;margin-bottom:0 !important;letter-spacing:-0.02em}
 /* Asset card */
-.erster-browser .er-card{padding:14px !important;border-radius:12px !important}
-.erster-browser .er-card-h{font-size:13px !important;font-weight:800 !important;margin-bottom:10px !important;color:var(--text)}
+.erster-browser .er-card{padding:11px !important;border-radius:10px !important}
+.erster-browser .er-card-h{font-size:10.5px !important;font-weight:800 !important;margin-bottom:8px !important;color:var(--text)}
 .erster-browser .er-asset{background:transparent !important;padding:0 !important}
-.erster-browser .er-tag-mini{font-size:9.5px !important;padding:3px 8px !important;font-weight:800 !important;margin-bottom:8px !important}
-.erster-browser .er-asset-name{font-size:13px !important;font-weight:600 !important;margin-bottom:8px !important;color:var(--text2)}
-.erster-browser .er-asset-amount{font-size:22px !important;font-weight:800 !important;margin-bottom:10px !important;letter-spacing:-0.025em !important}
-.erster-browser .er-bar{height:4px !important;border-radius:2px !important}
+.erster-browser .er-tag-mini{font-size:7.5px !important;padding:2px 6px !important;font-weight:800 !important;margin-bottom:6px !important}
+.erster-browser .er-asset-name{font-size:10.5px !important;font-weight:600 !important;margin-bottom:6px !important;color:var(--text2)}
+.erster-browser .er-asset-amount{font-size:18px !important;font-weight:800 !important;margin-bottom:8px !important;letter-spacing:-0.025em !important}
+.erster-browser .er-bar{height:3px !important;border-radius:2px !important}
 /* Investors table card */
-.erster-browser .er-table-card{padding:14px !important;border-radius:12px !important}
-.erster-browser .er-table-card h3{font-size:14px !important;font-weight:800 !important;margin-bottom:2px !important;color:var(--text)}
-.erster-browser .er-table-card p{font-size:10.5px !important;margin-bottom:10px !important;color:var(--text3)}
-.erster-browser .er-table{font-size:12.5px !important}
-.erster-browser .er-table th{font-size:9px !important;padding:6px 0 !important;font-weight:700 !important;letter-spacing:0.12em !important;color:var(--text3)}
-.erster-browser .er-table td{padding:8px 0 !important;font-weight:600 !important}
+.erster-browser .er-table-card{padding:11px !important;border-radius:10px !important}
+.erster-browser .er-table-card h3{font-size:11px !important;font-weight:800 !important;margin-bottom:2px !important;color:var(--text)}
+.erster-browser .er-table-card p{font-size:8.5px !important;margin-bottom:8px !important;color:var(--text3)}
+.erster-browser .er-table{font-size:10px !important}
+.erster-browser .er-table th{font-size:7px !important;padding:5px 0 !important;font-weight:700 !important;letter-spacing:0.12em !important;color:var(--text3)}
+.erster-browser .er-table td{padding:6px 0 !important;font-weight:600 !important}
 .erster-browser .er-table td:first-child{font-weight:700 !important;color:var(--text) !important}
 /* Agent column → mono font */
-.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:11.5px !important;font-weight:500 !important}
+.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:9.5px !important;font-weight:500 !important}
 /* Status pills */
-.erster-browser .er-pill-status{font-size:10.5px !important;padding:3px 9px !important;font-weight:800 !important;border-radius:9px !important}
+.erster-browser .er-pill-status{font-size:8.5px !important;padding:2px 7px !important;font-weight:800 !important;border-radius:7px !important}
 /* USER WISH: Approved pill purple (like AI referred) instead of green */
 .erster-browser .er-pill-status.approved{background:#efe9ff !important;color:#7B61FF !important}
 
@@ -723,8 +721,8 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
   .erster-section{padding:80px 0 60px}
   .erster-inner{grid-template-columns:1fr;gap:36px;justify-items:center}
   .erster-copy{padding-right:0;max-width:680px;text-align:left;width:100%}
-  /* keep phone shape — fixed 285×570 on tablet/mobile too (exact Section 1 hero match) */
-  .erster-browser{width:285px;height:570px;margin:0 auto}
+  /* keep phone shape — fixed 228×456 on tablet/mobile too (matches hero phone size) */
+  .erster-browser{width:228px;height:456px;margin:0 auto}
 }
 
 @media(max-width:780px){
