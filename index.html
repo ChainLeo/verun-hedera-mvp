@@ -752,9 +752,9 @@ footer .footer-inner > div:first-child > div:last-child{color:#64748b !important
 /* Mobile (≤760px): stack ERSTER vertically (text on top, phone below centered) */
 @media(max-width:760px){
   .erster-section{padding:60px 0 40px}
-  .erster-inner{grid-template-columns:1fr;gap:36px;justify-items:center}
+  .erster-inner{grid-template-columns:1fr !important;grid-template-areas:"copy" "phone" !important;gap:36px !important;justify-items:center}
   .erster-copy{padding-right:0;max-width:680px;text-align:left;width:100%}
-  .erster-browser{width:228px;height:456px;margin:0 auto}
+  .erster-browser{width:228px;height:456px;margin:0 auto;justify-self:center !important}
 }
 
 @media(max-width:780px){
