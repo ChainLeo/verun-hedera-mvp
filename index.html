@@ -70,7 +70,9 @@ a{color:var(--teal);text-decoration:none}
 
 /* HERO */
 /* Hero — soft lavender-grey base (var(--bg2)); brand green reserved for ERSTER finale section */
-.hero{padding:80px 0 0;position:relative;overflow:visible;background:var(--bg)}
+.hero{padding:80px 0 80px;position:relative;overflow:visible;background:var(--bg2);border-top:1px solid var(--border)}
+/* Mobile: tighter padding (background already grey from default) */
+@media(max-width:760px){.hero{padding:60px 0 60px !important}}
 /* Hide Demo section on mobile only (visible on tablet/desktop) */
 @media(max-width:760px){#demo{display:none !important}}
 /* Phone overflows into next white section for visual depth */
@@ -457,9 +459,9 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
   .nav-logo{font-size:15px}
   .nav-logo .tag{font-size:8px;padding:2px 6px}
   .algo-badge{font-size:10px;padding:3px 9px}
-  .hero{padding:48px 0 0}
+  .hero{padding:60px 0 60px !important}
   .hero-inner{padding-bottom:0}
-  .hero-copy{padding-bottom:36px}
+  .hero-copy{padding-bottom:0}
   .hero h1{font-size:60px;line-height:1.02;letter-spacing:-0.035em}
   .hero-sub{font-size:18px;line-height:1.5;margin-bottom:36px}
   .hero-btns{justify-content:flex-start}
@@ -933,68 +935,6 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
   </div>
 </section>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <h1>Trusted agents.</h1>
-        <p class="hero-sub">Make your AI agent <strong>regulatory ready</strong>.</p>
-        <div class="hero-flags">
-          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="MiFID II compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">MiFID II</text></svg>
-          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="EU AI Act compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">AI Act</text></svg>
-        </div>
-      </div>
-      <!-- Phone mockup (iPhone 15 Pro style, shows live demo content) -->
-      <div class="hero-phone-wrap">
-        <div class="hero-phone">
-          <div class="hero-phone-island"></div>
-          <div class="hero-phone-screen">
-            <!-- iPhone status bar -->
-            <div class="hp-status-bar">
-              <div class="hp-time">9:41</div>
-              <div class="hp-status-icons">
-                <!-- wifi -->
-                <svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
-                <!-- battery -->
-                <svg width="22" height="10" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
-              </div>
-            </div>
-            <!-- Safari URL bar -->
-            <div class="hp-safari-bar">
-              <div class="hp-safari-url">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
-                verun.network
-              </div>
-            </div>
-            <div class="hp-content">
-              <div class="hp-nav">
-                <span class="hp-back">← Back</span>
-                <span class="hp-counter">Step 1 of 3</span>
-                <span class="hp-next">Next →</span>
-              </div>
-              <div class="hp-title">Your agent scans.</div>
-              <div class="hp-card">
-                <div class="hp-card-label">AGENT</div>
-                <div class="hp-card-value">Alex Morgan</div>
-              </div>
-              <div class="hp-card">
-                <div class="hp-card-label">BUDGET</div>
-                <div class="hp-card-value">€500+ EUR</div>
-              </div>
-              <div class="hp-checks">
-                <div class="hp-status">Scanning.</div>
-                <div class="hp-check"><span class="hp-tick">✓</span><span>Banks.</span></div>
-                <div class="hp-check"><span class="hp-pending"></span><span>RWA platforms.</span></div>
-                <div class="hp-check"><span class="hp-pending"></span><span>Brokers.</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 
 <!-- MARKET STATS (TAM / institutions / coverage / projected agents) -->
@@ -1155,6 +1095,70 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
 
 
 
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1>Trusted agents.</h1>
+        <p class="hero-sub">Make your AI agent <strong>regulatory ready</strong>.</p>
+        <div class="hero-flags">
+          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="MiFID II compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">MiFID II</text></svg>
+          <svg class="hero-flag" viewBox="0 0 100 70" xmlns="http://www.w3.org/2000/svg" aria-label="EU AI Act compliant"><rect width="100" height="70" rx="3" fill="#003399"/><g fill="#FFCC00"><path d="M50,5.2 L50.629,7.135 L52.663,7.135 L51.018,8.331 L51.647,10.265 L50,9.07 L48.353,10.265 L48.982,8.331 L47.337,7.135 L49.371,7.135 Z"/><path d="M63.5,8.82 L64.129,10.755 L66.163,10.755 L64.518,11.951 L65.147,13.885 L63.5,12.69 L61.853,13.885 L62.482,11.951 L60.837,10.755 L62.871,10.755 Z"/><path d="M73.38,18.7 L74.009,20.635 L76.043,20.635 L74.398,21.831 L75.027,23.765 L73.38,22.57 L71.733,23.765 L72.362,21.831 L70.717,20.635 L72.751,20.635 Z"/><path d="M77,32.2 L77.629,34.135 L79.663,34.135 L78.018,35.331 L78.647,37.265 L77,36.07 L75.353,37.265 L75.982,35.331 L74.337,34.135 L76.371,34.135 Z"/><path d="M73.38,45.7 L74.009,47.635 L76.043,47.635 L74.398,48.831 L75.027,50.765 L73.38,49.57 L71.733,50.765 L72.362,48.831 L70.717,47.635 L72.751,47.635 Z"/><path d="M63.5,55.58 L64.129,57.515 L66.163,57.515 L64.518,58.711 L65.147,60.645 L63.5,59.45 L61.853,60.645 L62.482,58.711 L60.837,57.515 L62.871,57.515 Z"/><path d="M50,59.2 L50.629,61.135 L52.663,61.135 L51.018,62.331 L51.647,64.265 L50,63.07 L48.353,64.265 L48.982,62.331 L47.337,61.135 L49.371,61.135 Z"/><path d="M36.5,55.58 L37.129,57.515 L39.163,57.515 L37.518,58.711 L38.147,60.645 L36.5,59.45 L34.853,60.645 L35.482,58.711 L33.837,57.515 L35.871,57.515 Z"/><path d="M26.62,45.7 L27.249,47.635 L29.283,47.635 L27.638,48.831 L28.267,50.765 L26.62,49.57 L24.973,50.765 L25.602,48.831 L23.957,47.635 L25.991,47.635 Z"/><path d="M23,32.2 L23.629,34.135 L25.663,34.135 L24.018,35.331 L24.647,37.265 L23,36.07 L21.353,37.265 L21.982,35.331 L20.337,34.135 L22.371,34.135 Z"/><path d="M26.62,18.7 L27.249,20.635 L29.283,20.635 L27.638,21.831 L28.267,23.765 L26.62,22.57 L24.973,23.765 L25.602,21.831 L23.957,20.635 L25.991,20.635 Z"/><path d="M36.5,8.82 L37.129,10.755 L39.163,10.755 L37.518,11.951 L38.147,13.885 L36.5,12.69 L34.853,13.885 L35.482,11.951 L33.837,10.755 L35.871,10.755 Z"/></g><text x="50" y="40" text-anchor="middle" fill="#fff" font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" letter-spacing="-0.02em">AI Act</text></svg>
+        </div>
+      </div>
+      <!-- Phone mockup (iPhone 15 Pro style, shows live demo content) -->
+      <div class="hero-phone-wrap">
+        <div class="hero-phone">
+          <div class="hero-phone-island"></div>
+          <div class="hero-phone-screen">
+            <!-- iPhone status bar -->
+            <div class="hp-status-bar">
+              <div class="hp-time">9:41</div>
+              <div class="hp-status-icons">
+                <!-- wifi -->
+                <svg width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M1 4.2 C4.5 1.2 11.5 1.2 15 4.2"/><path d="M3.4 6.4 C5.9 4.4 10.1 4.4 12.6 6.4"/><path d="M5.8 8.6 C6.9 7.7 9.1 7.7 10.2 8.6"/><circle cx="8" cy="10" r="0.9" fill="currentColor"/></svg>
+                <!-- battery -->
+                <svg width="22" height="10" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor" stroke-width="0.8" opacity="0.55"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="23.5" y="3.5" width="1.5" height="5" rx="0.7" fill="currentColor" opacity="0.55"/></svg>
+              </div>
+            </div>
+            <!-- Safari URL bar -->
+            <div class="hp-safari-bar">
+              <div class="hp-safari-url">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 0a14 14 0 010 20m0-20a14 14 0 000 20M2 12h20"/></svg>
+                verun.network
+              </div>
+            </div>
+            <div class="hp-content">
+              <div class="hp-nav">
+                <span class="hp-back">← Back</span>
+                <span class="hp-counter">Step 1 of 3</span>
+                <span class="hp-next">Next →</span>
+              </div>
+              <div class="hp-title">Your agent scans.</div>
+              <div class="hp-card">
+                <div class="hp-card-label">AGENT</div>
+                <div class="hp-card-value">Alex Morgan</div>
+              </div>
+              <div class="hp-card">
+                <div class="hp-card-label">BUDGET</div>
+                <div class="hp-card-value">€500+ EUR</div>
+              </div>
+              <div class="hp-checks">
+                <div class="hp-status">Scanning.</div>
+                <div class="hp-check"><span class="hp-tick">✓</span><span>Banks.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>RWA platforms.</span></div>
+                <div class="hp-check"><span class="hp-pending"></span><span>Brokers.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- INLINE WAITLIST FORM (mobile only — shows before footer) -->
 <section class="inline-waitlist" id="inline-waitlist">
   <div class="container">
@@ -1181,7 +1185,7 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
   /* Hidden by default (desktop/tablet) — only visible on mobile */
   .inline-waitlist{display:none}
   @media(max-width:760px){
-    .inline-waitlist{display:block;background:var(--bg2);padding:60px 0 48px;border-top:1px solid var(--border)}
+    .inline-waitlist{display:block;background:var(--bg);padding:60px 0 48px;border-top:1px solid var(--border)}
     .inline-waitlist .iw-h2{font-size:34px;font-weight:800;line-height:1.06;letter-spacing:-0.025em;color:var(--text);margin:0 0 14px}
     .inline-waitlist .iw-h2 .muted{color:var(--text3);font-weight:700}
     .inline-waitlist .iw-sub{font-size:15px;color:var(--text2);line-height:1.5;margin:0 0 26px;max-width:520px}
