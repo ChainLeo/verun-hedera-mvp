@@ -661,7 +661,9 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
 .erster-browser .er-table td{padding:6px 0 !important;font-weight:600 !important}
 .erster-browser .er-table td:first-child{font-weight:700 !important;color:var(--text) !important}
 /* Agent column → mono font */
-.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:9.5px !important;font-weight:500 !important}
+.erster-browser .er-table td:nth-child(2){font-family:var(--mono) !important;color:var(--text2) !important;font-size:9.5px !important;font-weight:500 !important;line-height:0}
+/* Agent logos in investors table — uniform size + alignment */
+.erster-browser .agent-logo{width:18px;height:18px;display:inline-block;vertical-align:middle;object-fit:contain}
 /* Status pills */
 .erster-browser .er-pill-status{font-size:8.5px !important;padding:2px 7px !important;font-weight:800 !important;border-radius:7px !important}
 /* USER WISH: Approved pill purple (like AI referred) instead of green */
@@ -920,9 +922,9 @@ footer .footer-inner > div:first-child > div:last-child{color:rgba(255,255,255,0
                   <tr><th>Name</th><th>Agent</th><th>KYC</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Tom Lee</td><td>openai</td><td><span class="er-pill-status approved">Approved</span></td></tr>
-                  <tr><td>Maya Chen</td><td>claude</td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
-                  <tr><td>Lou Esses</td><td>hermes</td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
+                  <tr><td>Tom Lee</td><td><img class="agent-logo" src="/assets/agents/openai.svg" alt="OpenAI"></td><td><span class="er-pill-status approved">Approved</span></td></tr>
+                  <tr><td>Maya Chen</td><td><img class="agent-logo" src="/assets/agents/claude.svg" alt="Claude"></td><td><span class="er-pill-status waiting">Waiting</span></td></tr>
+                  <tr><td>Lou Esses</td><td><img class="agent-logo" src="/assets/agents/openclaw.svg" alt="Openclaw"></td><td><span class="er-pill-status rejected">Rejected</span></td></tr>
                 </tbody>
               </table>
             </div>
